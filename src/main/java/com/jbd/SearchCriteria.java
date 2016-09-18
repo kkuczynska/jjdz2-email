@@ -1,5 +1,6 @@
 package com.jbd;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCriteria {
@@ -7,8 +8,9 @@ public class SearchCriteria {
     private static String EMAIL;
     private static String STARTDATE;
     private static String ENDDATE;
-    private static List<String> KEYWORDS;
+    private static String KEYWORDS;
 
+    SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
 
     public static String getEMAIL() {
         return EMAIL;
@@ -16,6 +18,7 @@ public class SearchCriteria {
 
     public static void setEMAIL(String EMAIL) {
         SearchCriteria.EMAIL = EMAIL;
+        SearchCriteriaValidator.validateEmail(EMAIL);
     }
 
     public static String getSTARTDATE() {
@@ -35,11 +38,25 @@ public class SearchCriteria {
     }
 
     public static List<String> getKEYWORDS() {
-        return KEYWORDS;
+        List<String> keywordsParsed = keywordsParser(KEYWORDS);
+        return keywordsParsed;
     }
 
-    public static void setKEYWORDS(List<String> KEYWORDS) {
+    public static void setKEYWORDS(String KEYWORDS) {
         SearchCriteria.KEYWORDS = KEYWORDS;
+    }
+
+    private static List<String> keywordsParser(String keywords) {
+        List<String> keywordsParsed = new ArrayList<>();
+
+        String splitBy = ",";
+        String[] keywordsParsing = keywords.split(splitBy);
+
+        for (String stringElement: keywordsParsing) {
+            keywordsParsed.add(stringElement);
+        }
+
+        return keywordsParsed;
     }
 
 }
