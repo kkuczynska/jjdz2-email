@@ -9,41 +9,57 @@ import java.util.regex.Pattern;
 
 public class SearchCriteriaValidator {
 
+    private static final String INCORRECT_EMAIL_MESSAGE = "Niepoprawny adres email.";
+    private static final String INCORRECT_DATE_MESSAGE = "Niepoprawna data.";
+
     public static void validateEmail(String email) {
         String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
                 "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
 
-        int validationBinary = 0;
+        boolean validationBinary = true;
+        boolean validateChars = validateUnacceptableCharsExisting(email,unacceptableChars);
 
-        if(!email.contains("@") || !email.contains(".")) {
-            validationBinary = 1;
+        if(validateChars==false || !email.contains("@") || !email.contains(".")) {
+            validationBinary = false;
+        }
+        if(validationBinary==false) {
+            System.out.println(INCORRECT_EMAIL_MESSAGE);
         }
 
-        validateUnacceptableCharsExisting(email,unacceptableChars);
-
-        if(validationBinary==1) {
-            System.out.println("Podany adres jest niepoprawny.");
-        }
     }
 
     public static void validateStartDate(String startDate) {
-        validateDate(startDate);
+        boolean validationBinary = validateDate(startDate);
+        if(validationBinary==false) {
+            System.out.println(INCORRECT_DATE_MESSAGE);
+        }
     }
 
-    private static int validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
-        int validationBinary = 0;
+    public static void validateEndDate(String endDate) {
+        boolean validationBinary = validateDate(endDate);
+
+
+
+
+        if(validationBinary==false) {
+            System.out.println(INCORRECT_DATE_MESSAGE);
+        }
+    }
+
+    private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
+        boolean validationBinary = true;
 
         for(String unacceptableChar : unacceptableChars) {
             if (validateInput.contains(unacceptableChar)) {
-                validationBinary = 1;
+                validationBinary = false;
             }
         }
 
         return validationBinary;
     }
 
-    private static void validateDate(String date) {
-        int validateBinary = 0;
+    private static boolean validateDate(String date) {
+        boolean validationBinary = true;
 
         String datePattern = "([0-3][0-9])/([01][0-9])/([12][09][0-9][0-9])";
 
@@ -52,7 +68,7 @@ public class SearchCriteriaValidator {
 
         boolean matches = Pattern.matches(datePattern, date);
         if(matches==false) {
-            validateBinary = 1;
+            validationBinary = false;
         }
 
         while (matcher.find()) {
@@ -60,23 +76,21 @@ public class SearchCriteriaValidator {
             int month = Integer.parseInt(matcher.group(2));
             int year = Integer.parseInt(matcher.group(3));
 
-            validateBinary = validateDayMonthYear(day, month, year);
+            validationBinary = validateDayMonthYear(day, month, year);
 
         }
 
-        if(validateBinary==1) {
-            System.out.println("Błędna data.");
-        }
+        return validationBinary;
     }
 
-    private static int validateDayMonthYear(int day, int month, int year) {
-        int validationBinary = 0;
+    private static boolean validateDayMonthYear(int day, int month, int year) {
+        boolean validationBinary = true;
 
         int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
         if(day > 31 || day == 0 ||
                 month > 12 || month == 0) {
-            validationBinary = 1;
+            validationBinary = false;
         }
 
         return validationBinary;
