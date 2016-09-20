@@ -17,8 +17,8 @@ public class SearchCriteria {
     }
 
     public static void setEMAIL(String EMAIL) {
-        SearchCriteria.EMAIL = EMAIL;
         SearchCriteriaValidator.validateEmail(EMAIL);
+        SearchCriteria.EMAIL = EMAIL;
     }
 
     public static String getSTARTDATE() {
@@ -26,6 +26,7 @@ public class SearchCriteria {
     }
 
     public static void setSTARTDATE(String STARTDATE) {
+        SearchCriteriaValidator.validateStartDate(STARTDATE);
         SearchCriteria.STARTDATE = STARTDATE;
     }
 
@@ -34,6 +35,7 @@ public class SearchCriteria {
     }
 
     public static void setENDDATE(String ENDDATE) {
+        SearchCriteriaValidator.validateEndDate(ENDDATE);
         SearchCriteria.ENDDATE = ENDDATE;
     }
 
