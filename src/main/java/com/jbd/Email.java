@@ -1,8 +1,8 @@
+package com.jbd;
+
 import java.util.Date;
 
-/**
- * Created by marcinb on 11.09.16.
- */
+
 public class Email {
     private String From;
     private String To;
@@ -17,9 +17,7 @@ public class Email {
         Subject = subject;
     }
 
-    public String getFrom() {
-        return From;
-    }
+    public String getFrom() { return From; }
 
     public void setFrom(String from) {
         From = from;
