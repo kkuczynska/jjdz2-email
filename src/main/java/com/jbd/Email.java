@@ -1,49 +1,79 @@
 package com.jbd;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
 public class Email {
-    private String From;
-    private String To;
+    private String from;
     private Date data;
-    private String Subject;
+    private String subject;
+    private String content;
 
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date objectOfDate;
 
-    public Email(String from, String to, Date data, String subject) {
-        From = from;
-        To = to;
-        this.data = data;
-        Subject = subject;
+    public Email(String from, String subject, String data, String content) {
+        this.from = from;
+        try {
+            objectOfDate = simpleDateFormat.parse(data);
+            this.data = objectOfDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        this.subject = subject;
+        this.content = content;
     }
 
-    public String getFrom() { return From; }
+    public Email(String from, String subject) {
+        this.from = from;
+        this.subject = subject;
 
-    public void setFrom(String from) {
-        From = from;
     }
-
-    public String getTo() {
-        return To;
-    }
-
-    public void setTo(String to) {
-        To = to;
+    public Email(String from) {
+        this.from = from;
     }
 
     public Date getData() {
         return data;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    public void setData(String data) {
+        try {
+            objectOfDate = simpleDateFormat.parse(data);
+            this.data = objectOfDate;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     public String getSubject() {
-        return Subject;
+        return subject;
     }
 
     public void setSubject(String subject) {
-        Subject = subject;
+        this.subject = subject;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    @Override
+    public String toString() {
+        return from + " " + subject + " " + data.toString();
     }
 }
