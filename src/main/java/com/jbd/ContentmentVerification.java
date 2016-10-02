@@ -1,51 +1,79 @@
 package com.jbd;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by marcinb on 18.09.16.
- */
 public class ContentmentVerification {
 
-    private String example = "X-Mailer: Apple Mail (2.553)\n" +
-            "Subject: [Testlist] test\n" +
-            "Sender: testlist-admin@lists.malcolmhardie.com";
-    private String pattern = "(Subject:)(.*)";
-    private List<String> keywordsList = new ArrayList<>(SearchCriteria.getKEYWORDS());
-    public List<String> foundTitle = new ArrayList<>();
+    private List<Email> foundEmailsList = new ArrayList<>();
 
+    public List<Email> searchEmailByDate(String startDateOfEmailToSearch,List<Email> mailListToSearch) { //startDateOfEmailToSearch musi być w formacie "yyyy-MM-dd"
+        if(!foundEmailsList.isEmpty()){
+            foundEmailsList.clear();
+        }
 
-    public void searchTitle(List<String> keywordsList){
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(example);   // get a matcher object
-        int count = 0;
-        if (m.find()){
-            boolean check = false;
-            for (String item: keywordsList)
-            {
-                if (m.group(2).contains(item)){
-                check = true;
-                foundTitle.add(m.group(2));
-                    break;
-
-            }
-                else {
-                    System.out.println("Nie znaleziono!");
-
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+        for (Email email: mailListToSearch){
+            try {
+                if(email.getData().after(simpleDateFormat.parse(startDateOfEmailToSearch))){
+                    foundEmailsList.add(email);
+                }
+            } catch (ParseException e1) {
+                e1.printStackTrace();                
             }
 
-            }
-            if(check){
-            for (String title: foundTitle) {
-                System.out.println("tytul: " + title);
+        }
+
+        return foundEmailsList;
+    }
+
+    public List<Email> searchEmailByName(List<String> searchingMailList, List<Email> mailListToSearch) {
+        if(!foundEmailsList.isEmpty()){
+            foundEmailsList.clear();
+        }
+        for (Email email:mailListToSearch) {
+            for(String singleNameEmail: searchingMailList) {
+                Pattern pattern = Pattern.compile(singleNameEmail);
+                Matcher matcher = pattern.matcher(email.getFrom());
+                if (matcher.find()) {
+                    foundEmailsList.add(email);
+                    continue;
                 }
             }
         }
+        return foundEmailsList;
 
     }
+
+    public List<Email> searchEmailByTitleWithKeyWords(List<String> keyWordsListToSearchProperTitle, List<Email> mailListToSearch){
+        if(!foundEmailsList.isEmpty()){
+            foundEmailsList.clear();
+        }
+
+        for (Email email: mailListToSearch) {
+            for (String item:keyWordsListToSearchProperTitle) {
+                Pattern pattern = Pattern.compile("\\b"+item+"\\b");
+                Matcher matcher = pattern.matcher(email.getSubject());
+                if(matcher.find()){
+                    foundEmailsList.add(email);
+                    break;
+                }
+
+            }
+
+        }
+        return foundEmailsList;
+    }
+
+
+
+
+
+
 
 
 
