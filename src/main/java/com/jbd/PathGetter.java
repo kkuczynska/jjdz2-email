@@ -1,26 +1,53 @@
 package com.jbd;
 
+import java.io.File;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class PathGetter {
-    private Path inputPath;
+    private String inputPath;
+    private List<String> fileList;
 
-    public Path getInputPath() {
+    public String getInputPath() {
         return inputPath;
     }
 
-    public Path askUserAboutInputPath() {
+    public List<String> getFileList() {
+        return fileList;
+    }
+
+    public void askUserAboutInputPath() {
+        Pattern pattern = Pattern.compile(".*\\.[\\w]{1,5}");
+        Matcher matcher;
+        fileList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+
         do{
-            System.out.println("Type correct path:");
-            inputPath = Paths.get(scanner.nextLine());
-            if (inputPath.toString().equals("")) {
-                inputPath = Paths.get(new java.io.File("").getAbsolutePath());
+            System.out.println("Type correct path to file or directory:");
+            inputPath = scanner.nextLine();
+            if (inputPath.equals("")) {
+                inputPath = new java.io.File("").getAbsolutePath();
             }
-        } while (Files.notExists(inputPath));
-        return inputPath;
+        } while (Files.notExists(Paths.get(inputPath)));
+
+        matcher = pattern.matcher(inputPath);
+
+        if(matcher.matches()){
+            fileList.add(inputPath);
+        }
+        else{
+            File[] files = new File(inputPath).listFiles();
+            for (File file : files){
+                if(file.isFile() && (file.getAbsolutePath().toLowerCase().endsWith(".mbox")
+                        || file.getAbsolutePath().toLowerCase().endsWith(".eml"))){
+                    fileList.add(file.getAbsolutePath());
+                }
+            }
+        }
     }
 }
