@@ -14,77 +14,91 @@ public class SearchCriteriaValidator {
     private static final String DATE_PATTERN = "([0-3][0-9])/([01][0-9])/([12][09][0-9][0-9])";
     public static Pattern compile = Pattern.compile(DATE_PATTERN);
 
+
     public static void validateEmail(String email) {
         String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
                 "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
 
-        boolean validationBinary = true;
+        boolean validationFlag = true;
         boolean validateChars = validateUnacceptableCharsExisting(email,unacceptableChars);
 
         if(validateChars==false || !email.contains("@") || !email.contains(".")) {
-            validationBinary = false;
+            validationFlag = false;
         }
-        if(validationBinary==false) {
-            System.out.println(INCORRECT_EMAIL_MESSAGE);
+        if(validationFlag==false) {
+            UserCommunication.sendUserMessage(INCORRECT_EMAIL_MESSAGE);
         }
 
     }
 
     public static void validateStartDate(String startDate) {
-        boolean validationBinary = datePatternMatching(startDate);
-        if(validationBinary==false) {
-            System.out.println(INCORRECT_DATE_MESSAGE);
+        boolean validationFlag = datePatternMatching(startDate);
+        if(validationFlag==false) {
+            UserCommunication.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
     }
 
     public static void validateEndDate(String endDate) {
-        boolean validationBinary = datePatternMatching(endDate);
-        SearchCriteriaValidator dateGrouping = new SearchCriteriaValidator();
+        boolean validationFlag = datePatternMatching(endDate);
 
-        List<Integer> endDateList = dateGrouping.datePatternGrouping(endDate);
-        List<Integer> startDateList = dateGrouping.datePatternGrouping(SearchCriteria.getSTARTDATE());
+        if(validationFlag==true) {
+            SearchCriteriaValidator dateGrouping = new SearchCriteriaValidator();
 
+            List<Integer> endDateList = dateGrouping.datePatternGrouping(endDate);
+            List<Integer> startDateList = dateGrouping.datePatternGrouping(SearchCriteria.getSTARTDATE());
 
-        if(startDateList.get(2) > endDateList.get(2) ) {
-            validationBinary = false;
-        } else if(startDateList.get(1) > endDateList.get(1)) {
-            validationBinary = false;
-        } else if(startDateList.get(0) > endDateList.get(0)) {
-            validationBinary = false;
+            long startYear = dateGrouping.datePatternGroupingYear(SearchCriteria.getSTARTDATE());
+            long endYear = dateGrouping.datePatternGroupingYear(endDate);
+
+            int startMonth = startDateList.get(1);
+            int endMonth = endDateList.get(1);
+            int startDay = startDateList.get(0);
+            int endDay = endDateList.get(0);
+
+            if (startYear > endYear) {
+                validationFlag = false;
+            } else if (startYear == endYear
+                    && startMonth > endMonth) {
+                validationFlag = false;
+            } else if (startYear == endYear
+                    && startMonth == endMonth
+                    && startDay > endDay) {
+                validationFlag = false;
+            }
         }
 
-
-        if(validationBinary==false) {
-            System.out.println(INCORRECT_DATE_MESSAGE);
+        if (validationFlag == false) {
+            UserCommunication.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
     }
 
     private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
-        boolean validationBinary = true;
+        boolean validationFlag = true;
 
         for(String unacceptableChar : unacceptableChars) {
             if (validateInput.contains(unacceptableChar)) {
-                validationBinary = false;
+                validationFlag = false;
             }
         }
 
-        return validationBinary;
+        return validationFlag;
     }
 
     private static boolean datePatternMatching(String date) {
-        boolean validationBinary = true;
+        boolean validationFlag = true;
 
         SearchCriteriaValidator dateGrouping = new SearchCriteriaValidator();
         Matcher matcher = compile.matcher(date);
 
         boolean matches = Pattern.matches(DATE_PATTERN, date);
         if(matches==false) {
-            validationBinary = false;
+            validationFlag = false;
+        } else {
+            List<Integer> dateList = dateGrouping.datePatternGrouping(date);
+            long year = dateGrouping.datePatternGroupingYear(date);
+            validationFlag = validateDayMonthYear(dateList.get(0), dateList.get(1), year);
         }
-        List<Integer> dateList = dateGrouping.datePatternGrouping(date);
-        validationBinary = validateDayMonthYear(dateList.get(0), dateList.get(1), dateList.get(2));
-
-        return validationBinary;
+        return validationFlag;
     }
 
     public List<Integer> datePatternGrouping(String date) {
@@ -95,25 +109,36 @@ public class SearchCriteriaValidator {
         while (matcher.find()) {
             int day = Integer.parseInt(matcher.group(1));
             int month = Integer.parseInt(matcher.group(2));
-            int year = Integer.parseInt(matcher.group(3));
 
             dateGrouped.add(day);
             dateGrouped.add(month);
-            dateGrouped.add(year);
         }
 
         return dateGrouped;
     }
 
-    private static boolean validateDayMonthYear(int day, int month, int year) {
-        boolean validationBinary = true;
+    public long datePatternGroupingYear(String date) {
+        long dateYear = 0000;
 
-        if(day > 31 || day == 0 ||
-                month > 12 || month == 0) {
-            validationBinary = false;
+        Matcher matcher = compile.matcher(date);
+
+        while (matcher.find()) {
+            dateYear = Integer.parseInt(matcher.group(3));
         }
 
-        return validationBinary;
+        return dateYear;
+    }
+
+    private static boolean validateDayMonthYear(int day, int month, long year) {
+        boolean validationFlag = true;
+
+        if(day > 31 || day == 0 ||
+                month > 12 || month == 0 ||
+                year == 0) {
+            validationFlag = false;
+        }
+
+        return validationFlag;
     }
 
 }
