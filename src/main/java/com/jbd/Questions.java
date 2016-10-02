@@ -3,10 +3,10 @@ package com.jbd;
 
 public class Questions {
 
-    private static final String EMAIL_QUESTION = "Podaj adres email.";
-    private static final String KEYWORD_QUESTION = "Podaj słowa kluczowe w tytule.";
-    private static final String STARTDATE_QUESTION = "Zakres dat: podaj datę początkową.";
-    private static final String ENDDATE_QUESTION = "Zakres dat: podaj datę końcową.";
+    private static final String EMAIL_QUESTION = "Podaj adres email w formacie xxxx@xx.xx";
+    private static final String KEYWORD_QUESTION = "Podaj słowa kluczowe w tytule. Słowa oddziel przecinkami.";
+    private static final String STARTDATE_QUESTION = "Zakres dat: podaj datę początkową w formacie DD/MM/YYYY";
+    private static final String ENDDATE_QUESTION = "Zakres dat: podaj datę końcową w formacie DD/MM/YYYY";
 
 
     public static String getEmailQuestion() {
