@@ -11,8 +11,6 @@ public class setAnswerValue {
 
         Scanner scanner = new Scanner(System.in);
 
-
-
         switch(questionAsked) {
             case "EMAIL_QUESTION" : setEMAIL(scanner.nextLine());
                 break;

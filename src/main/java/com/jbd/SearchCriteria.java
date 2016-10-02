@@ -26,8 +26,8 @@ public class SearchCriteria {
     }
 
     public static void setSTARTDATE(String STARTDATE) {
-        SearchCriteriaValidator.validateStartDate(STARTDATE);
         SearchCriteria.STARTDATE = STARTDATE;
+        SearchCriteriaValidator.validateStartDate(STARTDATE);
     }
 
     public static String getENDDATE() {
@@ -35,8 +35,8 @@ public class SearchCriteria {
     }
 
     public static void setENDDATE(String ENDDATE) {
-        SearchCriteriaValidator.validateEndDate(ENDDATE);
         SearchCriteria.ENDDATE = ENDDATE;
+        SearchCriteriaValidator.validateEndDate(ENDDATE);
     }
 
     public static List<String> getKEYWORDS() {
