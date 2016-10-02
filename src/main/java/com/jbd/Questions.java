@@ -25,4 +25,8 @@ public class Questions {
         return ENDDATE_QUESTION;
     }
 
+    public enum QuestionsEnum {
+        EMAIL_QUESTION, KEYWORD_QUESTION, STARTDATE_QUESTION, ENDDATE_QUESTION;
+    }
+
 }
