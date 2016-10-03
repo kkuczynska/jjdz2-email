@@ -51,6 +51,9 @@ public class SearchCriteria {
     private static List<String> keywordsParser(String keywords) {
         List<String> keywordsParsed = new ArrayList<>();
 
+        keywords = keywords.replaceAll(", ",",");
+        keywords = keywords.replaceAll(" ,",",");
+
         String splitBy = ",";
         String[] keywordsParsing = keywords.split(splitBy);
 
