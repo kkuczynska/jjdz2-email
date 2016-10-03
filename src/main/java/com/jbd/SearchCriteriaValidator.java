@@ -11,7 +11,10 @@ public class SearchCriteriaValidator {
     private static final String INCORRECT_EMAIL_MESSAGE = "Niepoprawny adres email.";
     private static final String INCORRECT_DATE_MESSAGE = "Niepoprawna data.";
 
+    public static final int MAX_DAYS_IN_MONTH = 31;
+
     private static final String DATE_PATTERN = "([0-3][0-9])/([01][0-9])/([12][09][0-9][0-9])";
+    public static final int MAX_MONTHS_IN_YEAR = 12;
     public static Pattern compile = Pattern.compile(DATE_PATTERN);
 
 
@@ -132,8 +135,8 @@ public class SearchCriteriaValidator {
     private static boolean validateDayMonthYear(int day, int month, long year) {
         boolean validationFlag = true;
 
-        if(day > 31 || day == 0 ||
-                month > 12 || month == 0 ||
+        if(day > MAX_DAYS_IN_MONTH || day == 0 ||
+                month > MAX_MONTHS_IN_YEAR || month == 0 ||
                 year == 0) {
             validationFlag = false;
         }
