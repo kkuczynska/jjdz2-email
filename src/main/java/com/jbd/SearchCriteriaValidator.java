@@ -12,11 +12,12 @@ public class SearchCriteriaValidator {
     private static final String INCORRECT_DATE_MESSAGE = "Niepoprawna data.";
 
     public static final int MAX_DAYS_IN_MONTH = 31;
+    public static final int MAX_MONTHS_IN_YEAR = 12;
 
     private static final String DATE_PATTERN = "([0-3][0-9])/([01][0-9])/([12][09][0-9][0-9])";
-    public static final int MAX_MONTHS_IN_YEAR = 12;
     public static Pattern compile = Pattern.compile(DATE_PATTERN);
 
+    private static UserCommunication userMessage = new UserCommunication();
 
     public static void validateEmail(String email) {
         String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
@@ -29,7 +30,7 @@ public class SearchCriteriaValidator {
             validationFlag = false;
         }
         if(validationFlag==false) {
-            UserCommunication.sendUserMessage(INCORRECT_EMAIL_MESSAGE);
+            userMessage.sendUserMessage(INCORRECT_EMAIL_MESSAGE);
         }
 
     }
@@ -37,7 +38,7 @@ public class SearchCriteriaValidator {
     public static void validateStartDate(String startDate) {
         boolean validationFlag = datePatternMatching(startDate);
         if(validationFlag==false) {
-            UserCommunication.sendUserMessage(INCORRECT_DATE_MESSAGE);
+            userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
     }
 
@@ -71,7 +72,7 @@ public class SearchCriteriaValidator {
         }
 
         if (validationFlag == false) {
-            UserCommunication.sendUserMessage(INCORRECT_DATE_MESSAGE);
+            userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
     }
 
@@ -104,7 +105,7 @@ public class SearchCriteriaValidator {
         return validationFlag;
     }
 
-    public List<Integer> datePatternGrouping(String date) {
+    private List<Integer> datePatternGrouping(String date) {
         List<Integer> dateGrouped = new ArrayList<>();
 
         Matcher matcher = compile.matcher(date);
@@ -120,7 +121,7 @@ public class SearchCriteriaValidator {
         return dateGrouped;
     }
 
-    public long datePatternGroupingYear(String date) {
+    private long datePatternGroupingYear(String date) {
         long dateYear = 0000;
 
         Matcher matcher = compile.matcher(date);
