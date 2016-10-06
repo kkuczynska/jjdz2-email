@@ -1,6 +1,5 @@
 package com.jbd;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -14,44 +13,51 @@ public class SearchCriteriaValidator {
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;
 
-    private static final String DATE_PATTERN = "([0-3][0-9])/([01][0-9])/([12][09][0-9][0-9])";
-    public static Pattern compile = Pattern.compile(DATE_PATTERN);
+    private static final String datePattern = "([0-3][0-9])/([01][0-9])/([12][09][0-9][0-9])";
+    public static Pattern compile = Pattern.compile(datePattern);
+
+    private static String getStartDate = SearchCriteria.getSTARTDATE();
 
     private static UserCommunication userMessage = new UserCommunication();
 
-    public void validateEmail(String email) {
-        String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
-                "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
-
+    public boolean validateEmail(String email) {
         boolean validationFlag = true;
-        boolean validateChars = validateUnacceptableCharsExisting(email,unacceptableChars);
 
-        if(validateChars==false || !email.contains("@") || !email.contains(".")) {
-            validationFlag = false;
+        if(!email.equals("")) {
+            String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
+                    "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
+
+            boolean validateChars = validateUnacceptableCharsExisting(email, unacceptableChars);
+
+            if (validateChars == false || !email.contains("@") || !email.contains(".")) {
+                validationFlag = false;
+            }
         }
+
         if(validationFlag==false) {
             userMessage.sendUserMessage(INCORRECT_EMAIL_MESSAGE);
         }
-
+        return validationFlag;
     }
 
-    public void validateStartDate(String startDate) {
+    public boolean validateStartDate(String startDate) {
         boolean validationFlag = datePatternMatching(startDate);
         if(validationFlag==false) {
             userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
+        return validationFlag;
     }
 
-    public void validateEndDate(String endDate) {
+    public boolean validateEndDate(String endDate) {
         boolean validationFlag = datePatternMatching(endDate);
 
         if(validationFlag==true) {
             SearchCriteriaValidator dateGrouping = new SearchCriteriaValidator();
 
             List<Integer> endDateList = dateGrouping.datePatternGrouping(endDate);
-            List<Integer> startDateList = dateGrouping.datePatternGrouping(SearchCriteria.getSTARTDATE());
+            List<Integer> startDateList = dateGrouping.datePatternGrouping(getStartDate);
 
-            long startYear = dateGrouping.datePatternGroupingYear(SearchCriteria.getSTARTDATE());
+            long startYear = dateGrouping.datePatternGroupingYear(getStartDate);
             long endYear = dateGrouping.datePatternGroupingYear(endDate);
 
             int startMonth = startDateList.get(1);
@@ -74,6 +80,7 @@ public class SearchCriteriaValidator {
         if (validationFlag == false) {
             userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
+        return validationFlag;
     }
 
     private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
@@ -94,7 +101,7 @@ public class SearchCriteriaValidator {
         SearchCriteriaValidator dateGrouping = new SearchCriteriaValidator();
         Matcher matcher = compile.matcher(date);
 
-        boolean matches = Pattern.matches(DATE_PATTERN, date);
+        boolean matches = Pattern.matches(datePattern, date);
         if(matches==false) {
             validationFlag = false;
         } else {
