@@ -19,7 +19,7 @@ public class SearchCriteriaValidator {
 
     private static UserCommunication userMessage = new UserCommunication();
 
-    public static void validateEmail(String email) {
+    public void validateEmail(String email) {
         String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
                 "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
 
@@ -35,14 +35,14 @@ public class SearchCriteriaValidator {
 
     }
 
-    public static void validateStartDate(String startDate) {
+    public void validateStartDate(String startDate) {
         boolean validationFlag = datePatternMatching(startDate);
         if(validationFlag==false) {
             userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
     }
 
-    public static void validateEndDate(String endDate) {
+    public void validateEndDate(String endDate) {
         boolean validationFlag = datePatternMatching(endDate);
 
         if(validationFlag==true) {
