@@ -10,14 +10,14 @@ public class SearchCriteria {
     private static String ENDDATE;
     private static String KEYWORDS;
 
-    SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
+    private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
 
     public static String getEMAIL() {
         return EMAIL;
     }
 
     public static void setEMAIL(String EMAIL) {
-        SearchCriteriaValidator.validateEmail(EMAIL);
+        searchCriteriaValidator.validateEmail(EMAIL);
         SearchCriteria.EMAIL = EMAIL;
     }
 
@@ -27,7 +27,7 @@ public class SearchCriteria {
 
     public static void setSTARTDATE(String STARTDATE) {
         SearchCriteria.STARTDATE = STARTDATE;
-        SearchCriteriaValidator.validateStartDate(STARTDATE);
+        searchCriteriaValidator.validateStartDate(STARTDATE);
     }
 
     public static String getENDDATE() {
@@ -36,7 +36,7 @@ public class SearchCriteria {
 
     public static void setENDDATE(String ENDDATE) {
         SearchCriteria.ENDDATE = ENDDATE;
-        SearchCriteriaValidator.validateEndDate(ENDDATE);
+        searchCriteriaValidator.validateEndDate(ENDDATE);
     }
 
     public static List<String> getKEYWORDS() {
