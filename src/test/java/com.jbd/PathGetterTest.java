@@ -9,10 +9,12 @@ import java.io.InputStream;
 import static org.junit.Assert.assertEquals;
 
 public class PathGetterTest {
-    PathGetter pg = new PathGetter();
-    String absolutePath = new File("").getAbsolutePath();
-    String pathToFile = absolutePath + "/src/main/resources/testlist.mbox";
-    String pathToDirectory = absolutePath + "/src/main/resources";
+    private PathGetter pg = new PathGetter();
+    private String absolutePath = new File("").getAbsolutePath();
+    private String pathToFile = absolutePath + File.separator + "src" + File.separator + "main"
+            + File.separator + "resources" + File.separator + "testlist.mbox";
+    private String pathToDirectory = absolutePath + File.separator + "src" + File.separator + "main"
+            + File.separator + "resources";
 
     @Test
     public void emptyInputReturnsAbsolutePath() {
