@@ -10,7 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PathGetter {
-    private static final String ANY_EXTENSION = ".*\\.[\\w]{1,5}";
+    private static final String ACCEPTED_EXTENSIONS = ".*(.eml|.mbox)";
     private List<String> fileList = new ArrayList<>();
 
     public List<String> getFileList() {
@@ -31,7 +31,7 @@ public class PathGetter {
     }
 
     public List<String> createFileListFromPath(String inputPath) {
-        Pattern pattern = Pattern.compile(ANY_EXTENSION);
+        Pattern pattern = Pattern.compile(ACCEPTED_EXTENSIONS);
         Matcher matcher = pattern.matcher(inputPath);
         fileList.clear();
 
