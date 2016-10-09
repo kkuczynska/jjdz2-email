@@ -22,7 +22,8 @@ public class ContentmentVerification {
                     foundEmailsList.add(email);
                 }
             } catch (ParseException e1) {
-                e1.printStackTrace();                
+                //e1.printStackTrace();
+                throw  new IllegalArgumentException(e1);
             }
 
         }
