@@ -9,12 +9,11 @@ import java.util.regex.Pattern;
 
 public class ContentmentVerification {
 
-    private List<Email> foundEmailsList = new ArrayList<>();
+    private List<Email> foundEmailsList;
 
     public List<Email> searchEmailByDate(String startDateOfEmailToSearch,List<Email> mailListToSearch) { //startDateOfEmailToSearch musi być w formacie "yyyy-MM-dd"
-        if(!foundEmailsList.isEmpty()){
-            foundEmailsList.clear();
-        }
+
+        foundEmailsList = new ArrayList<>();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat ("yyyy-MM-dd");
         for (Email email: mailListToSearch){
@@ -32,9 +31,8 @@ public class ContentmentVerification {
     }
 
     public List<Email> searchEmailByName(List<String> searchingMailList, List<Email> mailListToSearch) {
-        if(!foundEmailsList.isEmpty()){
-            foundEmailsList.clear();
-        }
+        foundEmailsList = new ArrayList<>();
+
         for (Email email:mailListToSearch) {
             for(String singleNameEmail: searchingMailList) {
                 Pattern pattern = Pattern.compile(singleNameEmail);
@@ -50,9 +48,7 @@ public class ContentmentVerification {
     }
 
     public List<Email> searchEmailByTitleWithKeyWords(List<String> keyWordsListToSearchProperTitle, List<Email> mailListToSearch){
-        if(!foundEmailsList.isEmpty()){
-            foundEmailsList.clear();
-        }
+        foundEmailsList = new ArrayList<>();
 
         for (Email email: mailListToSearch) {
             for (String item:keyWordsListToSearchProperTitle) {
