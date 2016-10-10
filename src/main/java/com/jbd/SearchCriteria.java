@@ -10,15 +10,15 @@ public class SearchCriteria {
     private static String ENDDATE;
     private static String KEYWORDS;
 
-    SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
+    private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
 
     public static String getEMAIL() {
         return EMAIL;
     }
 
     public static void setEMAIL(String EMAIL) {
+        searchCriteriaValidator.validateEmail(EMAIL);
         SearchCriteria.EMAIL = EMAIL;
-        SearchCriteriaValidator.validateEmail(EMAIL);
     }
 
     public static String getSTARTDATE() {
@@ -27,6 +27,7 @@ public class SearchCriteria {
 
     public static void setSTARTDATE(String STARTDATE) {
         SearchCriteria.STARTDATE = STARTDATE;
+        searchCriteriaValidator.validateStartDate(STARTDATE);
     }
 
     public static String getENDDATE() {
@@ -35,6 +36,7 @@ public class SearchCriteria {
 
     public static void setENDDATE(String ENDDATE) {
         SearchCriteria.ENDDATE = ENDDATE;
+        searchCriteriaValidator.validateEndDate(ENDDATE);
     }
 
     public static List<String> getKEYWORDS() {
@@ -48,6 +50,9 @@ public class SearchCriteria {
 
     private static List<String> keywordsParser(String keywords) {
         List<String> keywordsParsed = new ArrayList<>();
+
+        keywords = keywords.replaceAll(", ",",");
+        keywords = keywords.replaceAll(" ,",",");
 
         String splitBy = ",";
         String[] keywordsParsing = keywords.split(splitBy);
