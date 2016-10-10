@@ -14,9 +14,9 @@ import static org.junit.Assert.*;
 public class ContentmentVerificationTest {
 
     private List<Email> emailList = Arrays.asList(
-            new Email("Marcin.bart@gmail.com", "tytul", "2014-08-09", "test"),
-            new Email("Pawel@wp.pl", "tytul", "2016-01-13", "test2"),
-            new Email("Karolina@onet.pl", "tytul", "1990-12-22", "test3")
+            new Email("Marcin.bart@gmail.com", "tytul wazny", "2014-08-09", "test"),
+            new Email("Pawel@wp.pl", "tytul niewazny", "2016-01-13", "test2"),
+            new Email("Karolina@onet.pl", "tytul straszny", "1990-12-22", "test3")
     );
 
     ContentmentVerification cv = new ContentmentVerification();
@@ -40,11 +40,15 @@ public class ContentmentVerificationTest {
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void should_throw_exception() {
-        String date = "Tf";
-        List<Email> emailList = Arrays.asList(new Email("Filip", "title", "2022-06-21", "content"));
-
+    @Test
+    public void should_return_email_with_keywords_in_title() throws Exception {
+        List<String> keyWords = Arrays.asList(
+                new String("wazny"),
+                new String("straszny")
+        );
+        List<Email> resultList = cv.searchEmailByTitleWithKeyWords(keyWords,emailList);
+        assertThat("Returned wrong Titles!", resultList.size(), is(2));
 
     }
+
 }
