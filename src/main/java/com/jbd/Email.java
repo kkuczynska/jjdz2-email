@@ -1,27 +1,19 @@
 package com.jbd;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import java.time.*;
 
 public class Email {
     private String from;
-    private Date data;
+    private LocalDate data;
     private String subject;
     private String content;
 
-    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Date objectOfDate;
+    LocalDate objectOfDate;
 
     public Email(String from, String subject, String data, String content) {
         this.from = from;
-        try {
-            objectOfDate = simpleDateFormat.parse(data);
-            this.data = objectOfDate;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        objectOfDate = LocalDate.parse(data);
+        this.data = objectOfDate;
         this.subject = subject;
         this.content = content;
     }
@@ -35,17 +27,18 @@ public class Email {
         this.from = from;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
     public void setData(String data) {
-        try {
-            objectOfDate = simpleDateFormat.parse(data);
-            this.data = objectOfDate;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        objectOfDate = LocalDate.parse(data);
+//        try {
+//            objectOfDate = simpleDateFormat.parse(data);
+//            this.data = objectOfDate;
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public String getFrom() {
