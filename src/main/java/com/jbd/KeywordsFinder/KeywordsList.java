@@ -16,9 +16,8 @@ public class KeywordsList {
 
         Set<String> keywordsFinalSet = new HashSet<String>();
 
-        for(String answer : answersList) {
-            keywordsSet.add(answer);
-        }
+        keywordsSet.addAll(answersList);
+
         return keywordsFinalSet;
     }
 
