@@ -10,7 +10,7 @@ public class DisplayEmails {
     public final int WHOLE_EMAIL = 1;
     public final int JUST_EMAIL_ADDRESS = 2;
 
-    public void DisplayEmails(List<Email> emailList) {
+    public void DisplayEmailsFunction(List<Email> emailList) {
 
         Scanner scanner = new Scanner(System.in);
 
