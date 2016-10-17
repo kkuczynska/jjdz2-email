@@ -48,7 +48,12 @@
     "szef",
     "biznes",
     "praca",
-    "współpracownik"
+    "współpracownik",
+    "biuro",
+    "asytentka",
+    "asystent",
+    "sekretarka",
+    "prezes"
   ],
   "emailNotBusiness": [
     "prywatny",
@@ -68,7 +73,9 @@
     "obiad",
     "żona",
     "mąż",
-    "rocznica"
+    "rocznica",
+    "mieszkanie",
+    "mieszkaniu"
   ],
   "emailAboutMeeting": [
     "spotkanie",
@@ -78,6 +85,7 @@
     "umówić się",
     "randka",
     "obiad",
-    ""
+    "gość",
+    "goście"
   ]
 }
