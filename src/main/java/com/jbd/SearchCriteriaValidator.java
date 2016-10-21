@@ -46,7 +46,7 @@ public class SearchCriteriaValidator {
     public static void validateEndDate(String endDate) {
         boolean validationFlag = datePatternMatching(endDate);
 
-        LocalDate endDateFormatted = null;
+        LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
         boolean isEndDateAfterStartDate = endDateFormatted.isAfter(LocalDate.parse(SearchCriteria.getSTARTDATE(), dateFormatter));
         if(isEndDateAfterStartDate==false) {
             validationFlag = false;
