@@ -14,7 +14,7 @@ public class DisplayEmails {
 
         Scanner scanner = new Scanner(System.in);
 
-        int wybor = 0;
+        int wybor;
         boolean flaga = false;
 
 
@@ -23,7 +23,7 @@ public class DisplayEmails {
             System.out.println("1 - Whole e-mail");
             System.out.println("2 - Only e-mail's addresses");
             wybor = scanner.nextInt();
-            if (wybor == 1 || wybor == 2) {
+            if (wybor == WHOLE_EMAIL || wybor == JUST_EMAIL_ADDRESS) {
                 flaga = true;
             } else {
                 flaga = false;
