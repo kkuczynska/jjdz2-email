@@ -1,7 +1,7 @@
 # jjdz2-email
 
 --------------------------------------------------------
-InfoShareAcademy Java Junior Developer project "jjdz2-email"
+InfoShareAcademy Junior Java Developer project "jjdz2-email"
 Product Owner: Marcin Dargacz
 
 Development Team (JBD):
