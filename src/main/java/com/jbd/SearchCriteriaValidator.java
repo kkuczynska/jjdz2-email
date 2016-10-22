@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 public class SearchCriteriaValidator {
 
-    private static final String INCORRECT_EMAIL_MESSAGE = "Niepoprawny adres email.";
-    private static final String INCORRECT_DATE_MESSAGE = "Niepoprawna data.";
+    private static final String INCORRECT_EMAIL_MESSAGE = "Incorrect email address.";
+    private static final String INCORRECT_DATE_MESSAGE = "Incorrect date.";
 
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;

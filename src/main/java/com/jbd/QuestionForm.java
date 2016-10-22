@@ -4,10 +4,10 @@ import static com.jbd.SearchCriteria.*;
 
 public class QuestionForm {
 
-    private static final String EMAIL_QUESTION = "Podaj adres email w formacie xxxx@xx.xx";
-    private static final String KEYWORD_QUESTION = "Podaj słowa kluczowe w tytule. Słowa oddziel przecinkami.";
-    private static final String STARTDATE_QUESTION = "Zakres dat: podaj datę początkową w formacie DD/MM/YYYY";
-    private static final String ENDDATE_QUESTION = "Zakres dat: podaj datę końcową w formacie DD/MM/YYYY";
+    private static final String EMAIL_QUESTION = "Provide email address (xxxx@xx.xx)";
+    private static final String KEYWORD_QUESTION = "Provide keywords to find in email subject. Separate them with commas.";
+    private static final String STARTDATE_QUESTION = "Provide start date (DD/MM/YYYY)";
+    private static final String ENDDATE_QUESTION = "Provide end date (DD/MM/YYYY)";
 
     public void askQuestionsAndSetAnswers() {
         UserCommunication sendMessage = new UserCommunication();
