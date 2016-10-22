@@ -1,0 +1,91 @@
+{
+  "questions": [
+    "Czy email jest pilny?",
+    "Czy email jest służbowy?",
+    "Czy email dotyczy rodziny?",
+    "Czy email dotyczy spotkania?"
+  ],
+  "emailUrgent": [
+    "pilny email",
+    "pilnie",
+    "pilny",
+    "szybko",
+    "szybki",
+    "natychmiast",
+    "asap",
+    "na wczoraj",
+    "od razu",
+    "na dziś",
+    "eod",
+    "przed końcem dnia",
+    "pośpiesz się",
+    "przyspieszyć",
+    "niezwłocznie",
+    "najszybciej",
+    "teraz",
+    "zaraz",
+    "ważne",
+    "ważny",
+    "istotny"
+  ],
+  "emailNotUrgent": [
+    "kiedyś",
+    "nieważne",
+    "nieważny",
+    "nieistotny",
+    "nie śpiesz się",
+    "spokojnie",
+    "chwilę",
+    "poczekam",
+    "jakbyś mógł",
+    "postaraj się",
+    "gdy znajdziesz chwilę",
+    "jak będziesz miał czas"
+  ],
+  "emailBusiness": [
+    "służbowy",
+    "służbowo",
+    "szef",
+    "biznes",
+    "praca",
+    "współpracownik",
+    "biuro",
+    "asytentka",
+    "asystent",
+    "sekretarka",
+    "prezes"
+  ],
+  "emailNotBusiness": [
+    "prywatny",
+    "prywatnie",
+    "dom",
+    "po pracy"
+  ],
+  "emailAboutFamily": [
+    "mama",
+    "tata",
+    "brat",
+    "siostra",
+    "rodzina",
+    "dziecko",
+    "dzieci",
+    "rodzice",
+    "obiad",
+    "żona",
+    "mąż",
+    "rocznica",
+    "mieszkanie",
+    "mieszkaniu"
+  ],
+  "emailAboutMeeting": [
+    "spotkanie",
+    "porozmawiać",
+    "rozmowa",
+    "spotkać",
+    "umówić się",
+    "randka",
+    "obiad",
+    "gość",
+    "goście"
+  ]
+}
