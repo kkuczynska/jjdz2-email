@@ -3,9 +3,7 @@ package com.jbd;
 import java.util.List;
 import java.util.Scanner;
 
-/**
- * Created by Admin on 15.10.2016.
- */
+
 public class DisplayEmails {
     public final int WHOLE_EMAIL = 1;
     public final int JUST_EMAIL_ADDRESS = 2;
