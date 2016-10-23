@@ -14,7 +14,7 @@ public class DisplayEmails {
 
         Scanner scanner = new Scanner(System.in);
 
-        int wybor;
+        int choice;
         boolean flaga = false;
 
 
@@ -22,8 +22,8 @@ public class DisplayEmails {
             System.out.println("What would you like to display ?");
             System.out.println("1 - Whole e-mail");
             System.out.println("2 - Only e-mail's addresses");
-            wybor = scanner.nextInt();
-            if (wybor == WHOLE_EMAIL || wybor == JUST_EMAIL_ADDRESS) {
+            choice = scanner.nextInt();
+            if (choice == WHOLE_EMAIL || choice == JUST_EMAIL_ADDRESS) {
                 flaga = true;
             } else {
                 flaga = false;
@@ -34,9 +34,9 @@ public class DisplayEmails {
         } while (!flaga);
 
 
-        switch (wybor) {
+        switch (choice) {
             case WHOLE_EMAIL:
-                int counter = 0;
+                int counter = 1;
                 System.out.println("You have taken option 1- whole email");
                 for (Email e : emailList) {
                     System.out.print(counter + ". ");
@@ -48,7 +48,7 @@ public class DisplayEmails {
                 break;
             case JUST_EMAIL_ADDRESS:
                 System.out.println("You have taken option 2 - just email address");
-                counter = 0;
+                counter = 1;
                 for (Email e : emailList) {
                     System.out.println(counter + ". > " + e.getFrom());
                     counter++;
