@@ -1,5 +1,6 @@
 package com.jbd;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -7,16 +8,14 @@ import java.util.regex.Pattern;
 import java.time.*;
 
 public class ContentmentVerification {
-
+    private DateTimeFormatter formatter1 = DateTimeFormatter.ISO_LOCAL_DATE;
     private List<Email> foundEmailsList;
 
     public List<Email> searchEmailByDate(String startDateOfEmailToSearch, List<Email> mailListToSearch) { //startDateOfEmailToSearch musi być w formacie "yyyy-MM-dd"
 
         foundEmailsList = new ArrayList<>();
         for (Email email : mailListToSearch) {
-
-
-            LocalDate date = LocalDate.parse(startDateOfEmailToSearch);
+            LocalDate date = LocalDate.parse(startDateOfEmailToSearch,formatter1);
             if (email.getData().isAfter(date)) {
                 foundEmailsList.add(email);
             }

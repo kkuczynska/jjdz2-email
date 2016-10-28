@@ -6,35 +6,38 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FileLoad {
+    private StringBuilder builder;
 
-    public void fileload(String file){
+    public String fileLoad(String file){
+        builder = new StringBuilder();
         FileReader fr = null;
-        String linia = "";
-        // tutaj czyta podany plik
-        // OTWIERANIE PLIKU:
+        String line;
+
         try {
             fr = new FileReader(file);
         } catch (FileNotFoundException e) {
-            System.out.println("BŁĄD PRZY OTWIERANIU PLIKU!");
+            System.out.println("error during opening");
             System.exit(1);
         }
 
         BufferedReader bfr = new BufferedReader(fr);
-        // ODCZYT KOLEJNYCH LINII Z PLIKU:
         try {
-            while((linia = bfr.readLine()) != null){
-                System.out.println(linia);
+            while((line = bfr.readLine()) != null){
+                builder.append(line).append("\n");
             }
         } catch (IOException e) {
-            System.out.println("BŁĄD ODCZYTU Z PLIKU!");
+            System.out.println("error during reading");
             System.exit(2);
         }
 
-        // ZAMYKANIE PLIKU
         try {
             fr.close();
         } catch (IOException e) {
-            System.out.println("BŁĄD PRZY ZAMYKANIU PLIKU!");
+            System.out.println("error during closing");
             System.exit(3);
-        }}
+        }
+
+        return builder.toString();
+    }
+
 }

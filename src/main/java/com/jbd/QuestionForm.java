@@ -6,8 +6,8 @@ public class QuestionForm {
 
     private static final String EMAIL_QUESTION = "Provide email address (xxxx@xx.xx)";
     private static final String KEYWORD_QUESTION = "Provide keywords to find in email subject. Separate them with commas.";
-    private static final String STARTDATE_QUESTION = "Provide start date (DD/MM/YYYY)";
-    private static final String ENDDATE_QUESTION = "Provide end date (DD/MM/YYYY)";
+    private static final String STARTDATE_QUESTION = "Provide start date (YYYY-MM-DD)";
+    private static final String ENDDATE_QUESTION = "Provide end date (YYYY-MM-DD)";
 
     public void askQuestionsAndSetAnswers() {
         UserCommunication sendMessage = new UserCommunication();

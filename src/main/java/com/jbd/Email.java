@@ -1,6 +1,7 @@
 package com.jbd;
 
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 public class Email {
     private String from;
@@ -12,8 +13,13 @@ public class Email {
 
     public Email(String from, String subject, String data, String content) {
         this.from = from;
-        objectOfDate = LocalDate.parse(data);
-        this.data = objectOfDate;
+        DateTimeFormatter formatterLongVersion = DateTimeFormatter.RFC_1123_DATE_TIME;
+        DateTimeFormatter formatterShortVersion = DateTimeFormatter.ISO_LOCAL_DATE;
+        if(data.length()> 12){
+            this.data = LocalDate.parse(data, formatterLongVersion);
+        } else {
+            this.data = LocalDate.parse(data,formatterShortVersion);
+        }
         this.subject = subject;
         this.content = content;
     }
@@ -67,6 +73,6 @@ public class Email {
 
     @Override
     public String toString() {
-        return from + " " + subject + " " + data.toString();
+        return "From: " + from + "\nSubject: " + subject + "\n";
     }
 }
