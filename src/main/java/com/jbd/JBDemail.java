@@ -1,10 +1,15 @@
 package com.jbd;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class JBDemail {
+    private static final Logger LOGGER = LogManager.getLogger(JBDemail.class);
+
     public static void main(String[] args) {
         List<String> filesInStrings = new ArrayList<>();
         List<Email> eMailKeeper = new ArrayList<>();
@@ -14,6 +19,7 @@ public class JBDemail {
 
         PathGetter pG = new PathGetter();
         pG.createFileListFromPath(pG.askUserAboutInputPath());
+        LOGGER.info("Found: " + pG.getFileList().size() + " files.");
 
         FileLoad fL = new FileLoad();
         filesInStrings.addAll(pG.getFileList().stream().map(fL::fileLoad).collect(Collectors.toList()));
