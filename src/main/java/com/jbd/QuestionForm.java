@@ -13,15 +13,15 @@ public class QuestionForm {
         UserCommunication sendMessage = new UserCommunication();
 
         sendMessage.sendUserMessage(EMAIL_QUESTION);
-        setEMAIL(sendMessage.getUserResonse());
+        setEMAIL(sendMessage.getUserResponse());
 
         sendMessage.sendUserMessage(STARTDATE_QUESTION);
-        setSTARTDATE(sendMessage.getUserResonse());
+        setSTARTDATE(sendMessage.getUserResponse());
 
         sendMessage.sendUserMessage(ENDDATE_QUESTION);
-        setENDDATE(sendMessage.getUserResonse());
+        setENDDATE(sendMessage.getUserResponse());
 
         sendMessage.sendUserMessage(KEYWORD_QUESTION);
-        setKEYWORDS(sendMessage.getUserResonse());
+        setKEYWORDS(sendMessage.getUserResponse());
     }
 }
