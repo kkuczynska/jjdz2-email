@@ -17,7 +17,7 @@ public class SearchCriteriaValidator {
     private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])";
 
     private static UserCommunication userMessage = new UserCommunication();
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static boolean validateEmail(String email) {
         String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
