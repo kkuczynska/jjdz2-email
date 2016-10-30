@@ -43,7 +43,7 @@ public class SearchCriteriaValidator {
         return isStartdateCorrect;
     }
 
-    public static void validateEndDate(String endDate) {
+    public static boolean validateEndDate(String endDate) {
         boolean isEnddateCorrect = datePatternMatching(endDate);
 
         LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
@@ -55,6 +55,8 @@ public class SearchCriteriaValidator {
         if (isEnddateCorrect == false) {
             userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
+
+        return isEnddateCorrect;
     }
 
     private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
