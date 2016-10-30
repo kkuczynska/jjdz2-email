@@ -8,15 +8,11 @@ import java.util.regex.Pattern;
 
 public class SearchCriteriaValidator {
 
-    private static final String INCORRECT_EMAIL_MESSAGE = "Incorrect email address.";
-    private static final String INCORRECT_DATE_MESSAGE = "Incorrect date.";
-
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;
 
     private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])";
 
-    private static UserCommunication userMessage = new UserCommunication();
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static boolean validateEmail(String email) {
@@ -29,31 +25,29 @@ public class SearchCriteriaValidator {
         if(validateChars==false || !email.contains("@") || !email.contains(".")) {
             isEmailCorrect = false;
         }
-        if(isEmailCorrect==false) {
-            userMessage.sendUserMessage(INCORRECT_EMAIL_MESSAGE);
-        }
         return isEmailCorrect;
     }
 
     public static boolean validateStartDate(String startDate) {
-        boolean isStartdateCorrect = datePatternMatching(startDate.toString());
-        if(isStartdateCorrect==false) {
-            userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
-        }
+        boolean isStartdateCorrect = datePatternMatching(startDate);
         return isStartdateCorrect;
     }
 
     public static boolean validateEndDate(String endDate) {
         boolean isEnddateCorrect = datePatternMatching(endDate);
 
-        LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
-        boolean isEndDateAfterStartDate = endDateFormatted.isAfter(LocalDate.parse(SearchCriteria.getSTARTDATE(), dateFormatter));
-        if(isEndDateAfterStartDate==false) {
-            isEnddateCorrect = false;
-        }
+        if(isEnddateCorrect==true) {
+            LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
+            boolean isEndDateTheSameAsStartDate = endDateFormatted
+                    .isEqual(LocalDate.parse(SearchCriteria.getSTARTDATE(), dateFormatter));
+            boolean isEndDateAfterStartDate = endDateFormatted
+                    .isAfter(LocalDate.parse(SearchCriteria.getSTARTDATE(), dateFormatter));
 
-        if (isEnddateCorrect == false) {
-            userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
+            if(isEndDateTheSameAsStartDate==true) {
+                isEnddateCorrect = true;
+            } else if (isEndDateAfterStartDate == false) {
+                isEnddateCorrect = false;
+            }
         }
 
         return isEnddateCorrect;
