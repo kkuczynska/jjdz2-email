@@ -23,75 +23,75 @@ public class SearchCriteriaValidator {
         String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
                 "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
 
-        boolean validationFlag = true;
+        boolean isEmailCorrect = true;
         boolean validateChars = validateUnacceptableCharsExisting(email,unacceptableChars);
 
         if(validateChars==false || !email.contains("@") || !email.contains(".")) {
-            validationFlag = false;
+            isEmailCorrect = false;
         }
-        if(validationFlag==false) {
+        if(isEmailCorrect==false) {
             userMessage.sendUserMessage(INCORRECT_EMAIL_MESSAGE);
         }
-        return validationFlag;
+        return isEmailCorrect;
     }
 
     public static boolean validateStartDate(String startDate) {
-        boolean validationFlag = datePatternMatching(startDate.toString());
-        if(validationFlag==false) {
+        boolean isStartdateCorrect = datePatternMatching(startDate.toString());
+        if(isStartdateCorrect==false) {
             userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
-        return validationFlag;
+        return isStartdateCorrect;
     }
 
     public static void validateEndDate(String endDate) {
-        boolean validationFlag = datePatternMatching(endDate);
+        boolean isEnddateCorrect = datePatternMatching(endDate);
 
         LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
         boolean isEndDateAfterStartDate = endDateFormatted.isAfter(LocalDate.parse(SearchCriteria.getSTARTDATE(), dateFormatter));
         if(isEndDateAfterStartDate==false) {
-            validationFlag = false;
+            isEnddateCorrect = false;
         }
 
-        if (validationFlag == false) {
+        if (isEnddateCorrect == false) {
             userMessage.sendUserMessage(INCORRECT_DATE_MESSAGE);
         }
     }
 
     private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
-        boolean validationFlag = true;
+        boolean hasUnacceptableChars = true;
 
         for(String unacceptableChar : unacceptableChars) {
             if (validateInput.contains(unacceptableChar)) {
-                validationFlag = false;
+                hasUnacceptableChars = false;
             }
         }
 
-        return validationFlag;
+        return hasUnacceptableChars;
     }
 
     private static boolean datePatternMatching(String date) {
-        boolean validationFlag;
+        boolean hasCorrectPattern;
 
         boolean matches = Pattern.matches(DATE_PATTERN, date);
         if(matches==false) {
-            validationFlag = false;
+            hasCorrectPattern = false;
         } else {
             LocalDate endDateFormatted = LocalDate.parse(date, dateFormatter);
-            validationFlag = validateDayMonthYear(endDateFormatted.getDayOfMonth(), endDateFormatted.getMonthValue(), endDateFormatted.getYear());
+            hasCorrectPattern = validateDayMonthYear(endDateFormatted.getDayOfMonth(), endDateFormatted.getMonthValue(), endDateFormatted.getYear());
         }
-        return validationFlag;
+        return hasCorrectPattern;
     }
 
     private static boolean validateDayMonthYear(int day, int month, long year) {
-        boolean validationFlag = true;
+        boolean isDateCorrect = true;
 
         if(day > MAX_DAYS_IN_MONTH || day == 0 ||
                 month > MAX_MONTHS_IN_YEAR || month == 0 ||
                 year == 0) {
-            validationFlag = false;
+            isDateCorrect = false;
         }
 
-        return validationFlag;
+        return isDateCorrect;
     }
 
 }
