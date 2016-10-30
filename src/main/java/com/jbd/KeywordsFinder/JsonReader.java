@@ -5,9 +5,11 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 
 public class JsonReader {
@@ -104,39 +106,69 @@ public class JsonReader {
         return emailAboutMeeting;
     }
 
-    public static String getUrgentEmailQuestion() throws IOException, ParseException {
-        urgentEmailQuestion = readQuestionJsonArray(urgentEmailQuestionID);
+    public static String getUrgentEmailQuestion() {
+        try {
+            urgentEmailQuestion = readQuestionJsonArray(urgentEmailQuestionID);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return urgentEmailQuestion;
     }
 
-    public static String getBusinessEmailQuestion() throws IOException, ParseException {
+    public static String getBusinessEmailQuestion() {
         businessEmailQuestion = readQuestionJsonArray(businessQuestionID);
         return businessEmailQuestion;
     }
 
-    public static String getFarmilyEmailQuestion() throws IOException, ParseException {
+    public static String getFarmilyEmailQuestion() {
         familyEmailQuestion = readQuestionJsonArray(familyQuestionID);
         return familyEmailQuestion;
     }
 
-    public static String getMeetingEmailQuestion() throws IOException, ParseException {
+    public static String getMeetingEmailQuestion() {
         meetingEmailQuestion = readQuestionJsonArray(meetingQuestionID);
         return meetingEmailQuestion;
     }
 
-    public static ArrayList<String> readAnswerJsonArray(String jsonNodeName) throws IOException, ParseException {
-        FileReader fileReader = new FileReader(jsonPath);
+    public static ArrayList<String> readAnswerJsonArray(String jsonNodeName) {
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(jsonPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) jsonParser.parse(fileReader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         JSONArray jsonArray = (JSONArray) jsonObject.get(jsonNodeName);
 
         return jsonArray;
     }
 
-    public static String readQuestionJsonArray(int questionListElement) throws IOException, ParseException {
-        FileReader fileReader = new FileReader(jsonPath);
+    public static String readQuestionJsonArray(int questionListElement) {
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader(jsonPath);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject) jsonParser.parse(fileReader);
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = (JSONObject) jsonParser.parse(fileReader);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         JSONArray jsonArray = (JSONArray) jsonObject.get("questions");
         return (String) jsonArray.get(questionListElement);
     }

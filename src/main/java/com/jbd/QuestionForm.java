@@ -1,5 +1,7 @@
 package com.jbd;
 
+import com.jbd.KeywordsFinder.JsonReader;
+
 import static com.jbd.SearchCriteria.*;
 
 public class QuestionForm {
@@ -50,11 +52,12 @@ public class QuestionForm {
     }
 
     public void keywordsForm() {
+        JsonReader json = new JsonReader();
         userCommunication.sendUserMessage(KEYWORDS_HELP_QUESTION);
         String answer = userCommunication.getUserResponse();
 
         if(answer.equals("yes")) {
-
+            userCommunication.sendUserMessage(json.);
         }
     }
 }

@@ -14,8 +14,10 @@ public class JBDemail {
         List<String> filesInStrings = new ArrayList<>();
         List<Email> eMailKeeper = new ArrayList<>();
 
+
+
         QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
-        askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
+        askQuestionsAndQuestionForm.searchCriteriaForm();
 
         PathGetter pG = new PathGetter();
         pG.createFileListFromPath(pG.askUserAboutInputPath());
