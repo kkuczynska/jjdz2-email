@@ -24,18 +24,22 @@ public class JBDemailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        Email e1 = new Email("kkk@wp.pl","test test");
-        Email e2 = new Email("kkk123@wp.pl","test");
-        List<Email> input = Arrays.asList(e1,e2);
+        //getClass().getResource("/testlist.mbox").toExternalForm();
+        //mvn clean package wildfly:run
+
+        Email e1 = new Email("qqq@wp.pl", "test test");
+        Email e2 = new Email("www@wp.pl", "test 1");
+        Email e3 = new Email("123@wp.pl", "okno");
+        Email e4 = new Email("567@wp.pl", "3test");
+        List<Email> input = Arrays.asList(e1, e2, e3, e4);
 
         String keyword = req.getParameter("keywords");
         List<String> key = Arrays.asList(keyword);
         List<Email> results = verification.searchEmailByTitleWithKeyWords(key, input);
 
         System.out.println(results);
-        req.setAttribute("results", results);
 
-        System.out.println("lol3");
+        req.setAttribute("results", results);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/form.jsp");
         dispatcher.forward(req, resp);
