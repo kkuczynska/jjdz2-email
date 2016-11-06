@@ -16,11 +16,9 @@ public class SearchCriteriaValidator {
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static boolean validateEmail(String email) {
-        String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
-                "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
 
         boolean isEmailCorrect = true;
-        boolean validateChars = validateUnacceptableCharsExisting(email,unacceptableChars);
+        boolean validateChars = validateUnacceptableCharsExisting(email);
 
         if(validateChars==false || !email.contains("@") || !email.contains(".")) {
             isEmailCorrect = false;
@@ -53,7 +51,10 @@ public class SearchCriteriaValidator {
         return isEnddateCorrect;
     }
 
-    private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
+    private static boolean validateUnacceptableCharsExisting (String validateInput) {
+        String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
+                "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", "<", ">", "?", "/"};
+
         boolean hasUnacceptableChars = true;
 
         for(String unacceptableChar : unacceptableChars) {
