@@ -13,7 +13,7 @@ Development Team (JBD):
 Scrum Masters:
 Sprint 1: Karolina Kuczyńska
 Sprint 2: Marcin Bartoszek
-Sprint 3:
+
 --------------------------------------------------------
 Application description:
 Application JBDEmail has been created in order to search through email messages provided as .eml or .mbox files
