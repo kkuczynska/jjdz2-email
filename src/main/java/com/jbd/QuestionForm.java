@@ -8,6 +8,7 @@ public class QuestionForm {
     private static String KEYWORD_QUESTION = "Provide keywords to find in email subject. Separate them with commas.";
     private static String STARTDATE_QUESTION = "Provide start date (YYYY-MM-DD)";
     private static String ENDDATE_QUESTION = "Provide end date (YYYY-MM-DD)";
+    private static String NUMBER_OF_EMAILS_QUESTION = "How many email addresses would you like to find?";
 
     private static String EMAIL_QUESTION_WRONG_VALUE = "Wrong format, please try again (xxxx@xx.xx)";
     private static String STARTDATE_QUESTION_WRONG_VALUE = "Wrong format or invalid date, please provide new start date (YYYY-MM-DD)";
@@ -18,13 +19,19 @@ public class QuestionForm {
         SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
         SearchCriteria searchCriteria = new SearchCriteria();
 
-        do {
-            sendMessage.sendUserMessage(EMAIL_QUESTION);
-            setEMAIL(sendMessage.getUserResponse());
-            if(searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL())==false) {
-                EMAIL_QUESTION=EMAIL_QUESTION_WRONG_VALUE;
-            }
-        } while(!searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()));
+        int numberOfEmailAddresses;
+        sendMessage.sendUserMessage(NUMBER_OF_EMAILS_QUESTION);
+        numberOfEmailAddresses = Integer.valueOf(sendMessage.getUserResponse());
+
+        for(int index = 0; index < numberOfEmailAddresses; index++) {
+            do {
+                sendMessage.sendUserMessage(EMAIL_QUESTION);
+                setEMAIL(sendMessage.getUserResponse());
+                if (searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()) == false) {
+                    EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
+                }
+            } while (!searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()));
+        }
 
         do {
         sendMessage.sendUserMessage(STARTDATE_QUESTION);
