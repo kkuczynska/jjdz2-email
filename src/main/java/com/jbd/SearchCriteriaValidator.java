@@ -11,9 +11,9 @@ public class SearchCriteriaValidator {
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;
 
-    private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])";
+    private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9]) ([0-9]{2}):([0-9]{2})";
 
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
 
     public static boolean validateEmail(String email) {
 

@@ -9,6 +9,7 @@ public class SearchCriteria {
     private static String STARTDATE;
     private static String ENDDATE;
     private static String KEYWORDS;
+    private static final String TIME = " 00:00";
 
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
 
@@ -22,7 +23,7 @@ public class SearchCriteria {
     }
 
     public static String getSTARTDATE() {
-        return STARTDATE;
+        return STARTDATE + TIME;
     }
 
     public static void setSTARTDATE(String STARTDATE) {
@@ -31,7 +32,7 @@ public class SearchCriteria {
     }
 
     public static String getENDDATE() {
-        return ENDDATE;
+        return ENDDATE + TIME;
     }
 
     public static void setENDDATE(String ENDDATE) {
