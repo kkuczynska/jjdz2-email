@@ -40,7 +40,7 @@ public class SearchCriteria {
     }
 
     public static List<String> getKEYWORDS() {
-        List<String> keywordsParsed = keywordsParser(KEYWORDS);
+        List<String> keywordsParsed = searchCriteriaCommaParser(KEYWORDS);
         return keywordsParsed;
     }
 
@@ -48,20 +48,20 @@ public class SearchCriteria {
         SearchCriteria.KEYWORDS = KEYWORDS;
     }
 
-    private static List<String> keywordsParser(String keywords) {
-        List<String> keywordsParsed = new ArrayList<>();
+    private static List<String> searchCriteriaCommaParser(String stringToParse) {
+        List<String> parsedList = new ArrayList<>();
 
-        keywords = keywords.replaceAll(", ",",");
-        keywords = keywords.replaceAll(" ,",",");
+        stringToParse = stringToParse.replaceAll(", ",",");
+        stringToParse = stringToParse.replaceAll(" ,",",");
 
         String splitBy = ",";
-        String[] keywordsParsing = keywords.split(splitBy);
+        String[] keywordsParsing = stringToParse.split(splitBy);
 
         for (String stringElement: keywordsParsing) {
-            keywordsParsed.add(stringElement);
+            parsedList.add(stringElement);
         }
 
-        return keywordsParsed;
+        return parsedList;
     }
 
 }
