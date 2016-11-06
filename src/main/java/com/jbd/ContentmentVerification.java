@@ -8,20 +8,18 @@ import java.util.regex.Pattern;
 import java.time.*;
 
 public class ContentmentVerification {
-    private DateTimeFormatter formatter1 = DateTimeFormatter.ISO_LOCAL_DATE;
+    private DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private List<Email> foundEmailsList;
 
     public List<Email> searchEmailByDate(String startDateOfEmailToSearch, List<Email> mailListToSearch) { //startDateOfEmailToSearch musi być w formacie "yyyy-MM-dd"
 
         foundEmailsList = new ArrayList<>();
         for (Email email : mailListToSearch) {
-            LocalDate date = LocalDate.parse(startDateOfEmailToSearch,formatter1);
+            LocalDateTime date = LocalDateTime.parse(startDateOfEmailToSearch,formatter1);
             if (email.getData().isAfter(date)) {
                 foundEmailsList.add(email);
             }
-
         }
-
         return foundEmailsList;
     }
 
@@ -39,7 +37,6 @@ public class ContentmentVerification {
             }
         }
         return foundEmailsList;
-
     }
 
     public List<Email> searchEmailByTitleWithKeyWords(List<String> keyWordsListToSearchProperTitle, List<Email> mailListToSearch) {
@@ -53,12 +50,8 @@ public class ContentmentVerification {
                     foundEmailsList.add(email);
                     break;
                 }
-
             }
-
         }
         return foundEmailsList;
     }
-
-
 }
