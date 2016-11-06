@@ -1,31 +1,25 @@
 package com.jbd;
 
 import org.junit.Test;
-import org.w3c.dom.ls.LSInput;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertThat;
 
 public class ContentmentVerificationTest {
     private List<Email> emailList = Arrays.asList(
-            new Email("Marcin.bart@gmail.com", "tytul wazny", "2014-08-09", "test"), //2014-08-09
-            new Email("Pawel@wp.pl", "tytul niewazny", "2016-01-13", "test2"),//2016-01-13
+            new Email("Marcin.bart@gmail.com", "tytul wazny", "2014-08-09 00:00", "test"), //2014-08-09
+            new Email("Pawel@wp.pl", "tytul niewazny", "2016-01-13 00:00", "test2"),//2016-01-13
             new Email("Karolina@onet.pl", "tytul straszny", "Sat, 22 Dec 1990 02:32:43 +0100", "test3")//1990-12-22
     );
 
     ContentmentVerification cv = new ContentmentVerification();
 
-
     @Test
     public void should_return_email_with_correct_date() throws Exception {
-        String date = "2013-01-01";
+        String date = "2013-01-01 00:00";
         List<Email> resultList = cv.searchEmailByDate(date, emailList);
         assertThat("Given data is later then data in List", resultList.size(), is(2));
     }
@@ -38,7 +32,6 @@ public class ContentmentVerificationTest {
         );
         List<Email> resultList = cv.searchEmailByName(emailString,emailList);
         assertThat("Given emails are wrong", resultList.size(), is(2));
-
     }
 
     @Test
@@ -49,7 +42,5 @@ public class ContentmentVerificationTest {
         );
         List<Email> resultList = cv.searchEmailByTitleWithKeyWords(keyWords,emailList);
         assertThat("Returned wrong Titles!", resultList.size(), is(2));
-
     }
-
 }

@@ -4,21 +4,22 @@ import java.time.*;
 import java.time.format.DateTimeFormatter;
 
 public class Email {
+    public static final int LENGTH_LIMIT = 16;
     private String from;
-    private LocalDate data;
+    private LocalDateTime data;
     private String subject;
     private String content;
 
-    LocalDate objectOfDate;
+    LocalDateTime objectOfDate;
 
     public Email(String from, String subject, String data, String content) {
         this.from = from;
         DateTimeFormatter formatterLongVersion = DateTimeFormatter.RFC_1123_DATE_TIME;
-        DateTimeFormatter formatterShortVersion = DateTimeFormatter.ISO_LOCAL_DATE;
-        if(data.length()> 12){
-            this.data = LocalDate.parse(data, formatterLongVersion);
+        DateTimeFormatter formatterShortVersion = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        if(data.length()> LENGTH_LIMIT){
+            this.data = LocalDateTime.parse(data, formatterLongVersion);
         } else {
-            this.data = LocalDate.parse(data,formatterShortVersion);
+            this.data = LocalDateTime.parse(data,formatterShortVersion);
         }
         this.subject = subject;
         this.content = content;
@@ -33,18 +34,12 @@ public class Email {
         this.from = from;
     }
 
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
     public void setData(String data) {
-        objectOfDate = LocalDate.parse(data);
-//        try {
-//            objectOfDate = simpleDateFormat.parse(data);
-//            this.data = objectOfDate;
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
+        objectOfDate = LocalDateTime.parse(data);
     }
 
     public String getFrom() {
