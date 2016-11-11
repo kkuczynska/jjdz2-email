@@ -19,6 +19,7 @@ public class QuestionForm {
         UserCommunication sendMessage = new UserCommunication();
         SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
         SearchCriteria searchCriteria = new SearchCriteria();
+        String emailAddress = "";
 
         int numberOfEmailAddresses;
         sendMessage.sendUserMessage(NUMBER_OF_EMAILS_QUESTION);
@@ -28,14 +29,14 @@ public class QuestionForm {
         for(int index = 0; index < numberOfEmailAddresses; index++) {
             do {
                 sendMessage.sendUserMessage(EMAIL_QUESTION);
-                setEMAIL(sendMessage.getUserResponse());
-                System.out.println("Email: " + getEMAIL());
-                if (searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()) == false) {
+                emailAddress = sendMessage.getUserResponse();
+                setEMAIL(emailAddress);
+                if (searchCriteriaValidator.validateEmail(emailAddress) == false) {
                     EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
                 } else if(!(numberOfEmailAddresses==1 && index==0)) {
                     EMAIL_QUESTION = ADDITIONAL_EMAIL_QUESTION;
                 }
-            } while (!searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()));
+            } while (!searchCriteriaValidator.validateEmail(emailAddress));
         }
 
         do {
