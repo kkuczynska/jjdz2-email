@@ -10,16 +10,18 @@ public class SearchCriteria {
     private static String ENDDATE;
     private static String KEYWORDS;
     private static final String TIME = " 00:00";
+    private static ArrayList<String> emailAdresses = new ArrayList<>();
 
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
 
-    public static String getEMAIL() {
-        return EMAIL;
+    public static ArrayList<String> getEMAIL() {
+        return emailAdresses;
     }
 
     public static void setEMAIL(String EMAIL) {
         searchCriteriaValidator.validateEmail(EMAIL);
         SearchCriteria.EMAIL = EMAIL;
+        emailAdresses.add(EMAIL);
     }
 
     public static String getSTARTDATE() {
