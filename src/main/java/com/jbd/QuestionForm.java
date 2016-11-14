@@ -24,7 +24,6 @@ public class QuestionForm {
         int numberOfEmailAddresses;
         sendMessage.sendUserMessage(NUMBER_OF_EMAILS_QUESTION);
         numberOfEmailAddresses = Integer.valueOf(sendMessage.getUserResponse());
-        System.out.println(numberOfEmailAddresses);
 
         for (int index = 0; index < numberOfEmailAddresses; index++) {
             do {
