@@ -54,13 +54,13 @@ public class SearchCriteria {
     private static List<String> searchCriteriaCommaParser(String stringToParse) {
         List<String> parsedList = new ArrayList<>();
 
-        stringToParse = stringToParse.replaceAll(", ",",");
-        stringToParse = stringToParse.replaceAll(" ,",",");
+        stringToParse = stringToParse.replaceAll(", ", ",");
+        stringToParse = stringToParse.replaceAll(" ,", ",");
 
         String splitBy = ",";
         String[] keywordsParsing = stringToParse.split(splitBy);
 
-        for (String stringElement: keywordsParsing) {
+        for (String stringElement : keywordsParsing) {
             parsedList.add(stringElement);
         }
 
