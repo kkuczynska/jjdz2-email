@@ -14,6 +14,8 @@ public class JBDemail {
         List<String> filesInStrings = new ArrayList<>();
         List<Email> eMailKeeper = new ArrayList<>();
 
+        DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
+
         QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
         askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
 

@@ -36,7 +36,7 @@ public class SearchCriteria {
 
     public static void setENDDATE(String ENDDATE) {
         SearchCriteria.ENDDATE = ENDDATE;
-        searchCriteriaValidator.validateEndDate(ENDDATE);
+        //searchCriteriaValidator.validateEndDate(ENDDATE); To Improve!!
     }
 
     public static List<String> getKEYWORDS() {
