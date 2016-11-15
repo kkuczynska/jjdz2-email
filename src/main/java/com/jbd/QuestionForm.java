@@ -27,16 +27,16 @@ public class QuestionForm {
         } while(!searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()));
 
         do {
-        sendMessage.sendUserMessage(STARTDATE_QUESTION);
-        setSTARTDATE(sendMessage.getUserResponse());
+            sendMessage.sendUserMessage(STARTDATE_QUESTION);
+            setSTARTDATE(sendMessage.getUserResponse());
             if(searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE())==false) {
                 STARTDATE_QUESTION=STARTDATE_QUESTION_WRONG_VALUE;
             }
         } while(!searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()));
 
         do {
-        sendMessage.sendUserMessage(ENDDATE_QUESTION);
-        setENDDATE(sendMessage.getUserResponse());
+            sendMessage.sendUserMessage(ENDDATE_QUESTION);
+            setENDDATE(sendMessage.getUserResponse());
             if(searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE())==false) {
                 ENDDATE_QUESTION=ENDDATE_QUESTION_WRONG_VALUE;
             }

@@ -9,23 +9,20 @@ public class SearchCriteria {
     private static String STARTDATE;
     private static String ENDDATE;
     private static String KEYWORDS;
-    private static final String TIME = " 00:00";
-    private static ArrayList<String> emailAdresses = new ArrayList<>();
 
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
 
-    public static ArrayList<String> getEMAIL() {
-        return emailAdresses;
+    public static String getEMAIL() {
+        return EMAIL;
     }
 
     public static void setEMAIL(String EMAIL) {
         searchCriteriaValidator.validateEmail(EMAIL);
         SearchCriteria.EMAIL = EMAIL;
-        emailAdresses.add(EMAIL);
     }
 
     public static String getSTARTDATE() {
-        return STARTDATE + TIME;
+        return STARTDATE;
     }
 
     public static void setSTARTDATE(String STARTDATE) {
@@ -34,7 +31,7 @@ public class SearchCriteria {
     }
 
     public static String getENDDATE() {
-        return ENDDATE + TIME;
+        return ENDDATE;
     }
 
     public static void setENDDATE(String ENDDATE) {
@@ -43,7 +40,7 @@ public class SearchCriteria {
     }
 
     public static List<String> getKEYWORDS() {
-        List<String> keywordsParsed = searchCriteriaCommaParser(KEYWORDS);
+        List<String> keywordsParsed = keywordsParser(KEYWORDS);
         return keywordsParsed;
     }
 
@@ -51,20 +48,20 @@ public class SearchCriteria {
         SearchCriteria.KEYWORDS = KEYWORDS;
     }
 
-    private static List<String> searchCriteriaCommaParser(String stringToParse) {
-        List<String> parsedList = new ArrayList<>();
+    private static List<String> keywordsParser(String keywords) {
+        List<String> keywordsParsed = new ArrayList<>();
 
-        stringToParse = stringToParse.replaceAll(", ", ",");
-        stringToParse = stringToParse.replaceAll(" ,", ",");
+        keywords = keywords.replaceAll(", ",",");
+        keywords = keywords.replaceAll(" ,",",");
 
         String splitBy = ",";
-        String[] keywordsParsing = stringToParse.split(splitBy);
+        String[] keywordsParsing = keywords.split(splitBy);
 
-        for (String stringElement : keywordsParsing) {
-            parsedList.add(stringElement);
+        for (String stringElement: keywordsParsing) {
+            keywordsParsed.add(stringElement);
         }
 
-        return parsedList;
+        return keywordsParsed;
     }
 
 }
