@@ -1,7 +1,9 @@
 package com.jbd;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 public class SearchCriteriaValidator {
@@ -9,16 +11,18 @@ public class SearchCriteriaValidator {
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;
 
-    private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9]) ([0-9]{2}):([0-9]{2})";
+    private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])";
 
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public static boolean validateEmail(String email) {
+        String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
+                "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
 
         boolean isEmailCorrect = true;
-        boolean validateChars = validateUnacceptableCharsExisting(email);
+        boolean validateChars = validateUnacceptableCharsExisting(email,unacceptableChars);
 
-        if (validateChars == false || !email.contains("@") || !email.contains(".")) {
+        if(validateChars==false || !email.contains("@") || !email.contains(".")) {
             isEmailCorrect = false;
         }
         return isEmailCorrect;
@@ -32,14 +36,14 @@ public class SearchCriteriaValidator {
     public static boolean validateEndDate(String endDate) {
         boolean isEnddateCorrect = datePatternMatching(endDate);
 
-        if (isEnddateCorrect == true) {
+        if(isEnddateCorrect==true) {
             LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
             boolean isEndDateTheSameAsStartDate = endDateFormatted
                     .isEqual(LocalDate.parse(SearchCriteria.getSTARTDATE(), dateFormatter));
             boolean isEndDateAfterStartDate = endDateFormatted
                     .isAfter(LocalDate.parse(SearchCriteria.getSTARTDATE(), dateFormatter));
 
-            if (isEndDateTheSameAsStartDate == true) {
+            if(isEndDateTheSameAsStartDate==true) {
                 isEnddateCorrect = true;
             } else if (isEndDateAfterStartDate == false) {
                 isEnddateCorrect = false;
@@ -49,13 +53,10 @@ public class SearchCriteriaValidator {
         return isEnddateCorrect;
     }
 
-    private static boolean validateUnacceptableCharsExisting(String validateInput) {
-        String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
-                "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", "<", ">", "?", "/"};
-
+    private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
         boolean hasUnacceptableChars = true;
 
-        for (String unacceptableChar : unacceptableChars) {
+        for(String unacceptableChar : unacceptableChars) {
             if (validateInput.contains(unacceptableChar)) {
                 hasUnacceptableChars = false;
             }
@@ -68,7 +69,7 @@ public class SearchCriteriaValidator {
         boolean hasCorrectPattern;
 
         boolean matches = Pattern.matches(DATE_PATTERN, date);
-        if (matches == false) {
+        if(matches==false) {
             hasCorrectPattern = false;
         } else {
             LocalDate endDateFormatted = LocalDate.parse(date, dateFormatter);
@@ -80,7 +81,7 @@ public class SearchCriteriaValidator {
     private static boolean validateDayMonthYear(int day, int month, long year) {
         boolean isDateCorrect = true;
 
-        if (day > MAX_DAYS_IN_MONTH || day == 0 ||
+        if(day > MAX_DAYS_IN_MONTH || day == 0 ||
                 month > MAX_MONTHS_IN_YEAR || month == 0 ||
                 year == 0) {
             isDateCorrect = false;
