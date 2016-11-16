@@ -14,17 +14,22 @@ import static org.junit.Assert.*;
 public class JsonReaderTest {
 
     private static ArrayList<String> ANSWERS_LIST = new ArrayList<>(Arrays.asList(
-            "służbowy",
-            "służbowo",
-            "szef",
-            "biznes",
-            "praca",
-            "współpracownik",
-            "biuro",
-            "asytentka",
-            "asystent",
-            "sekretarka",
-            "prezes"
+            "business",
+            "official",
+            "officialy",
+            "formally",
+            "manager",
+            "boss",
+            "work",
+            "job",
+            "wokplace",
+            "cowoker",
+            "office",
+            "assistant",
+            "secretary",
+            "CEO",
+            "chairman",
+            "president"
     ));
 
     @Test
@@ -40,39 +45,32 @@ public class JsonReaderTest {
     @Test
     public void set_without_duplicates_should_return_true() {
         ArrayList<String> answersList = new ArrayList<>(Arrays.asList(
-                "teraz",
-                "służbowo",
-                "szef",
-                "wczoraj",
-                "biurko",
-                "praca",
-                "współpracownik",
-                "tapczan",
-                "film",
-                "lista",
-                "człowiek",
-                "goście"
+                "business",
+                "official",
+                "officialy",
+                "formally",
+                "manager",
+                "boss",
+                "work",
+                "job"
         ));
         ArrayList<String> finalAnswersList = new ArrayList<>(Arrays.asList(
-                "teraz",
-                "służbowo",
-                "szef",
-                "wczoraj",
-                "biurko",
-                "praca",
-                "współpracownik",
-                "tapczan",
-                "film",
-                "lista",
-                "człowiek",
-                "goście",
-                "służbowy",
-                "biznes",
-                "biuro",
-                "asytentka",
-                "asystent",
-                "sekretarka",
-                "prezes"
+                "business",
+                "official",
+                "officialy",
+                "formally",
+                "manager",
+                "boss",
+                "work",
+                "job",
+                "wokplace",
+                "cowoker",
+                "office",
+                "assistant",
+                "secretary",
+                "CEO",
+                "chairman",
+                "president"
         ));
 
 
