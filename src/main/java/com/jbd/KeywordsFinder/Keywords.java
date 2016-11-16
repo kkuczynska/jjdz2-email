@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.jbd.QuestionForm.ANSWER_POSITIVE;
+import static com.jbd.Questions.ANSWER_POSITIVE;
 
 public class Keywords {
 
