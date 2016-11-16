@@ -29,12 +29,10 @@ public class JsonReaderTest {
 
     @Test
     public void complete_list_of_answers_should_return_true() throws Exception {
-        String emailBusiness = "emailBusiness";
-
+        String emailBusiness = "1";
 
         JsonReader jsonReader = new JsonReader();
-        ArrayList<String> answers = new ArrayList<>();
-        answers = jsonReader.readAnswerJsonArray(emailBusiness);
+        ArrayList<String> answers = jsonReader.readAnswerJsonArray(emailBusiness);
 
         assertTrue(answers.containsAll(ANSWERS_LIST));
     }
@@ -82,14 +80,17 @@ public class JsonReaderTest {
         answersSet.addAll(answersList);
         answersSet.addAll(ANSWERS_LIST);
 
-        assertTrue(answersSet.size()==finalAnswersList.size());
+        assertTrue(answersSet.size() == finalAnswersList.size());
     }
 
     @Test
     public void question_match_should_return_true() throws IOException, ParseException {
-        int question = 3;
+        int questionID = 3;
+        String question = "Are you looking for an email about a meeting?";
+
         JsonReader jsonReader = new JsonReader();
-        String finalQuestion = jsonReader.readQuestionJsonArray(question);
-        assertTrue(finalQuestion.equals("Czy email dotyczy spotkania?"));
+        String finalQuestion = jsonReader.readQuestionJsonArray().get(questionID);
+
+        assertTrue(finalQuestion.equals(question));
     }
 }
