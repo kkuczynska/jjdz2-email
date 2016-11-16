@@ -14,11 +14,8 @@ public class JBDemail {
         List<String> filesInStrings = new ArrayList<>();
         List<Email> eMailKeeper = new ArrayList<>();
 
-
-
-        QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
+        Questions askQuestionsAndQuestionForm = new Questions();
         askQuestionsAndQuestionForm.searchCriteriaForm();
-
         PathGetter pG = new PathGetter();
         pG.createFileListFromPath(pG.askUserAboutInputPath());
         LOGGER.info("Found: " + pG.getFileList().size() + " files.");
@@ -79,6 +76,7 @@ public class JBDemail {
         System.out.println("\n" + eMailKeeper.size() + "\n");
         System.out.println(eMailKeeper);
         System.out.println(eMailKeeper.get(1).getData());
+
 
     }
 }
