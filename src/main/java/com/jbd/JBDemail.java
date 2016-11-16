@@ -16,8 +16,8 @@ public class JBDemail {
 
         DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
 
-        QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
-        askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
+        Questions questionForm = new Questions();
+        questionForm.searchCriteriaForm();
 
         PathGetter pG = new PathGetter();
         pG.createFileListFromPath(pG.askUserAboutInputPath());
