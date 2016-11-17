@@ -37,7 +37,7 @@ public class JBDemail {
         ContentmentVerification cV = new ContentmentVerification();
 
         List<String> eMailToLookFor = new ArrayList<>();
-        eMailToLookFor.add(SearchCriteria.getEMAIL());
+        eMailToLookFor.addAll((SearchCriteria.getEMAIL()));
         String dateOfEmailToLookFor = SearchCriteria.getSTARTDATE();
         //eMailToLookFor.add(SearchCriteria.getSTARTDATE());
         List<Email> result1;
