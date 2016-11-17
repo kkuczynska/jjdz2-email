@@ -27,7 +27,6 @@ public class Keywords {
     private static void createKeywordsSet() {
         JsonReader jsonReader = new JsonReader();
         for (int index = 0; index < answersIDs.size(); index++) {
-            System.out.println("element: " + answersIDs.get(index));
             if (answersIDs.get(index).equalsIgnoreCase(ANSWER_POSITIVE)) {
                 KEYWORDS_SET.addAll(jsonReader.readAnswerJsonArray(answersIDs.get(index)));
             }

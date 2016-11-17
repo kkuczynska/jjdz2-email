@@ -10,7 +10,7 @@ public class Questions {
     public static final String ANSWER_POSITIVE = "1";
     public static final String ANSWER_NEGATIVE = "0";
     private static String EMAIL_QUESTION = "Provide email address (xxxx@xx.xx)";
-    private static String KEYWORD_QUESTION = "Provide createAndDisplayKeywordsHashSet to find in email subject. Separate them with commas.";
+    private static String KEYWORD_QUESTION = "Provide keywords to find in email subject. Separate them with commas.";
     private static String STARTDATE_QUESTION = "Provide start date (YYYY-MM-DD)";
     private static String ENDDATE_QUESTION = "Provide end date (YYYY-MM-DD)";
 
@@ -18,8 +18,12 @@ public class Questions {
     private static String STARTDATE_QUESTION_WRONG_VALUE = "Wrong format or invalid date, please provide new start date (YYYY-MM-DD)";
     private static String ENDDATE_QUESTION_WRONG_VALUE = "Wrong format or invalid date, please provide new end date (YYYY-MM-DD)";
 
-    private static final String KEYWORDS_HELP_QUESTION = "Do you need help with createAndDisplayKeywordsHashSet? (yes / no)";
-    private static final String KEYWORDS_HEADER = "Keywords matching your query: ";
+    private static final String KEYWORDS_HELP_QUESTION = "Do you need help with keywords? (yes / no)";
+    private static final String KEYWORDS_HEADER = "\n--------------------------------------" +
+                                                  "\nKeywords matching your query: " +
+                                                  "\n--------------------------------------";
+    private final String ANSWER_NO = "no";
+    private final String ANSWER_YES = "yes";
 
     private UserCommunication userCommunication = new UserCommunication();
     private SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
@@ -69,23 +73,32 @@ public class Questions {
             userCommunication.sendUserMessage(KEYWORDS_HELP_QUESTION);
             answer = userCommunication.getUserResponse();
 
-            if (answer.equalsIgnoreCase("yes")) {
+            if (answer.equalsIgnoreCase(ANSWER_YES)) {
                 for (String question : jsonReader.readQuestionJsonArray()) {
-                    userCommunication.sendUserMessage(question);
-                    String keywordFormAnswer = userCommunication.getUserResponse();
-                    if(keywordFormAnswer.equalsIgnoreCase("yes")) {
-                        keywords.gatherAnswers(ANSWER_POSITIVE);
-                    } else if(keywordFormAnswer.equalsIgnoreCase("no")) {
-                        keywords.gatherAnswers(ANSWER_NEGATIVE);
-                    }
+                    String keywordFormAnswer;
+
+                    do {
+                        userCommunication.sendUserMessage(question);
+                        keywordFormAnswer = userCommunication.getUserResponse();
+                        if (keywordFormAnswer.equalsIgnoreCase(ANSWER_YES)) {
+                            keywords.gatherAnswers(ANSWER_POSITIVE);
+                        } else if (keywordFormAnswer.equalsIgnoreCase(ANSWER_NO)) {
+                            keywords.gatherAnswers(ANSWER_NEGATIVE);
+                        } else {
+                            userCommunication.sendUserMessage(WRONG_INPUT);
+                        }
+                    } while(!(keywordFormAnswer.equalsIgnoreCase(ANSWER_YES) ||
+                                keywordFormAnswer.equalsIgnoreCase(ANSWER_NO)));
+
                 }
                 userCommunication.sendUserMessage(KEYWORDS_HEADER);
                 keywords.createAndDisplayKeywordsHashSet();
-            } else if (answer.equalsIgnoreCase("no")) {
+            } else if (answer.equalsIgnoreCase(ANSWER_NO)) {
                 break;
             } else {
                 userCommunication.sendUserMessage(WRONG_INPUT);
             }
-        } while (!answer.equalsIgnoreCase("yes"));
+
+        } while (!(answer.equalsIgnoreCase(ANSWER_YES) || answer.equalsIgnoreCase(ANSWER_NO)));
     }
 }
