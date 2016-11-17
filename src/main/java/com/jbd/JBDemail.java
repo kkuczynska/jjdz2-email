@@ -1,14 +1,17 @@
 package com.jbd;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class JBDemail {
-    private static final Logger LOGGER = LogManager.getLogger(JBDemail.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(JBDemail.class);
+    private static final Marker MAIN_MARKER = MarkerFactory.getMarker("Main");
 
     public static void main(String[] args) {
         List<String> filesInStrings = new ArrayList<>();
@@ -21,7 +24,7 @@ public class JBDemail {
 
         PathGetter pG = new PathGetter();
         pG.createFileListFromPath(pG.askUserAboutInputPath());
-        LOGGER.info("Found: " + pG.getFileList().size() + " files.");
+        LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
 
         FileLoad fL = new FileLoad();
         filesInStrings.addAll(pG.getFileList().stream().map(fL::fileLoad).collect(Collectors.toList()));
