@@ -1,9 +1,7 @@
 package com.jbd;
 
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 public class SearchCriteriaValidator {
@@ -11,16 +9,14 @@ public class SearchCriteriaValidator {
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;
 
-    private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])";
+    private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9]) ([0-9]{2}):([0-9]{2})";
 
-    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
 
     public static boolean validateEmail(String email) {
-        String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
-                "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", ",", "<", ">", "?", "/"};
 
         boolean isEmailCorrect = true;
-        boolean validateChars = validateUnacceptableCharsExisting(email,unacceptableChars);
+        boolean validateChars = validateUnacceptableCharsExisting(email);
 
         if(validateChars==false || !email.contains("@") || !email.contains(".")) {
             isEmailCorrect = false;
@@ -53,7 +49,10 @@ public class SearchCriteriaValidator {
         return isEnddateCorrect;
     }
 
-    private static boolean validateUnacceptableCharsExisting (String validateInput, String[] unacceptableChars) {
+    private static boolean validateUnacceptableCharsExisting (String validateInput) {
+        String[] unacceptableChars = {"!", "#", "$", "%", "^", "&", "*", "(", ")", "+",
+                "=", "[", "]", "{", "}", "~", "`", "\\", "|", ":", ";", "\"", "'", "<", ">", "?", "/"};
+
         boolean hasUnacceptableChars = true;
 
         for(String unacceptableChar : unacceptableChars) {
