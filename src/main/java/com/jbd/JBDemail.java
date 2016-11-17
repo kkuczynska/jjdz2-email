@@ -20,7 +20,7 @@ public class JBDemail {
         DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
 
         QuestionForm askQuestionsAndQuestionForm = new QuestionForm();
-        //askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
+        askQuestionsAndQuestionForm.askQuestionsAndSetAnswers();
 
         PathGetter pG = new PathGetter();
         pG.createFileListFromPath(pG.askUserAboutInputPath());
