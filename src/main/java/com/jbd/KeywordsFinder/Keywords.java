@@ -28,7 +28,7 @@ public class Keywords {
         JsonReader jsonReader = new JsonReader();
         for (int index = 0; index < answersIDs.size(); index++) {
             if (answersIDs.get(index).equalsIgnoreCase(ANSWER_POSITIVE)) {
-                KEYWORDS_SET.addAll(jsonReader.readAnswerJsonArray(answersIDs.get(index)));
+                KEYWORDS_SET.addAll(jsonReader.readAnswerJsonArray(String.valueOf(index)));
             }
         }
         if (KEYWORDS_SET.isEmpty()) {

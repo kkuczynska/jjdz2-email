@@ -13,11 +13,13 @@ public class Questions {
     private static String KEYWORD_QUESTION = "Provide keywords to find in email subject. Separate them with commas.";
     private static String STARTDATE_QUESTION = "Provide start date (YYYY-MM-DD)";
     private static String ENDDATE_QUESTION = "Provide end date (YYYY-MM-DD)";
-
+    private static String NUMBER_OF_EMAILS_QUESTION = "How many email addresses would you like to find?";
+    private static String ADDITIONAL_EMAIL_QUESTION = "Provide additional email address.";
     private static String EMAIL_QUESTION_WRONG_VALUE = "Wrong format, please try again (xxxx@xx.xx)";
     private static String STARTDATE_QUESTION_WRONG_VALUE = "Wrong format or invalid date, please provide new start date (YYYY-MM-DD)";
     private static String ENDDATE_QUESTION_WRONG_VALUE = "Wrong format or invalid date, please provide new end date (YYYY-MM-DD)";
-
+    private String WRONG_INPUT = "Accepted answers: yes , no";
+    private static String POSSIBLE_ANSWERS = " (yes / no)";
     private static final String KEYWORDS_HELP_QUESTION = "Do you need help with keywords? (yes / no)";
     private static final String KEYWORDS_HEADER = "\n--------------------------------------" +
                                                   "\nKeywords matching your query: " +
@@ -28,7 +30,8 @@ public class Questions {
     private UserCommunication userCommunication = new UserCommunication();
     private SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
     private SearchCriteria searchCriteria = new SearchCriteria();
-    private String WRONG_INPUT = "Accepted answers: yes , no";
+    String emailAddress = "";
+
 
     public void searchCriteriaForm() {
         keywordsForm();
@@ -36,13 +39,22 @@ public class Questions {
     }
 
     private void generalForm() {
-        do {
-            userCommunication.sendUserMessage(EMAIL_QUESTION);
-            setEMAIL(userCommunication.getUserResponse());
-            if (searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()) == false) {
-                EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
-            }
-        } while (!searchCriteriaValidator.validateEmail(searchCriteria.getEMAIL()));
+        int numberOfEmailAddresses;
+        userCommunication.sendUserMessage(NUMBER_OF_EMAILS_QUESTION);
+        numberOfEmailAddresses = Integer.valueOf(userCommunication.getUserResponse());
+
+        for (int index = 0; index < numberOfEmailAddresses; index++) {
+            do {
+                userCommunication.sendUserMessage(EMAIL_QUESTION);
+                emailAddress = userCommunication.getUserResponse();
+                setEMAIL(emailAddress);
+                if (searchCriteriaValidator.validateEmail(emailAddress) == false) {
+                    EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
+                } else if (!(numberOfEmailAddresses == 1 && index == 0)) {
+                    EMAIL_QUESTION = ADDITIONAL_EMAIL_QUESTION;
+                }
+            } while (!searchCriteriaValidator.validateEmail(emailAddress));
+        }
 
         do {
             userCommunication.sendUserMessage(STARTDATE_QUESTION);
@@ -78,7 +90,7 @@ public class Questions {
                     String keywordFormAnswer;
 
                     do {
-                        userCommunication.sendUserMessage(question);
+                        userCommunication.sendUserMessage(question + POSSIBLE_ANSWERS);
                         keywordFormAnswer = userCommunication.getUserResponse();
                         if (keywordFormAnswer.equalsIgnoreCase(ANSWER_YES)) {
                             keywords.gatherAnswers(ANSWER_POSITIVE);
