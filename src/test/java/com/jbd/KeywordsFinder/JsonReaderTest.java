@@ -14,27 +14,30 @@ import static org.junit.Assert.*;
 public class JsonReaderTest {
 
     private static ArrayList<String> ANSWERS_LIST = new ArrayList<>(Arrays.asList(
-            "służbowy",
-            "służbowo",
-            "szef",
-            "biznes",
-            "praca",
-            "współpracownik",
-            "biuro",
-            "asytentka",
-            "asystent",
-            "sekretarka",
-            "prezes"
+            "business",
+            "official",
+            "officialy",
+            "formally",
+            "manager",
+            "boss",
+            "work",
+            "job",
+            "wokplace",
+            "cowoker",
+            "office",
+            "assistant",
+            "secretary",
+            "CEO",
+            "chairman",
+            "president"
     ));
 
     @Test
     public void complete_list_of_answers_should_return_true() throws Exception {
-        String emailBusiness = "emailBusiness";
-
+        String emailBusiness = "1";
 
         JsonReader jsonReader = new JsonReader();
-        ArrayList<String> answers = new ArrayList<>();
-        answers = jsonReader.readAnswerJsonArray(emailBusiness);
+        ArrayList<String> answers = jsonReader.readAnswerJsonArray(emailBusiness);
 
         assertTrue(answers.containsAll(ANSWERS_LIST));
     }
@@ -42,39 +45,32 @@ public class JsonReaderTest {
     @Test
     public void set_without_duplicates_should_return_true() {
         ArrayList<String> answersList = new ArrayList<>(Arrays.asList(
-                "teraz",
-                "służbowo",
-                "szef",
-                "wczoraj",
-                "biurko",
-                "praca",
-                "współpracownik",
-                "tapczan",
-                "film",
-                "lista",
-                "człowiek",
-                "goście"
+                "business",
+                "official",
+                "officialy",
+                "formally",
+                "manager",
+                "boss",
+                "work",
+                "job"
         ));
         ArrayList<String> finalAnswersList = new ArrayList<>(Arrays.asList(
-                "teraz",
-                "służbowo",
-                "szef",
-                "wczoraj",
-                "biurko",
-                "praca",
-                "współpracownik",
-                "tapczan",
-                "film",
-                "lista",
-                "człowiek",
-                "goście",
-                "służbowy",
-                "biznes",
-                "biuro",
-                "asytentka",
-                "asystent",
-                "sekretarka",
-                "prezes"
+                "business",
+                "official",
+                "officialy",
+                "formally",
+                "manager",
+                "boss",
+                "work",
+                "job",
+                "wokplace",
+                "cowoker",
+                "office",
+                "assistant",
+                "secretary",
+                "CEO",
+                "chairman",
+                "president"
         ));
 
 
@@ -82,14 +78,17 @@ public class JsonReaderTest {
         answersSet.addAll(answersList);
         answersSet.addAll(ANSWERS_LIST);
 
-        assertTrue(answersSet.size()==finalAnswersList.size());
+        assertTrue(answersSet.size() == finalAnswersList.size());
     }
 
     @Test
     public void question_match_should_return_true() throws IOException, ParseException {
-        int question = 3;
+        int questionID = 3;
+        String question = "Are you looking for an email about a meeting?";
+
         JsonReader jsonReader = new JsonReader();
-        String finalQuestion = jsonReader.readQuestionJsonArray(question);
-        assertTrue(finalQuestion.equals("Czy email dotyczy spotkania?"));
+        String finalQuestion = jsonReader.readQuestionJsonArray().get(questionID);
+
+        assertTrue(finalQuestion.equals(question));
     }
 }
