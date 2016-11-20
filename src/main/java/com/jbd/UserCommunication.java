@@ -8,7 +8,7 @@ public class UserCommunication {
         System.out.println(message);
     }
 
-    public String getUserResonse() {
+    public String getUserResponse() {
         Scanner userResponse = new Scanner(System.in);
         return userResponse.nextLine();
     }
