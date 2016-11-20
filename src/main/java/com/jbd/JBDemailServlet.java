@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/sendData")
+@WebServlet(urlPatterns = "/jsp/sendData")
 public class JBDemailServlet extends HttpServlet {
 
     @EJB
