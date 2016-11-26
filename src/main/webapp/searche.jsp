@@ -15,7 +15,7 @@
             Keywords separated with comma: <input type="text" name="keywords"> <br />
             <input type="submit" value="Search emails">
         </form>
-        <form name="goBackToKeywordsFinder" action="jsp/searchk.jsp">
+        <form name="goBackToKeywordsFinder" action="searchk.jsp">
             <input type="submit" value="Go to Keywords Finder">
         </form>
 
