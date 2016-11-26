@@ -47,6 +47,10 @@ public class JBDemail {
         result2 = cV.searchEmailByTitleWithKeyWords(SearchCriteria.getKEYWORDS(), eMailKeeper);
         result3 = cV.searchEmailByDate(dateOfEmailToLookFor,eMailKeeper);
 
+        //-------------------------------------------------------------------------------------------------------------
+
+
+
         // awh@malcolmhardie.com
         // 12/12/2004
         // 12/12/2006

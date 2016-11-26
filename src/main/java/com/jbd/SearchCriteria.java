@@ -1,8 +1,10 @@
 package com.jbd;
 
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
 
+@Stateless
 public class SearchCriteria {
 
     private static String EMAIL;
@@ -25,7 +27,7 @@ public class SearchCriteria {
     }
 
     public static String getSTARTDATE() {
-        return STARTDATE + TIME;
+        return STARTDATE + " " + TIME;
     }
 
     public static void setSTARTDATE(String STARTDATE) {

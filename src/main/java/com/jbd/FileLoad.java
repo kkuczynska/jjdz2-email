@@ -1,10 +1,12 @@
 package com.jbd;
 
+import javax.ejb.Stateless;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+@Stateless
 public class FileLoad {
     private StringBuilder builder;
 
