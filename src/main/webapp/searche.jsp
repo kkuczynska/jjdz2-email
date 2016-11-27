@@ -31,24 +31,13 @@
     </div>
 
     <div>
-        <span>by date</span> <br/>
+        <span>Emails matching your criteria: </span> <br/>
         <ol>
             <c:forEach items="${finalEmailSet}" var="email">
                 <li> ${email.from} || ${email.subject} || ${email.data}
             </c:forEach>
         </ol>
-        <%--<span>by email</span> <br/>--%>
-        <%--<ul>--%>
-            <%--<c:forEach items="${emailsBasedOnName}" var="email">--%>
-            <%--<li> ${email.from} || ${email.subject} || ${email.data}--%>
-                <%--</c:forEach>--%>
-        <%--</ul>--%>
-        <%--<span>by keywords</span> <br/>--%>
-        <%--<ul>--%>
-            <%--<c:forEach items="${emailsBasedOnKeywords}" var="email">--%>
-            <%--<li> ${email.from} || ${email.subject} || ${email.data}--%>
-                <%--</c:forEach>--%>
-        <%--</ul>--%>
+
     </div>
 </body>
 </html>
