@@ -2,10 +2,17 @@ package com.jbd;
 
 import com.jbd.KeywordsFinder.JsonReader;
 import com.jbd.KeywordsFinder.Keywords;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import static com.jbd.SearchCriteria.*;
 
 public class Questions {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Questions.class);
+    private static final Marker QUESTIONS_MARKER = MarkerFactory.getMarker("Questions");
 
     public static final String ANSWER_POSITIVE = "1";
     public static final String ANSWER_NEGATIVE = "0";
@@ -81,6 +88,7 @@ public class Questions {
         Keywords keywords = new Keywords();
         String answer = "";
 
+        LOGGER.info(QUESTIONS_MARKER, "Keywords form displaying started.");
         do {
             userCommunication.sendUserMessage(KEYWORDS_HELP_QUESTION);
             answer = userCommunication.getUserResponse();
@@ -97,6 +105,7 @@ public class Questions {
                         } else if (keywordFormAnswer.equalsIgnoreCase(ANSWER_NO)) {
                             keywords.gatherAnswers(ANSWER_NEGATIVE);
                         } else {
+                            LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + keywordFormAnswer);
                             userCommunication.sendUserMessage(WRONG_INPUT);
                         }
                     } while(!(keywordFormAnswer.equalsIgnoreCase(ANSWER_YES) ||
@@ -108,6 +117,7 @@ public class Questions {
             } else if (answer.equalsIgnoreCase(ANSWER_NO)) {
                 break;
             } else {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + answer);
                 userCommunication.sendUserMessage(WRONG_INPUT);
             }
 
