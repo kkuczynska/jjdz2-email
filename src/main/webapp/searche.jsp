@@ -8,7 +8,7 @@
     <h1>Here you can specify the search criteria and upload your email file</h1>
     <div>
         <form method="post" action="searche">
-            Email file path: <input type="text" name="emailPath"><br />
+            Email file path: <span id="required">*</span><input type="text" name="emailPath"><br />
             <br />
             Please provide email address in correct format (xxxxx@xxxxxxx.xxx). <br />
             <input type="text" name="email"> <br />
@@ -31,11 +31,24 @@
     </div>
 
     <div>
-        <ul>
-            <c:forEach items="${emailsMatchingQuery}" var="email">
+        <span>by date</span> <br/>
+        <ol>
+            <c:forEach items="${finalEmailSet}" var="email">
                 <li> ${email.from} || ${email.subject} || ${email.data}
             </c:forEach>
-        </ul>
+        </ol>
+        <%--<span>by email</span> <br/>--%>
+        <%--<ul>--%>
+            <%--<c:forEach items="${emailsBasedOnName}" var="email">--%>
+            <%--<li> ${email.from} || ${email.subject} || ${email.data}--%>
+                <%--</c:forEach>--%>
+        <%--</ul>--%>
+        <%--<span>by keywords</span> <br/>--%>
+        <%--<ul>--%>
+            <%--<c:forEach items="${emailsBasedOnKeywords}" var="email">--%>
+            <%--<li> ${email.from} || ${email.subject} || ${email.data}--%>
+                <%--</c:forEach>--%>
+        <%--</ul>--%>
     </div>
 </body>
 </html>

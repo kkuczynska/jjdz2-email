@@ -1,7 +1,6 @@
 package com.jbd.servlets;
 
 import com.jbd.*;
-
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,38 +23,32 @@ public class SearchEmailsServlet extends HttpServlet {
     @EJB
     FileLoad fileLoader;
     @EJB
-    ContentmentVerification contentmentVerification;
+    FinalEmailsSet finalEmailsSet;
     @EJB
     MakeEmailsFromString makeEmailsFromString;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
-        String email = req.getParameter("email");
-        String startDate = req.getParameter("startDate");
-        String endDate = req.getParameter("endDate");
-        String keywords = req.getParameter("keywords");
-        String path = req.getParameter("emailPath");
-
-        searchCriteria.setEMAIL(email);
-        searchCriteria.setSTARTDATE(startDate);
-        searchCriteria.setENDDATE(endDate);
-        searchCriteria.setKEYWORDS(keywords);
-        pathGetter.createFileListFromPath(path);
-        String startDateFormatted = searchCriteria.getSTARTDATE();
-
         List<String> filesInStrings = new ArrayList<>();
         List<Email> emails = new ArrayList<>();
-        List<Email> emailsMatchingQuery;
+        List<String> emailToFind = new ArrayList<>();
 
+        String path = req.getParameter("emailPath");
+        searchCriteria.setEMAIL(req.getParameter("email"));
+        searchCriteria.setSTARTDATE(req.getParameter("startDate"));
+        searchCriteria.setENDDATE(req.getParameter("endDate"));
+        searchCriteria.setKEYWORDS(req.getParameter("keywords"));
+
+        emailToFind.addAll(searchCriteria.getEMAIL());
+        emailToFind.add(searchCriteria.getSTARTDATE());
+
+        pathGetter.createFileListFromPath(path);
         filesInStrings.addAll(pathGetter.getFileList().stream().map(fileLoader::fileLoad).collect(Collectors.toList()));
-
-        for (String s : filesInStrings) {
-            emails.addAll(makeEmailsFromString.makeEmailList(s));
+        for (String emailAddress : filesInStrings) {
+            emails.addAll(makeEmailsFromString.makeEmailList(emailAddress));
         }
 
-        emailsMatchingQuery = contentmentVerification.searchEmailByDate(startDateFormatted, emails);
-
-        req.setAttribute("emailsMatchingQuery", emailsMatchingQuery);
+        req.setAttribute("finalEmailSet", finalEmailsSet.createUniqueEmailsSet(emailToFind, emails));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/searche.jsp");
         try {
