@@ -10,7 +10,7 @@
         <form method="post" action="searche">
             Email file path: <input type="text" name="emailPath"><br />
             <br />
-            Please provide email adsress in correct format (xxxxx@xxxxxxx.xxx). <br />
+            Please provide email address in correct format (xxxxx@xxxxxxx.xxx). <br />
             <input type="text" name="email"> <br />
             <span id="multipleEmailsInformation">
                 * If you want to search for more than one email address, separate them with commas. <br />
@@ -20,8 +20,8 @@
             Keywords separated with comma: <input type="text" name="keywords"> <br />
             <br /><br />
             Should we also display phone numbers contained in the emails?<br />
-            <input type="checkbox" name="yes">Yes<br />
-            <input type="checkbox" name="no">No<br />
+            <label><input type="checkbox" name="yes">Yes</label><br />
+            <label><input type="checkbox" name="no">No</label><br />
             <br><br>
             <input type="submit" value="Search emails">
         </form>

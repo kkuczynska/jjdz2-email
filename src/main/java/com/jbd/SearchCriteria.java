@@ -7,11 +7,11 @@ import java.util.List;
 @Stateless
 public class SearchCriteria {
 
-    private static String EMAIL;
-    private static String STARTDATE;
-    private static String ENDDATE;
-    private static String KEYWORDS;
-    private static final String TIME = " 00:00";
+    private static String EMAIL = "";
+    private static String STARTDATE = "1000-01-01";
+    private static String ENDDATE = "9999-01-01";
+    private static String KEYWORDS = "";
+    private static final String TIME = "00:00";
     private static ArrayList<String> emailAdresses = new ArrayList<>();
 
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
@@ -36,12 +36,12 @@ public class SearchCriteria {
     }
 
     public static String getENDDATE() {
-        return ENDDATE + TIME;
+        return ENDDATE + " " + TIME;
     }
 
     public static void setENDDATE(String ENDDATE) {
         SearchCriteria.ENDDATE = ENDDATE;
-        //searchCriteriaValidator.validateEndDate(ENDDATE); To Improve!!
+        searchCriteriaValidator.validateEndDate(ENDDATE + " " + TIME);
     }
 
     public static List<String> getKEYWORDS() {

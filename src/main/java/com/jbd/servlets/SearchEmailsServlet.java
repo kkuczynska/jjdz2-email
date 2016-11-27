@@ -54,12 +54,6 @@ public class SearchEmailsServlet extends HttpServlet {
         }
 
         emailsMatchingQuery = contentmentVerification.searchEmailByDate(startDateFormatted, emails);
-        String resultText;
-
-        if(emailsMatchingQuery.size() == 0){
-            resultText = "Nie znaleziono wyników odpowiadająych podanemu kryterium email";
-            req.setAttribute("resultMessage", resultText);
-        }
 
         req.setAttribute("emailsMatchingQuery", emailsMatchingQuery);
 
