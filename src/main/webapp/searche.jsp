@@ -5,7 +5,7 @@
     <title>JBD Email Search Engine</title>
 </head>
 <body>
-    <h1>Here you can specify the search criteria and upload your email file</h1>
+    <h1>Here you can specify the search criteria and select email file</h1>
     <div>
         <form method="post" action="searche">
             Email file path: <span id="required">*</span><input type="text" name="emailPath"><br />
@@ -13,7 +13,7 @@
             Please provide email address in correct format (xxxxx@xxxxxxx.xxx). <br />
             <input type="text" name="email"> <br />
             <span id="multipleEmailsInformation">
-                * If you want to search for more than one email address, separate them with commas. <br />
+                If you want to search for more than one email address, separate them with commas. <br />
             </span>
             Start date: <input type="text" name="startDate"> (YYYY-MM-DD) <br />
             End date: <input type="text" name="endDate"> (YYYY-MM-DD) <br />
