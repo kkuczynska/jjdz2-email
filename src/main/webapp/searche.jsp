@@ -8,10 +8,9 @@
     <h1>Here you can specify the search criteria and select email file</h1>
     <div>
         <form method="post" action="searche">
-            Email file path: <span id="required">*</span><input type="text" name="emailPath"><br />
+            Email file path: <span id="requiredEmailPath">*</span><input type="text" name="emailPath"><br />
             <br />
-            Please provide email address in correct format (xxxxx@xxxxxxx.xxx). <br />
-            <input type="text" name="email"> <br />
+            Email address (xxxxx@xxxxxxx.xxx): <input type="text" name="email"> <br />
             <span id="multipleEmailsInformation">
                 If you want to search for more than one email address, separate them with commas. <br />
             </span>

@@ -40,7 +40,7 @@ public class SearchEmailsServlet extends HttpServlet {
         searchCriteria.setKEYWORDS(req.getParameter("keywords"));
 
         emailToFind.addAll(searchCriteria.getEMAIL());
-        emailToFind.add(searchCriteria.getSTARTDATE());
+       // emailToFind.add(searchCriteria.getSTARTDATE());
 
         pathGetter.createFileListFromPath(path);
         filesInStrings.addAll(pathGetter.getFileList().stream().map(fileLoader::fileLoad).collect(Collectors.toList()));
