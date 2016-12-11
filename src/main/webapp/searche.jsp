@@ -19,8 +19,8 @@
             Keywords separated with comma: <input type="text" name="keywords"> <br />
             <br /><br />
             Should we also display phone numbers contained in the emails?<br />
-            <label><input type="checkbox" name="yes">Yes</label><br />
-            <label><input type="checkbox" name="no">No</label><br />
+            <label><input type="checkbox" name="phoneNumbers" value="yes">Yes</label><br />
+            <label><input type="checkbox" name="phoneNumbers" value="no">No</label><br />
             <br><br>
             <input type="submit" value="Search emails">
         </form>
@@ -36,7 +36,14 @@
                 <li> ${email.from} || ${email.subject} || ${email.data}
             </c:forEach>
         </ol>
-
     </div>
+    <div>
+         <span>Emails matching your criteria: </span> <br/>
+            <ol>
+                <c:forEach items="${displayNumbers}" var="phone">
+                    <li> ${phone.key} || ${phone.value}
+                </c:forEach>
+            </ol>
+        </div>
 </body>
 </html>
