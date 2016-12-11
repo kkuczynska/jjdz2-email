@@ -5,11 +5,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.ejb.Stateless;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+@Stateless
 public class JsonReader {
 
     private static final String jsonPath = "src/main/resources/KeywordsForm.json";
