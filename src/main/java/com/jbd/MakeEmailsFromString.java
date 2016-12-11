@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 @Stateless
 public class MakeEmailsFromString {
-    private List<Email> emailsFromString = new ArrayList<>();
     private String EMAILREGEX = "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     private String FROMREGEX = "(from\\s)("+EMAILREGEX+")";
     private String SUBJECTREGEX = "(subject:\\s)(.*)";
@@ -16,6 +15,8 @@ public class MakeEmailsFromString {
     //private String CONTENTREGEX = "(x-list.*|list.*)(\\n\\n)(?s)(.*)(\\n\\n\\n)";//(?s)<yolo>(.*?)</yolo>
 
     public List<Email> makeEmailList(String fromString){
+        List<Email> emailsFromString = new ArrayList<>();
+
         Matcher fromMatcher = getMatcherFor(FROMREGEX, fromString);
         Matcher subjectMatcher = getMatcherFor(SUBJECTREGEX, fromString);
         Matcher dateMatcher = getMatcherFor(DATEREGEX, fromString);
