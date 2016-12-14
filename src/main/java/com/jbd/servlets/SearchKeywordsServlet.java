@@ -20,15 +20,25 @@ public class SearchKeywordsServlet extends HttpServlet {
     @EJB
     JsonReader jsonReader;
 
+    protected void doGet() {
+
+
+    }
+
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
         jsonReader.readQuestionJsonArray();
-        for(int i = 0; i < jsonReader.readQuestionJsonArray().size(); i++) {
-            keywords.gatherAnswers(req.getParameter("answer" + String.valueOf(i++)));
+
+        System.out.println("jsonReader = " + jsonReader.readQuestionJsonArray().size());
+        for (int i = 1; i < jsonReader.readQuestionJsonArray().size() + 1; i++) {
+            String answer = "0";
+            if (req.getParameter("keywordsForm" + String.valueOf(i)).equals("yes")) {
+                answer = "1";
+            }
+            keywords.gatherAnswers(answer);
         }
         keywords.createKeywordsSet();
 
-        System.out.println("keywords.getKeywordsSet() = " + keywords.createKeywordsSet());
         req.setAttribute("keywordsList", keywords.createKeywordsSet());
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/searchk.jsp");
@@ -39,5 +49,6 @@ public class SearchKeywordsServlet extends HttpServlet {
         } catch (IOException e) {
             //LOGGER
         }
+        keywords.getKeywordsSet().clear();
     }
 }

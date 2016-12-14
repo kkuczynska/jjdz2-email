@@ -60,7 +60,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(eMailKeeper);
 
-        if(req.getParameter("phoneNumbers").equals("yes")) {
+        if (req.getParameter("phoneNumbers").equals("yes")) {
             req.setAttribute("displayNumbers", resultMap);
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/searche.jsp");

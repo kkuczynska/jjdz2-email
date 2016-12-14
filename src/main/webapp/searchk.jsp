@@ -8,11 +8,14 @@
 <h1>Keywords finder</h1>
 <div>
     <form method="post" action="searchk">
-        urgent <input type="text" name="answer1"> <br />
-        business <input type="text" name="answer2"> <br />
-        family <input type="text" name="answer3"> <br />
-        meeting <input type="text" name="answer4"> <br />
-
+        urgent <label><input type="checkbox" name="keywordsForm1" value="yes">Yes</label>
+               <label><input type="checkbox" name="keywordsForm1" value="no">No</label><br />
+        business <label><input type="checkbox" name="keywordsForm2" value="yes">Yes</label>
+                 <label><input type="checkbox" name="keywordsForm2" value="no">No</label><br />
+        family <label><input type="checkbox" name="keywordsForm3" value="yes">Yes</label>
+               <label><input type="checkbox" name="keywordsForm3" value="no">No</label><br />
+        meeting <label><input type="checkbox" name="keywordsForm4" value="yes">Yes</label>
+                <label><input type="checkbox" name="keywordsForm4" value="no">No</label><br />
         <input type="submit" value="Search Keywords">
     </form>
 </div>
