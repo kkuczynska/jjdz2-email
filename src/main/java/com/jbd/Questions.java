@@ -47,6 +47,7 @@ public class Questions {
 
     private void generalForm() {
         int numberOfEmailAddresses;
+        LOGGER.info(QUESTIONS_MARKER, "General search form displaying started.");
         userCommunication.sendUserMessage(NUMBER_OF_EMAILS_QUESTION);
         numberOfEmailAddresses = Integer.valueOf(userCommunication.getUserResponse());
 
@@ -56,6 +57,7 @@ public class Questions {
                 emailAddress = userCommunication.getUserResponse();
                 setEMAIL(emailAddress);
                 if (searchCriteriaValidator.validateEmail(emailAddress) == false) {
+                    LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + emailAddress);
                     EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
                 } else if (!(numberOfEmailAddresses == 1 && index == 0)) {
                     EMAIL_QUESTION = ADDITIONAL_EMAIL_QUESTION;
@@ -67,6 +69,7 @@ public class Questions {
             userCommunication.sendUserMessage(STARTDATE_QUESTION);
             setSTARTDATE(userCommunication.getUserResponse());
             if (searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()) == false) {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getSTARTDATE());
                 STARTDATE_QUESTION = STARTDATE_QUESTION_WRONG_VALUE;
             }
         } while (!searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()));
@@ -75,6 +78,7 @@ public class Questions {
             userCommunication.sendUserMessage(ENDDATE_QUESTION);
             setENDDATE(userCommunication.getUserResponse());
             if (searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()) == false) {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getENDDATE());
                 ENDDATE_QUESTION = ENDDATE_QUESTION_WRONG_VALUE;
             }
         } while (!searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()));
