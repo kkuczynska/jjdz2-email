@@ -39,7 +39,7 @@ public class JsonReader {
         return jsonArray;
     }
 
-public List<String> readQuestionJsonArray() {
+    public List<String> readQuestionJsonArray() {
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(jsonPath);

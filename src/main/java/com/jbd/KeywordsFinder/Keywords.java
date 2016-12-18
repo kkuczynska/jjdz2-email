@@ -23,7 +23,6 @@ public class Keywords {
     }
 
     public void gatherAnswers(String answerID) {
-        System.out.println("answerID dodane = " + answerID);
         answersIDs.add(answerID);
     }
 

@@ -9,12 +9,12 @@
 <h3>If you need help with finding keywords, answer questions in below form and we will provide you with some ideas!</h3>
 <div>
     <form method="GET" action="keywords">
-        <p>Keywordsy:</p>
         <ul>
             <c:forEach items="${questions}" var="question">
-                <li> ${question} <label><input type="radio" name="keywordsForm" value="${question}">Yes</label>
-                    <label><input type="radio" name="keywordsForm" value="${question}">No</label>
-                </li>
+                 ${question}
+                    <label><input type="radio" name="radios" value="yes" checked="checked"/>Yes</label>
+                    <label><input type="radio" name="radios" value="no"/>No</label> <br />
+
             </c:forEach>
         </ul>
     </form>

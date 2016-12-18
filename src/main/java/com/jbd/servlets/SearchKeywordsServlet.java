@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(urlPatterns = "keywords")
 public class SearchKeywordsServlet extends HttpServlet {
@@ -40,17 +41,20 @@ public class SearchKeywordsServlet extends HttpServlet {
 
         jsonReader.readQuestionJsonArray();
 
-        for (int i = 1; i < jsonReader.readQuestionJsonArray().size() + 1; i++) {
+        List<Integer> questionID = new ArrayList<>();
+        for (int questionIndex = 1;
+             questionIndex < jsonReader.readQuestionJsonArray().size() + 1; questionIndex++) {
             String answer = "0";
-            if ("yes".equals(req.getParameter("keywordsForm" + String.valueOf(i)))) {
+            if ("yes".equalsIgnoreCase(req.getParameter(String.valueOf(questionIndex)))) {
                 answer = "1";
             }
             keywords.gatherAnswers(answer);
+            questionID.add(questionIndex);
         }
-        keywords.createKeywordsSet();
 
         req.setAttribute("keywordsList", keywords.createKeywordsSet());
         req.setAttribute("questions", jsonReader.readQuestionJsonArray());
+        req.setAttribute("questionID", questionID);
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
         try {
