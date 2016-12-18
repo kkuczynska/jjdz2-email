@@ -7,29 +7,20 @@
 <body>
 <h2>Keywords finder</h2>
 <h3>If you need help with finding keywords, answer questions in below form and we will provide you with some ideas!</h3>
-
 <div>
     <form method="GET" action="keywords">
         <p>Keywordsy:</p>
         <ul>
             <c:forEach items="${questions}" var="question">
-                <li> ${question} </li>
+                <li> ${question} <label><input type="radio" name="keywordsForm" value="${question}">Yes</label>
+                    <label><input type="radio" name="keywordsForm" value="${question}">No</label>
+                </li>
             </c:forEach>
         </ul>
     </form>
 </div>
-
-
 <div>
     <form method="post" action="keywords">
-        urgent <label><input type="checkbox" name="keywordsForm1" value="yes">Yes</label>
-        <label><input type="checkbox" name="keywordsForm1" value="no">No</label><br/>
-        business <label><input type="checkbox" name="keywordsForm2" value="yes">Yes</label>
-        <label><input type="checkbox" name="keywordsForm2" value="no">No</label><br/>
-        family <label><input type="checkbox" name="keywordsForm3" value="yes">Yes</label>
-        <label><input type="checkbox" name="keywordsForm3" value="no">No</label><br/>
-        meeting <label><input type="checkbox" name="keywordsForm4" value="yes">Yes</label>
-        <label><input type="checkbox" name="keywordsForm4" value="no">No</label><br/>
         <input type="submit" value="Search Keywords">
     </form>
 </div>
@@ -37,7 +28,7 @@
     <span>Keywords found: </span> <br/>
     <ol>
         <c:forEach items="${keywordsList}" var="keyword">
-        <li> ${keyword}
+        <li> ${keyword} </li>
             </c:forEach>
     </ol>
 </div>
