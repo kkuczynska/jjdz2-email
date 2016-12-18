@@ -11,9 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
-@WebServlet(urlPatterns = "searchk")
+@WebServlet(urlPatterns = "keywords")
 public class SearchKeywordsServlet extends HttpServlet {
 
     @EJB
@@ -21,11 +22,24 @@ public class SearchKeywordsServlet extends HttpServlet {
     @EJB
     JsonReader jsonReader;
 
+    protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
+
+        req.setAttribute("questions", jsonReader.readQuestionJsonArray());
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
+        try {
+            dispatcher.forward(req, response);
+        } catch (ServletException e) {
+            //LOGGER
+        } catch (IOException e) {
+            //LOGGER
+        }
+    }
+
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
         jsonReader.readQuestionJsonArray();
 
-        System.out.println("jsonReader = " + jsonReader.readQuestionJsonArray().size());
         for (int i = 1; i < jsonReader.readQuestionJsonArray().size() + 1; i++) {
             String answer = "0";
             if ("yes".equals(req.getParameter("keywordsForm" + String.valueOf(i)))) {
@@ -36,8 +50,9 @@ public class SearchKeywordsServlet extends HttpServlet {
         keywords.createKeywordsSet();
 
         req.setAttribute("keywordsList", keywords.createKeywordsSet());
+        req.setAttribute("questions", jsonReader.readQuestionJsonArray());
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/searchk.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
         try {
             dispatcher.forward(req, response);
         } catch (ServletException e) {

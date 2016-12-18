@@ -9,10 +9,11 @@
 <h3>If you need help with finding keywords, answer questions in below form and we will provide you with some ideas!</h3>
 
 <div>
-    <form method="get" action="form">
+    <form method="GET" action="keywords">
+        <p>Keywordsy:</p>
         <ul>
             <c:forEach items="${questions}" var="question">
-                <li> ${question}
+                <li> ${question} </li>
             </c:forEach>
         </ul>
     </form>
@@ -20,15 +21,15 @@
 
 
 <div>
-    <form method="post" action="searchk">
+    <form method="post" action="keywords">
         urgent <label><input type="checkbox" name="keywordsForm1" value="yes">Yes</label>
-               <label><input type="checkbox" name="keywordsForm1" value="no">No</label><br />
+        <label><input type="checkbox" name="keywordsForm1" value="no">No</label><br/>
         business <label><input type="checkbox" name="keywordsForm2" value="yes">Yes</label>
-                 <label><input type="checkbox" name="keywordsForm2" value="no">No</label><br />
+        <label><input type="checkbox" name="keywordsForm2" value="no">No</label><br/>
         family <label><input type="checkbox" name="keywordsForm3" value="yes">Yes</label>
-               <label><input type="checkbox" name="keywordsForm3" value="no">No</label><br />
+        <label><input type="checkbox" name="keywordsForm3" value="no">No</label><br/>
         meeting <label><input type="checkbox" name="keywordsForm4" value="yes">Yes</label>
-                <label><input type="checkbox" name="keywordsForm4" value="no">No</label><br />
+        <label><input type="checkbox" name="keywordsForm4" value="no">No</label><br/>
         <input type="submit" value="Search Keywords">
     </form>
 </div>
@@ -36,14 +37,15 @@
     <span>Keywords found: </span> <br/>
     <ol>
         <c:forEach items="${keywordsList}" var="keyword">
-            <li> ${keyword}
-        </c:forEach>
+        <li> ${keyword}
+            </c:forEach>
     </ol>
 </div>
 <div>
-     If you already know what you are looking for you can just start searching...<br>
-     <form action="searche.jsp">
+    If you already know what you are looking for you can just start searching...<br>
+    <form action="emails.jsp">
         <input type="submit" value="Go to Email Search" name="searchEmails">
-     </form>
+    </form>
+</div>
 </body>
 </html>

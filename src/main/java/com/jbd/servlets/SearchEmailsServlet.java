@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet(urlPatterns = "searche")
+@WebServlet(urlPatterns = "emails")
 public class SearchEmailsServlet extends HttpServlet {
 
     @EJB
@@ -66,7 +66,7 @@ public class SearchEmailsServlet extends HttpServlet {
         if ("yes".equals(req.getParameter("phoneNumbers"))) {
             req.setAttribute("displayNumbers", resultMap);
         }
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/searche.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
         try {
             dispatcher.forward(req, response);
         } catch (ServletException e) {

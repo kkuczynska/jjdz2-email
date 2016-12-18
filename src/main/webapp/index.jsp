@@ -13,12 +13,12 @@
     <br><br><br>
         <div>
             If you already know what you are looking for you can just start searching...<br>
-            <form action="searche.jsp">
+            <form action="emails.jsp">
                 <input type="submit" value="Search emails" name="searchEmails">
             </form>
             <br><br>
             ... or you can ask for help with keywords you might need.<br>
-            <form action="searchk.jsp">
+            <form action="keywords">
                 <input type="submit" value="Keywords finder" name="searchKeywords">
             </form>
         </div>

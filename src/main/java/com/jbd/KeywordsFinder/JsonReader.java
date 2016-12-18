@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class JsonReader {
@@ -38,7 +39,7 @@ public class JsonReader {
         return jsonArray;
     }
 
-    public ArrayList<String> readQuestionJsonArray() {
+public List<String> readQuestionJsonArray() {
         FileReader fileReader = null;
         try {
             fileReader = new FileReader(jsonPath);

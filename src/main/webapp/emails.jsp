@@ -9,7 +9,7 @@
 <body>
     <h2>Here you can specify the search criteria and select email file</h2>
     <div>
-        <form method="post" action="searche">
+        <form method="post" action="emails">
             Email file path: <span id="requiredEmailPath">*</span><input type="text" name="emailPath" id="email">
             <span id="emailPathMsg"></span>
             <br /><br />
@@ -27,7 +27,7 @@
             <br><br>
             <input type="submit" value="Search emails" onclick="validateFilePath()">
         </form>
-        <form name="goBackToKeywordsFinder" action="searchk.jsp">
+        <form name="goBackToKeywordsFinder" action="keywords.jsp">
             <input type="submit" value="Go to Keywords Finder">
         </form>
     </div>
