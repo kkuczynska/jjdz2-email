@@ -11,9 +11,9 @@
     <form method="GET" action="keywords">
         <ul>
             <c:forEach items="${questions}" var="question">
-                 ${question}
-                    <label><input type="radio" name="radios" value="yes" checked="checked"/>Yes</label>
-                    <label><input type="radio" name="radios" value="no"/>No</label> <br />
+                ${question}
+                <label><input type="radio" name="radios" value="yes" checked="checked"/>Yes</label>
+                <label><input type="radio" name="radios" value="no"/>No</label> <br/>
 
             </c:forEach>
         </ul>
@@ -28,8 +28,8 @@
     <span>Keywords found: </span> <br/>
     <ol>
         <c:forEach items="${keywordsList}" var="keyword">
-        <li> ${keyword} </li>
-            </c:forEach>
+            <li> ${keyword} </li>
+        </c:forEach>
     </ol>
 </div>
 <div>

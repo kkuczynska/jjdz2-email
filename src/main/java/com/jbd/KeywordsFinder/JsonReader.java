@@ -56,6 +56,7 @@ public class JsonReader {
             e.printStackTrace();
         }
         JSONArray jsonArray = (JSONArray) jsonObject.get(QUESTIONS_ARRAY_NAME);
+
         return (ArrayList<String>) jsonArray;
     }
 

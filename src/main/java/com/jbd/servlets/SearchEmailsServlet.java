@@ -1,6 +1,7 @@
 package com.jbd.servlets;
 
 import com.jbd.*;
+
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,7 +46,7 @@ public class SearchEmailsServlet extends HttpServlet {
         emailToFind.addAll(searchCriteria.getEMAIL());
 
         String emailPath = req.getParameter("emailPath");
-        if(!"".equals(emailPath)) {
+        if (!"".equals(emailPath)) {
             pathGetter.createFileListFromPath(emailPath);
             filesInStrings.addAll(pathGetter.getFileList().stream().map(fileLoader::fileLoad).collect(Collectors.toList()));
             for (String emailAddress : filesInStrings) {
