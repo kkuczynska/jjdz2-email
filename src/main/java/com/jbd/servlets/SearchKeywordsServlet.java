@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 @WebServlet(urlPatterns = "searchk")
 public class SearchKeywordsServlet extends HttpServlet {
@@ -20,11 +21,6 @@ public class SearchKeywordsServlet extends HttpServlet {
     @EJB
     JsonReader jsonReader;
 
-    protected void doGet() {
-
-
-    }
-
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
         jsonReader.readQuestionJsonArray();
@@ -32,7 +28,7 @@ public class SearchKeywordsServlet extends HttpServlet {
         System.out.println("jsonReader = " + jsonReader.readQuestionJsonArray().size());
         for (int i = 1; i < jsonReader.readQuestionJsonArray().size() + 1; i++) {
             String answer = "0";
-            if (req.getParameter("keywordsForm" + String.valueOf(i)).equals("yes")) {
+            if ("yes".equals(req.getParameter("keywordsForm" + String.valueOf(i)))) {
                 answer = "1";
             }
             keywords.gatherAnswers(answer);

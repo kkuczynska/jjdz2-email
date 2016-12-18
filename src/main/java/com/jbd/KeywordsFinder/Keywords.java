@@ -12,6 +12,7 @@ import static com.jbd.Questions.ANSWER_POSITIVE;
 @Stateless
 public class Keywords {
 
+    private static Set<String> KEYWORDS_SET = new HashSet();
     private static ArrayList<String> answersIDs = new ArrayList<>();
     private static UserCommunication userCommunication = new UserCommunication();
     private static final String NO_MATCHES = "Sorry! \nThere is no keywords matching your query.";
@@ -22,11 +23,12 @@ public class Keywords {
     }
 
     public void gatherAnswers(String answerID) {
+        System.out.println("answerID dodane = " + answerID);
         answersIDs.add(answerID);
     }
 
     public Set<String> createKeywordsSet() {
-        Set<String> KEYWORDS_SET = new HashSet();
+
         JsonReader jsonReader = new JsonReader();
 
         System.out.println("answersIDs = " + answersIDs);
@@ -38,7 +40,8 @@ public class Keywords {
         if (KEYWORDS_SET.isEmpty()) {
             userCommunication.sendUserMessage(NO_MATCHES);
         }
-
+        answersIDs.clear();
+        System.out.println("keywords size: " + KEYWORDS_SET.size());
         return KEYWORDS_SET;
     }
 
@@ -49,7 +52,7 @@ public class Keywords {
 //        }
 //    }
 
-//    public static Set<String> getKeywordsSet() {
-//        return KEYWORDS_SET;
-//    }
+    public static Set<String> getKeywordsSet() {
+        return KEYWORDS_SET;
+    }
 }

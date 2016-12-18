@@ -2,10 +2,23 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>JBD Email Search Engine</title>
 </head>
 <body>
-<h1>Keywords finder</h1>
+<h2>Keywords finder</h2>
+<h3>If you need help with finding keywords, answer questions in below form and we will provide you with some ideas!</h3>
+
+<div>
+    <form method="get" action="form">
+        <ul>
+            <c:forEach items="${questions}" var="question">
+                <li> ${question}
+            </c:forEach>
+        </ul>
+    </form>
+</div>
+
+
 <div>
     <form method="post" action="searchk">
         urgent <label><input type="checkbox" name="keywordsForm1" value="yes">Yes</label>
@@ -19,7 +32,6 @@
         <input type="submit" value="Search Keywords">
     </form>
 </div>
-
 <div>
     <span>Keywords found: </span> <br/>
     <ol>
@@ -28,6 +40,10 @@
         </c:forEach>
     </ol>
 </div>
-
+<div>
+     If you already know what you are looking for you can just start searching...<br>
+     <form action="searche.jsp">
+        <input type="submit" value="Go to Email Search" name="searchEmails">
+     </form>
 </body>
 </html>

@@ -3,14 +3,17 @@
 <html>
 <head>
     <title>JBD Email Search Engine</title>
+    <script type="text/javascript" src="resources/js.js"></script>
+    <link href="resources/css.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <h1>Here you can specify the search criteria and select email file</h1>
+    <h2>Here you can specify the search criteria and select email file</h2>
     <div>
         <form method="post" action="searche">
-            Email file path: <span id="requiredEmailPath">*</span><input type="text" name="emailPath"><br />
-            <br />
-            Email address (xxxxx@xxxxxxx.xxx): <input type="text" name="email"> <br />
+            Email file path: <span id="requiredEmailPath">*</span><input type="text" name="emailPath" id="email">
+            <span id="emailPathMsg"></span>
+            <br /><br />
+            Email address: <input type="text" name="email"> (xxxxx@xxxxxxx.xxx) <br />
             <span id="multipleEmailsInformation">
                 If you want to search for more than one email address, separate them with commas. <br />
             </span>
@@ -22,7 +25,7 @@
             <label><input type="checkbox" name="phoneNumbers" value="yes">Yes</label><br />
             <label><input type="checkbox" name="phoneNumbers" value="no">No</label><br />
             <br><br>
-            <input type="submit" value="Search emails">
+            <input type="submit" value="Search emails" onclick="validateFilePath()">
         </form>
         <form name="goBackToKeywordsFinder" action="searchk.jsp">
             <input type="submit" value="Go to Keywords Finder">
@@ -38,7 +41,7 @@
         </ol>
     </div>
     <div>
-         <span>Emails matching your criteria: </span> <br/>
+         <span>Phone numbers found in your email file: </span> <br/>
             <ol>
                 <c:forEach items="${displayNumbers}" var="phone">
                     <li> ${phone.key} || ${phone.value}

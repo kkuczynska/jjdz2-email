@@ -44,10 +44,13 @@ public class SearchEmailsServlet extends HttpServlet {
 
         emailToFind.addAll(searchCriteria.getEMAIL());
 
-        pathGetter.createFileListFromPath(req.getParameter("emailPath"));
-        filesInStrings.addAll(pathGetter.getFileList().stream().map(fileLoader::fileLoad).collect(Collectors.toList()));
-        for (String emailAddress : filesInStrings) {
-            emails.addAll(makeEmailsFromString.makeEmailList(emailAddress));
+        String emailPath = req.getParameter("emailPath");
+        if(!"".equals(emailPath)) {
+            pathGetter.createFileListFromPath(emailPath);
+            filesInStrings.addAll(pathGetter.getFileList().stream().map(fileLoader::fileLoad).collect(Collectors.toList()));
+            for (String emailAddress : filesInStrings) {
+                emails.addAll(makeEmailsFromString.makeEmailList(emailAddress));
+            }
         }
 
         req.setAttribute("finalEmailSet", finalEmailsSet.createUniqueEmailsSet(emails));
@@ -60,7 +63,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(eMailKeeper);
 
-        if (req.getParameter("phoneNumbers").equals("yes")) {
+        if ("yes".equals(req.getParameter("phoneNumbers"))) {
             req.setAttribute("displayNumbers", resultMap);
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/searche.jsp");
