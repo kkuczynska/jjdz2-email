@@ -2,6 +2,7 @@ package com.jbd;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class Email {
     public static final int LENGTH_LIMIT = 16;
@@ -9,8 +10,14 @@ public class Email {
     private LocalDateTime data;
     private String subject;
     private String content;
-
     LocalDateTime objectOfDate;
+
+    public Email(String from, String subject, Date date, String content) {
+        this.content = content;
+        this.from = from;
+        this.data = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
+        this.subject = subject;
+    }
 
     public Email(String from, String subject, String data, String content) {
         this.from = from;
