@@ -2,10 +2,17 @@ package com.jbd;
 
 import com.jbd.KeywordsFinder.JsonReader;
 import com.jbd.KeywordsFinder.Keywords;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import static com.jbd.SearchCriteria.*;
 
 public class Questions {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Questions.class);
+    private static final Marker QUESTIONS_MARKER = MarkerFactory.getMarker("Questions");
 
     public static final String ANSWER_POSITIVE = "1";
     public static final String ANSWER_NEGATIVE = "0";
@@ -40,6 +47,7 @@ public class Questions {
 
     private void generalForm() {
         int numberOfEmailAddresses;
+        LOGGER.info(QUESTIONS_MARKER, "General search form displaying started.");
         userCommunication.sendUserMessage(NUMBER_OF_EMAILS_QUESTION);
         numberOfEmailAddresses = Integer.valueOf(userCommunication.getUserResponse());
 
@@ -49,6 +57,7 @@ public class Questions {
                 emailAddress = userCommunication.getUserResponse();
                 setEMAIL(emailAddress);
                 if (searchCriteriaValidator.validateEmail(emailAddress) == false) {
+                    LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + emailAddress);
                     EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
                 } else if (!(numberOfEmailAddresses == 1 && index == 0)) {
                     EMAIL_QUESTION = ADDITIONAL_EMAIL_QUESTION;
@@ -60,6 +69,7 @@ public class Questions {
             userCommunication.sendUserMessage(STARTDATE_QUESTION);
             setSTARTDATE(userCommunication.getUserResponse());
             if (searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()) == false) {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getSTARTDATE());
                 STARTDATE_QUESTION = STARTDATE_QUESTION_WRONG_VALUE;
             }
         } while (!searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()));
@@ -68,6 +78,7 @@ public class Questions {
             userCommunication.sendUserMessage(ENDDATE_QUESTION);
             setENDDATE(userCommunication.getUserResponse());
             if (searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()) == false) {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getENDDATE());
                 ENDDATE_QUESTION = ENDDATE_QUESTION_WRONG_VALUE;
             }
         } while (!searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()));
@@ -81,6 +92,7 @@ public class Questions {
         Keywords keywords = new Keywords();
         String answer = "";
 
+        LOGGER.info(QUESTIONS_MARKER, "Keywords form displaying started.");
         do {
             userCommunication.sendUserMessage(KEYWORDS_HELP_QUESTION);
             answer = userCommunication.getUserResponse();
@@ -97,6 +109,7 @@ public class Questions {
                         } else if (keywordFormAnswer.equalsIgnoreCase(ANSWER_NO)) {
                             keywords.gatherAnswers(ANSWER_NEGATIVE);
                         } else {
+                            LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + keywordFormAnswer);
                             userCommunication.sendUserMessage(WRONG_INPUT);
                         }
                     } while(!(keywordFormAnswer.equalsIgnoreCase(ANSWER_YES) ||
@@ -108,6 +121,7 @@ public class Questions {
             } else if (answer.equalsIgnoreCase(ANSWER_NO)) {
                 break;
             } else {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + answer);
                 userCommunication.sendUserMessage(WRONG_INPUT);
             }
 

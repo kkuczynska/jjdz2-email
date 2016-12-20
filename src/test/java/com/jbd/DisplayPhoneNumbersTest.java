@@ -7,13 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
-/**
- * Created by Admin on 07.11.2016.
- */
+
 public class DisplayPhoneNumbersTest {
-    List<Email> eMailKeeper = Arrays.asList(new Email("marcin@wp.pl", "subject", "2015-01-01", "test 515-417-846"),
+    List<Email> eMailKeeper = Arrays.asList(new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515-417-846"),
             new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515417844"),
             new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515 417 846"),
             new Email("wojtek@wp.pl", "subject", "2015-01-01 00:00", "test 616478366"),

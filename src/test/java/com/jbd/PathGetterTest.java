@@ -32,6 +32,6 @@ public class PathGetterTest {
 
     @Test
     public void pathToDirectoryReturnsAllFilesInIt() {
-        assertEquals(pathToFile, pg.createFileListFromPath(pathToDirectory).get(0));
+        assertEquals(pathToFile, pg.createFileListFromPath(pathToDirectory).get(1));
     }
 }
