@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "emails")
 public class SearchEmailsServlet extends HttpServlet {
@@ -24,17 +23,14 @@ public class SearchEmailsServlet extends HttpServlet {
     @EJB
     PathGetter pathGetter;
     @EJB
-    FileLoad fileLoader;
+    FileParser fileParser;
     @EJB
     FinalEmailsSet finalEmailsSet;
-    @EJB
-    MakeEmailsFromString makeEmailsFromString;
     @EJB
     DisplayPhoneNumbers displayPhoneNumbers;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
-        List<String> filesInStrings = new ArrayList<>();
         List<Email> emails = new ArrayList<>();
         List<String> emailToFind = new ArrayList<>();
 
@@ -47,22 +43,17 @@ public class SearchEmailsServlet extends HttpServlet {
 
         String emailPath = req.getParameter("emailPath");
         if (!"".equals(emailPath)) {
-            pathGetter.createFileListFromPath(emailPath);
-            filesInStrings.addAll(pathGetter.getFileList().stream().map(fileLoader::fileLoad).collect(Collectors.toList()));
-            for (String emailAddress : filesInStrings) {
-                emails.addAll(makeEmailsFromString.makeEmailList(emailAddress));
+            try {
+                emails = fileParser.parseEmails(pathGetter.createFileListFromPath(emailPath));
+            } catch (Exception e) {
+                //LOGGER
+                e.printStackTrace();
             }
         }
 
         req.setAttribute("finalEmailSet", finalEmailsSet.createUniqueEmailsSet(emails));
 
-        List<Email> eMailKeeper = Arrays.asList(new Email("Angus.Hardie@malcolm23hardie2.com", "subject", "2015-01-01 00:00", "test 515-417-846"),
-                new Email("Angus.Hardie@malcolm23hardie2.com", "subject", "2015-01-01 00:00", "test 515417844"),
-                new Email("Angus.Hardie@malcolm23hardie2.com", "subject", "2015-01-01 00:00", "test 515 417 846"),
-                new Email("Angus.Hardied@malcolm23hardie2.com", "subject", "2015-01-01 00:00", "test 616478366"),
-                new Email("Angus.dddHardie@malcolm23hardie2.com", "subject", "2015-01-01 00:00", "test 616478366"));
-
-        Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(eMailKeeper);
+        Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
 
         if ("yes".equals(req.getParameter("phoneNumbers"))) {
             req.setAttribute("displayNumbers", resultMap);

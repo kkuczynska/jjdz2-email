@@ -36,7 +36,7 @@
     <span>Emails matching your criteria: </span> <br/>
     <ol>
         <c:forEach items="${finalEmailSet}" var="email">
-        <li> ${email.from} || ${email.subject} || ${email.data}
+        <li> ${email.from} || ${email.subject} || ${email.data} || ${email.content}
             </c:forEach>
     </ol>
 </div>

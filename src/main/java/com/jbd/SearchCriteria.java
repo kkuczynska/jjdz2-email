@@ -1,6 +1,7 @@
 package com.jbd;
 
 import javax.ejb.Stateless;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -19,7 +20,7 @@ public class SearchCriteria {
     private static String STARTDATE;
     private static String ENDDATE;
     private static String KEYWORDS;
-    private static final String TIME = " 00:00";
+    private static final String TIME = "00:00";
     private static ArrayList<String> emailAdresses = new ArrayList<>();
 
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
@@ -41,7 +42,7 @@ public class SearchCriteria {
 
     public static void setSTARTDATE(String STARTDATE) {
         LOGGER.info(SEARCHCRITERIA_MARKER, "Start date has been set: " + STARTDATE);
-        if("".equals(STARTDATE)) {
+        if ("".equals(STARTDATE)) {
             STARTDATE = "1111-01-01";
         }
         SearchCriteria.STARTDATE = STARTDATE;
@@ -54,7 +55,7 @@ public class SearchCriteria {
 
     public static void setENDDATE(String ENDDATE) {
         LOGGER.info(SEARCHCRITERIA_MARKER, "End date has been set: " + ENDDATE);
-        if("".equals(ENDDATE)) {
+        if ("".equals(ENDDATE)) {
             ENDDATE = "9999-12-12";
         }
         SearchCriteria.ENDDATE = ENDDATE;
@@ -76,16 +77,16 @@ public class SearchCriteria {
     private static List<String> searchCriteriaCommaParser(String stringToParse) {
         List<String> parsedList = new ArrayList<>();
 
-        stringToParse = stringToParse.replaceAll(", ",",");
+        stringToParse = stringToParse.replaceAll(", ", ",");
         LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: replaced all \", \" with single comma.");
-        stringToParse = stringToParse.replaceAll(" ,",",");
+        stringToParse = stringToParse.replaceAll(" ,", ",");
         LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: replaced all \" ,\" with single comma.");
 
         String splitBy = ",";
         String[] keywordsParsing = stringToParse.split(splitBy);
         LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: input string: " + stringToParse + " parsed by comma: [" + splitBy + "]");
 
-        for (String stringElement: keywordsParsing) {
+        for (String stringElement : keywordsParsing) {
             parsedList.add(stringElement);
             LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: parsed element added to the list: " + stringElement);
         }
