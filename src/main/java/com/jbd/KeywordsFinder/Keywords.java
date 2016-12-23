@@ -26,7 +26,7 @@ public class Keywords {
 
     public void createAndDisplayKeywordsHashSet() {
         createKeywordsSet();
-       // displayKeywords();
+        displayKeywords();
     }
 
     public void gatherAnswers(String answerID) {
@@ -42,19 +42,22 @@ public class Keywords {
             if (answersIDs.get(index).equalsIgnoreCase(ANSWER_POSITIVE)) {
                 LOGGER.info(KEYWORDS_MARKER, "Adding keywords to set.");
 
-        System.out.println("answersIDs = " + answersIDs);
-        for(int index = 0; index < answersIDs.size(); index++) {
-            if (ANSWER_POSITIVE.equalsIgnoreCase(answersIDs.get(index))) {
-                KEYWORDS_SET.addAll(jsonReader.readAnswerJsonArray(String.valueOf(index)));
+                System.out.println("answersIDs = " + answersIDs);
+                for (int count = 0; count < answersIDs.size(); count++) {
+                    if (ANSWER_POSITIVE.equalsIgnoreCase(answersIDs.get(count))) {
+                        KEYWORDS_SET.addAll(jsonReader.readAnswerJsonArray(String.valueOf(count)));
+                    }
+                }
+                if (KEYWORDS_SET.isEmpty()) {
+                    LOGGER.info(KEYWORDS_MARKER, "Confirming keywords set is populated with data, size is: "
+                            + KEYWORDS_SET.size());
+                    userCommunication.sendUserMessage(NO_MATCHES);
+                }
+                answersIDs.clear();
+                System.out.println("keywords size: " + KEYWORDS_SET.size());
+
             }
         }
-        if (KEYWORDS_SET.isEmpty()) {
-            LOGGER.info(KEYWORDS_MARKER, "Confirming keywords set is populated with data, size is: "
-                    + KEYWORDS_SET.size());
-            userCommunication.sendUserMessage(NO_MATCHES);
-        }
-        answersIDs.clear();
-        System.out.println("keywords size: " + KEYWORDS_SET.size());
         return KEYWORDS_SET;
     }
 
@@ -65,12 +68,6 @@ public class Keywords {
             userCommunication.sendUserMessage(keyword);
         }
     }
-//    private static void displayKeywords() {
-//        UserCommunication userCommunication = new UserCommunication();
-//        for (String keyword : KEYWORDS_SET) {
-//            userCommunication.sendUserMessage(keyword);
-//        }
-//    }
 
     public static Set<String> getKeywordsSet() {
         return KEYWORDS_SET;

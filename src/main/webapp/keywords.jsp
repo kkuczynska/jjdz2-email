@@ -11,10 +11,9 @@
     <form method="GET" action="keywords">
         <ul>
             <c:forEach items="${questions}" var="question">
-                ${question}
-                <label><input type="radio" name="radios" value="yes" checked="checked"/>Yes</label>
-                <label><input type="radio" name="radios" value="no"/>No</label> <br/>
-
+                ${question.value}
+                <label><input type="radio" name="${question.key}" value="yes"/>Yes</label>
+                <label><input type="radio" name="${question.key}" value="no"/>No</label> <br/>
             </c:forEach>
         </ul>
     </form>
