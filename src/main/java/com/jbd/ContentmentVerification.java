@@ -1,5 +1,6 @@
 package com.jbd;
 
+import javax.ejb.Stateless;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.time.*;
 
+@Stateless
 public class ContentmentVerification {
     private DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private List<Email> foundEmailsList;
