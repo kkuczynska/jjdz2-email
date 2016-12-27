@@ -5,6 +5,10 @@
     <title>JBD Email Search Engine</title>
     <script type="text/javascript" src="resources/js.js"></script>
     <link href="resources/css.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css"
+                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
 <h2>Here you can specify the search criteria and select email file</h2>
