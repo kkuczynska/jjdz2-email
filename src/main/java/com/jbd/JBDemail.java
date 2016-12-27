@@ -107,7 +107,8 @@ public class JBDemail {
             if ("4".equals(input) && answer != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 4.");
                 String dateOfEmailToLookFor = SearchCriteria.getSTARTDATE();
-                partialEMailKeeper = cV.searchEmailByDate(dateOfEmailToLookFor, partialEMailKeeper);
+                String endDateOfEmailToLookFor = SearchCriteria.getENDDATE();
+                partialEMailKeeper = cV.searchEmailByDate(dateOfEmailToLookFor, endDateOfEmailToLookFor, partialEMailKeeper);
             }
             if ("5".equals(input) && answer != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 5.");
