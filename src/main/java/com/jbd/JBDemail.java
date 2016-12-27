@@ -74,7 +74,7 @@ public class JBDemail {
                         "6 - to look for phone numbers in emails\n" +
                         "7 - to display parsed emails\n" +
                         "8 - to display filtered emails\n" +
-                        "9 - to display number of filtered emails" +
+                        "9 - to display number of filtered emails\n" +
                         "q - to quit");
             }
 
