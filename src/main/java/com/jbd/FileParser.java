@@ -43,6 +43,7 @@ public class FileParser {
             }
         }
         LOGGER.info(FP_MARKER, "Parsing finished");
+        System.gc();
         return emailsFromFiles;
     }
 

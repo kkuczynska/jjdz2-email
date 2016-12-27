@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/jsp/sendData")
+@WebServlet(urlPatterns = "/App/sendData")
 public class JBDemailServlet extends HttpServlet {
 
     @EJB
@@ -41,7 +41,7 @@ public class JBDemailServlet extends HttpServlet {
 
         req.setAttribute("results", results);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/form.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/App/form.jsp");
         dispatcher.forward(req, resp);
     }
 }
