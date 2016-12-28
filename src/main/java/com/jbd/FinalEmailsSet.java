@@ -23,20 +23,20 @@ public class FinalEmailsSet {
 
         Set<Email> emailsFinal = new LinkedHashSet<>();
 
-        String getStartDate = searchCriteria.getSTARTDATE();
-        String getEndDate = searchCriteria.getENDDATE();
-        List<String> getEmail = searchCriteria.getEMAIL();
-        List<String> getKeywords = searchCriteria.getKEYWORDS();
+        String getStartDate = searchCriteria.getStartDate();
+        String getEndDate = searchCriteria.getEndDate();
+        List<String> getEmail = searchCriteria.getEmail();
+        List<String> getKeywords = searchCriteria.getKeywords();
 
-        if(!(getEmail.size() == 1 && getEmail.get(0).equals(""))) {
+        if (!(getEmail.size() == 1 && getEmail.get(0).equals(""))) {
             emailsFinal.addAll(contentmentVerification.searchEmailByName(getEmail, emails));
             LOGGER.info(MARKER, "Added emails found by email address to set.");
         }
-        if(!("1111-01-01 00:00".equals(getStartDate) && "9999-12-12 00:00".equals(getEndDate))) {
+        if (!("1111-01-01 00:00".equals(getStartDate) && "9999-12-12 00:00".equals(getEndDate))) {
             emailsFinal.addAll(contentmentVerification.searchEmailByDate(getStartDate, getEndDate, emails));
             LOGGER.info(MARKER, "Added emails found by date to set.");
         }
-        if(!(getKeywords.size() == 1 && getKeywords.get(0).equals(""))) {
+        if (!(getKeywords.size() == 1 && getKeywords.get(0).equals(""))) {
             emailsFinal.addAll(contentmentVerification.searchEmailByTitleWithKeyWords(getKeywords, emails));
             LOGGER.info(MARKER, "Added emails found by keywords to set.");
         }

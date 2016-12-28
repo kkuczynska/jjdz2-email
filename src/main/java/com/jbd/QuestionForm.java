@@ -29,7 +29,7 @@
 //            do {
 //                sendMessage.sendUserMessage(EMAIL_QUESTION);
 //                emailAddress = sendMessage.getUserResponse();
-//                setEMAIL(emailAddress);
+//                setEmail(emailAddress);
 //                if (searchCriteriaValidator.validateEmail(emailAddress) == false) {
 //                    EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
 //                } else if (!(numberOfEmailAddresses == 1 && index == 0)) {
@@ -40,21 +40,21 @@
 //
 //        do {
 //            sendMessage.sendUserMessage(STARTDATE_QUESTION);
-//            setSTARTDATE(sendMessage.getUserResponse());
-//            if (searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()) == false) {
+//            setStartDate(sendMessage.getUserResponse());
+//            if (searchCriteriaValidator.validateStartDate(searchCriteria.getStartDate()) == false) {
 //                STARTDATE_QUESTION = STARTDATE_QUESTION_WRONG_VALUE;
 //            }
-//        } while (!searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()));
+//        } while (!searchCriteriaValidator.validateStartDate(searchCriteria.getStartDate()));
 //
 //        do {
 //            sendMessage.sendUserMessage(ENDDATE_QUESTION);
-//            setENDDATE(sendMessage.getUserResponse());
-//            if (searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()) == false) {
+//            setEndDate(sendMessage.getUserResponse());
+//            if (searchCriteriaValidator.validateEndDate(searchCriteria.getEndDate()) == false) {
 //                ENDDATE_QUESTION = ENDDATE_QUESTION_WRONG_VALUE;
 //            }
-//        } while (!searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()));
+//        } while (!searchCriteriaValidator.validateEndDate(searchCriteria.getEndDate()));
 //
 //        sendMessage.sendUserMessage(KEYWORD_QUESTION);
-//        setKEYWORDS(sendMessage.getUserResponse());
+//        setKeywords(sendMessage.getUserResponse());
 //    }
 //}

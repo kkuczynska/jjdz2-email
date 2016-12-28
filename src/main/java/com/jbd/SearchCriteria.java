@@ -16,63 +16,62 @@ public class SearchCriteria {
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchCriteria.class);
     private static final Marker SEARCHCRITERIA_MARKER = MarkerFactory.getMarker("SearchCriteria");
 
-    private static String EMAIL;
-    private static String STARTDATE;
-    private static String ENDDATE;
-    private static String KEYWORDS;
+    private static String email;
+    private static String startDate;
+    private static String endDate;
+    private static String keywords;
     private static final String TIME = "00:00";
     private static ArrayList<String> emailAdresses = new ArrayList<>();
 
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
 
-    public static ArrayList<String> getEMAIL() {
+    public static ArrayList<String> getEmail() {
         return emailAdresses;
     }
 
-    public static void setEMAIL(String EMAIL) {
+    public static void setEmail(String email) {
         emailAdresses = new ArrayList<>();
-        searchCriteriaValidator.validateEmail(EMAIL);
-        SearchCriteria.EMAIL = EMAIL;
-        emailAdresses.addAll(searchCriteriaCommaParser(EMAIL));
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Element: " + EMAIL + " added to the emails list.");
+        searchCriteriaValidator.validateEmail(email);
+        SearchCriteria.email = email;
+        emailAdresses.addAll(searchCriteriaCommaParser(email));
+        LOGGER.info(SEARCHCRITERIA_MARKER, "Element: " + email + " added to the emails list.");
     }
 
-    public static String getSTARTDATE() {
-        return STARTDATE + " " + TIME;
+    public static String getStartDate() {
+        return startDate + " " + TIME;
     }
 
-    public static void setSTARTDATE(String STARTDATE) {
-        if ("".equals(STARTDATE)) {
-            STARTDATE = "1111-01-01";
+    public static void setStartDate(String startDate) {
+        if ("".equals(startDate)) {
+            startDate = "1111-01-01";
         }
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Start date has been set: " + STARTDATE);
-        SearchCriteria.STARTDATE = STARTDATE;
-        searchCriteriaValidator.validateStartDate(STARTDATE);
+        LOGGER.info(SEARCHCRITERIA_MARKER, "Start date has been set: " + startDate);
+        SearchCriteria.startDate = startDate;
+        searchCriteriaValidator.validateStartDate(startDate);
     }
 
-    public static String getENDDATE() {
-        return ENDDATE + " " + TIME;
+    public static String getEndDate() {
+        return endDate + " " + TIME;
     }
 
-    public static void setENDDATE(String ENDDATE) {
-
-        if ("".equals(ENDDATE)) {
-            ENDDATE = "9999-12-12";
+    public static void setEndDate(String endDate) {
+        if ("".equals(endDate)) {
+            endDate = "9999-12-12";
         }
-        SearchCriteria.ENDDATE = ENDDATE;
-        LOGGER.info(SEARCHCRITERIA_MARKER, "End date has been set: " + ENDDATE);
-        searchCriteriaValidator.validateEndDate(ENDDATE);
+        SearchCriteria.endDate = endDate;
+        LOGGER.info(SEARCHCRITERIA_MARKER, "End date has been set: " + endDate);
+        searchCriteriaValidator.validateEndDate(endDate);
     }
 
-    public static List<String> getKEYWORDS() {
+    public static List<String> getKeywords() {
         LOGGER.info(SEARCHCRITERIA_MARKER, "Keywords passed parsing method");
-        List<String> keywordsParsed = searchCriteriaCommaParser(KEYWORDS);
+        List<String> keywordsParsed = searchCriteriaCommaParser(keywords);
         return keywordsParsed;
     }
 
-    public static void setKEYWORDS(String KEYWORDS) {
-        SearchCriteria.KEYWORDS = KEYWORDS;
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Keywords has been set: " + KEYWORDS);
+    public static void setKeywords(String keywords) {
+        SearchCriteria.keywords = keywords;
+        LOGGER.info(SEARCHCRITERIA_MARKER, "Keywords has been set: " + keywords);
     }
 
     private static List<String> searchCriteriaCommaParser(String stringToParse) {
@@ -91,8 +90,6 @@ public class SearchCriteria {
             parsedList.add(stringElement);
             LOGGER.info(SEARCHCRITERIA_MARKER, "Parsing: parsed element added to the list: " + stringElement);
         }
-
         return parsedList;
     }
-
 }

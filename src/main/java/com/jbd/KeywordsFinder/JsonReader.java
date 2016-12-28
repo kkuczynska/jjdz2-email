@@ -27,7 +27,7 @@ public class JsonReader {
 
     public ArrayList<String> readAnswerJsonArray(String jsonNodeName) {
         FileReader fileReader = null;
-        LOGGER.info(JSONREADER_MARKER, "Reading Json file: " + jsonPath);
+        LOGGER.info(JSONREADER_MARKER, "Reading Json file from path: " + jsonPath);
         try {
             fileReader = new FileReader(jsonPath);
         } catch (FileNotFoundException e) {
@@ -79,5 +79,4 @@ public class JsonReader {
 
         return (ArrayList<String>) jsonArray;
     }
-
 }

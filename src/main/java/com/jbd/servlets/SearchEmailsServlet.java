@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -40,13 +39,13 @@ public class SearchEmailsServlet extends HttpServlet {
 
         List<Email> emails = new ArrayList<>();
 
-        searchCriteria.setEMAIL(req.getParameter("email"));
+        searchCriteria.setEmail(req.getParameter("email"));
         LOGGER.info(MARKER, "Set value for email field.");
-        searchCriteria.setSTARTDATE(req.getParameter("startDate"));
+        searchCriteria.setStartDate(req.getParameter("startDate"));
         LOGGER.info(MARKER, "Set value for start date field.");
-        searchCriteria.setENDDATE(req.getParameter("endDate"));
+        searchCriteria.setEndDate(req.getParameter("endDate"));
         LOGGER.info(MARKER, "Set value for end date field.");
-        searchCriteria.setKEYWORDS(req.getParameter("keywords"));
+        searchCriteria.setKeywords(req.getParameter("keywords"));
         LOGGER.info(MARKER, "Set value for keywords field.");
 
         String emailPath = req.getParameter("emailPath");
@@ -54,7 +53,6 @@ public class SearchEmailsServlet extends HttpServlet {
         if (!("".equals(emailPath))) {
             try {
                 emails = fileParser.parseEmails(pathGetter.createFileListFromPath(emailPath));
-                LOGGER.info(MARKER, "Email file parsed under condition: path has been given.");
             } catch (Exception e) {
                 LOGGER.debug(MARKER, "Wrong path has been given by user.");
                 e.printStackTrace();
@@ -65,12 +63,11 @@ public class SearchEmailsServlet extends HttpServlet {
         LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
 
         Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
-        LOGGER.info(MARKER, "Initiated map with phone numbers.");
-
         if ("yes".equals(req.getParameter("phoneNumbers"))) {
             req.setAttribute("displayNumbers", resultMap);
             LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
         }
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");
         try {
@@ -83,5 +80,4 @@ public class SearchEmailsServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 }

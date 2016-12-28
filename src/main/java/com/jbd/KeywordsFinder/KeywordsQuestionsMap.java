@@ -23,7 +23,7 @@ public class KeywordsQuestionsMap {
         JsonReader jsonReader = new JsonReader();
         jsonReader.readQuestionJsonArray();
         LOGGER.info(MARKER, "Invoked readJsonArray.");
-        for(String question : jsonReader.readQuestionJsonArray()) {
+        for (String question : jsonReader.readQuestionJsonArray()) {
             keywordsMap.put(QUESTION + keywordsMap.size(), question);
             LOGGER.info(MARKER,
                     "Added keyword record: " + QUESTION + "" + keywordsMap.size() + ", question " + question);

@@ -101,18 +101,18 @@ public class JBDemail {
             }
             if ("3".equals(input) && answer != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 3.");
-                eMailToLookFor.addAll((SearchCriteria.getEMAIL()));
+                eMailToLookFor.addAll((SearchCriteria.getEmail()));
                 partialEMailKeeper = cV.searchEmailByName(eMailToLookFor, partialEMailKeeper);
             }
             if ("4".equals(input) && answer != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 4.");
-                String dateOfEmailToLookFor = SearchCriteria.getSTARTDATE();
-                String endDateOfEmailToLookFor = SearchCriteria.getENDDATE();
+                String dateOfEmailToLookFor = SearchCriteria.getStartDate();
+                String endDateOfEmailToLookFor = SearchCriteria.getEndDate();
                 partialEMailKeeper = cV.searchEmailByDate(dateOfEmailToLookFor, endDateOfEmailToLookFor, partialEMailKeeper);
             }
             if ("5".equals(input) && answer != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 5.");
-                partialEMailKeeper = cV.searchEmailByTitleWithKeyWords(SearchCriteria.getKEYWORDS(), partialEMailKeeper);
+                partialEMailKeeper = cV.searchEmailByTitleWithKeyWords(SearchCriteria.getKeywords(), partialEMailKeeper);
             }
             if ("6".equals(input) && path != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 6.");
