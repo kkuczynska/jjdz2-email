@@ -30,9 +30,10 @@ public class SearchCriteria {
     }
 
     public static void setEMAIL(String EMAIL) {
+        emailAdresses = new ArrayList<>();
         searchCriteriaValidator.validateEmail(EMAIL);
         SearchCriteria.EMAIL = EMAIL;
-        emailAdresses.add(EMAIL);
+        emailAdresses.addAll(searchCriteriaCommaParser(EMAIL));
         LOGGER.info(SEARCHCRITERIA_MARKER, "Element: " + EMAIL + " added to the emails list.");
     }
 
@@ -41,10 +42,10 @@ public class SearchCriteria {
     }
 
     public static void setSTARTDATE(String STARTDATE) {
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Start date has been set: " + STARTDATE);
         if ("".equals(STARTDATE)) {
             STARTDATE = "1111-01-01";
         }
+        LOGGER.info(SEARCHCRITERIA_MARKER, "Start date has been set: " + STARTDATE);
         SearchCriteria.STARTDATE = STARTDATE;
         searchCriteriaValidator.validateStartDate(STARTDATE);
     }
@@ -54,13 +55,13 @@ public class SearchCriteria {
     }
 
     public static void setENDDATE(String ENDDATE) {
-        LOGGER.info(SEARCHCRITERIA_MARKER, "End date has been set: " + ENDDATE);
+
         if ("".equals(ENDDATE)) {
             ENDDATE = "9999-12-12";
         }
         SearchCriteria.ENDDATE = ENDDATE;
+        LOGGER.info(SEARCHCRITERIA_MARKER, "End date has been set: " + ENDDATE);
         searchCriteriaValidator.validateEndDate(ENDDATE);
-        searchCriteriaValidator.validateEndDate(ENDDATE + " " + TIME);
     }
 
     public static List<String> getKEYWORDS() {
@@ -70,8 +71,8 @@ public class SearchCriteria {
     }
 
     public static void setKEYWORDS(String KEYWORDS) {
-        LOGGER.info(SEARCHCRITERIA_MARKER, "Keywords has been set: " + KEYWORDS);
         SearchCriteria.KEYWORDS = KEYWORDS;
+        LOGGER.info(SEARCHCRITERIA_MARKER, "Keywords has been set: " + KEYWORDS);
     }
 
     private static List<String> searchCriteriaCommaParser(String stringToParse) {

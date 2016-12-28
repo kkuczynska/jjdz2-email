@@ -22,10 +22,9 @@ public class FinalEmailsSet {
     public Set<Email> createUniqueEmailsSet(List<Email> emails) {
 
         Set<Email> emailsFinal = new LinkedHashSet<>();
-        emailsFinal.clear();
-        LOGGER.info(MARKER, "Cleared Emails Set");
 
         String getStartDate = searchCriteria.getSTARTDATE();
+        String getEndDate = searchCriteria.getENDDATE();
         List<String> getEmail = searchCriteria.getEMAIL();
         List<String> getKeywords = searchCriteria.getKEYWORDS();
 
@@ -33,9 +32,9 @@ public class FinalEmailsSet {
             emailsFinal.addAll(contentmentVerification.searchEmailByName(getEmail, emails));
             LOGGER.info(MARKER, "Added emails found by email address to set.");
         }
-        if(!("1111-01-01 00:00".equals(getStartDate))) {
-            emailsFinal.addAll(contentmentVerification.searchEmailByDate(getStartDate, emails));
-            LOGGER.info(MARKER, "Added emails found by start date to set.");
+        if(!("1111-01-01 00:00".equals(getStartDate) && "9999-12-12 00:00".equals(getEndDate))) {
+            emailsFinal.addAll(contentmentVerification.searchEmailByDate(getStartDate, getEndDate, emails));
+            LOGGER.info(MARKER, "Added emails found by date to set.");
         }
         if(!(getKeywords.size() == 1 && getKeywords.get(0).equals(""))) {
             emailsFinal.addAll(contentmentVerification.searchEmailByTitleWithKeyWords(getKeywords, emails));

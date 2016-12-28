@@ -76,7 +76,7 @@ public class SearchEmailsServlet extends HttpServlet {
         try {
             dispatcher.forward(req, response);
         } catch (ServletException e) {
-            LOGGER.debug(MARKER, "Caught ServletEception " + e);
+            LOGGER.debug(MARKER, "Caught ServletException " + e);
             e.printStackTrace();
         } catch (IOException e) {
             LOGGER.debug(MARKER, "Caught IOException " + e);
