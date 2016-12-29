@@ -6,9 +6,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.Stateless;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Stateless
 public class FinalEmailsSet {
@@ -22,25 +20,45 @@ public class FinalEmailsSet {
     public Set<Email> createUniqueEmailsSet(List<Email> emails) {
 
         Set<Email> emailsFinal = new LinkedHashSet<>();
+        List<Email> emailsFoundByEmail = new ArrayList<>();
+        List<Email> emailsFoundByEmailAndDate = new ArrayList<>();
 
         String getStartDate = searchCriteria.getStartDate();
         String getEndDate = searchCriteria.getEndDate();
         List<String> getEmail = searchCriteria.getEmail();
         List<String> getKeywords = searchCriteria.getKeywords();
 
-        if (!(getEmail.size() == 1 && getEmail.get(0).equals(""))) {
-            emailsFinal.addAll(contentmentVerification.searchEmailByName(getEmail, emails));
-            LOGGER.info(MARKER, "Added emails found by email address to set.");
-        }
-        if (!("1111-01-01 00:00".equals(getStartDate) && "9999-12-12 00:00".equals(getEndDate))) {
-            emailsFinal.addAll(contentmentVerification.searchEmailByDate(getStartDate, getEndDate, emails));
-            LOGGER.info(MARKER, "Added emails found by date to set.");
-        }
-        if (!(getKeywords.size() == 1 && getKeywords.get(0).equals(""))) {
+        if (!(1 == getEmail.size() && "".equals(getEmail.get(0)))) {
+            emailsFoundByEmail.addAll(contentmentVerification.searchEmailByName(getEmail, emails));
+            if (emailsFoundByEmail.size() > 0) {
+                LOGGER.info(MARKER, "Found " + emailsFoundByEmail.size() + " messages by email address.");
+            }
+            emailsFoundByEmailAndDate.addAll(contentmentVerification.searchEmailByDate(getStartDate, getEndDate, emailsFoundByEmail));
+            if (emailsFoundByEmailAndDate.size() > 0) {
+                LOGGER.info(MARKER, "Filtered " + emailsFoundByEmailAndDate.size() + " messages by date.");
+            }
+            emailsFinal.addAll(contentmentVerification.searchEmailByTitleWithKeyWords(getKeywords, emailsFoundByEmailAndDate));
+            if (emailsFinal.size() > 0) {
+                LOGGER.info(MARKER, "Filtered " + emailsFinal.size() + " messages by keywords.");
+            }
+        } else if (!("1111-01-01 00:00".equals(getStartDate) && "9999-12-12 00:00".equals(getEndDate))) {
+            emailsFoundByEmailAndDate.addAll(contentmentVerification.searchEmailByDate(getStartDate, getEndDate, emails));
+            if (emailsFoundByEmailAndDate.size() > 0) {
+                LOGGER.info(MARKER, "Found " + emailsFoundByEmailAndDate.size() + " messages by date.");
+            }
+            emailsFinal.addAll(contentmentVerification.searchEmailByTitleWithKeyWords(getKeywords, emailsFoundByEmailAndDate));
+            if (emailsFinal.size() > 0) {
+                LOGGER.info(MARKER, "Filtered " + emailsFinal.size() + " messages by keywords.");
+            }
+        } else if (!(1 == getKeywords.size() && "".equals(getKeywords.get(0)))) {
             emailsFinal.addAll(contentmentVerification.searchEmailByTitleWithKeyWords(getKeywords, emails));
-            LOGGER.info(MARKER, "Added emails found by keywords to set.");
+            if (emailsFinal.size() > 0) {
+                LOGGER.info(MARKER, "Found " + emailsFinal.size() + " messages by keywords.");
+            }
         }
         LOGGER.info(MARKER, "Final email set completed.");
         return emailsFinal;
     }
+
+
 }

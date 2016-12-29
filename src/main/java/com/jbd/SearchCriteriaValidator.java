@@ -38,7 +38,7 @@ public class SearchCriteriaValidator {
 
     public static boolean validateEndDate(String endDate) {
         boolean isEnddateCorrect = datePatternMatching(endDate);
-        // if (isEnddateCorrect == true) {
+         if (isEnddateCorrect == true) {
         LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
         boolean isEndDateAfterStartDate = endDateFormatted
                 .isAfter(LocalDate.parse(SearchCriteria.getStartDate(), dateFormatter));
@@ -48,7 +48,7 @@ public class SearchCriteriaValidator {
         if (isEndDateAfterStartDate == false) {
             isEnddateCorrect = false;
         }
-        //  }
+          }
         LOGGER.info(SEARCHCRITERIAVALIDATOR_MARKER, "Validation of end date: " + endDate + " outcome: " + isEnddateCorrect);
         return isEnddateCorrect;
     }
