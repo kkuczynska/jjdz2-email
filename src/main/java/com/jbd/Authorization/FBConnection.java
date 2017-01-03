@@ -4,24 +4,26 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.ejb.Stateless;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import javax.enterprise.context.SessionScoped;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
 
-@Stateless
-public class FBConnection {
+@SessionScoped
+public class FBConnection implements Serializable {
     private static final Logger LOGGER = LogManager.getLogger(FBConnection.class);
     public static final String FB_APP_ID = "1783631111890477";
     public static final String FB_APP_SECRET = "3fa1e9b96990c6591c43196353bbde70";
     public static final String REDIRECT_URI = "http://localhost:8080/jbdee/LoginFBServlet";
 
     static String accessToken = "";
+
+    public void clearAccessToken() {
+        accessToken = "";
+    }
 
     public String getFBAuthUrl() {
         String fbLoginUrl = "";

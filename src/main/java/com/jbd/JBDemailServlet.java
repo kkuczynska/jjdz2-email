@@ -24,9 +24,6 @@ public class JBDemailServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        //getClass().getResource("/testlist.mbox").toExternalForm();
-        //mvn clean package wildfly:run
-
         Email e1 = new Email("qqq@wp.pl", "test test");
         Email e2 = new Email("www@wp.pl", "test 1");
         Email e3 = new Email("123@wp.pl", "okno");
