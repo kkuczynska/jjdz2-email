@@ -1,6 +1,5 @@
 package com.jbd.servlets;
 
-import com.jbd.KeywordsFinder.JsonReader;
 import com.jbd.KeywordsFinder.Keywords;
 import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
 import org.slf4j.Logger;
@@ -16,8 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.jbd.KeywordsFinder.KeywordsQuestionsMap.QUESTION;
 
@@ -30,14 +27,12 @@ public class SearchKeywordsServlet extends HttpServlet {
     @EJB
     Keywords keywords;
     @EJB
-    JsonReader jsonReader;
-    @EJB
     KeywordsQuestionsMap keywordsQuestionsMap;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
 
         LOGGER.info(MARKER, "User redirected to keywords.jsp with doGet().");
-        req.setAttribute("questions", keywordsQuestionsMap.createKeywordsMap());
+        req.setAttribute("questions", keywordsQuestionsMap.createQuestionsMap());
         LOGGER.info(MARKER, "Set JSP attribute \"question\" with keywords questionnaire.");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
@@ -53,24 +48,35 @@ public class SearchKeywordsServlet extends HttpServlet {
         }
     }
 
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
-        keywordsQuestionsMap.createKeywordsMap();
-        LOGGER.info(MARKER, "Invoked creaion of keywords map.");
+        System.out.println("q0: "+ req.getParameter("q0"));
+        System.out.println("q1: "+ req.getParameter("q1"));
+        System.out.println("q2: "+ req.getParameter("q2"));
+        System.out.println("q3: "+ req.getParameter("q3"));
+        System.out.println("qqqqqq5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: "+ req.getParameter("qq5"));
 
         for (int questionIndex = 0;
-             questionIndex < keywordsQuestionsMap.createKeywordsMap().size(); questionIndex++) {
+             questionIndex < keywordsQuestionsMap.getQuestionsMap().size(); questionIndex++) {
             String answer = "0";
+            LOGGER.info(MARKER, "questionIndex " + questionIndex);
             if ("yes".equalsIgnoreCase(req.getParameter(QUESTION + "" + String.valueOf(questionIndex)))) {
+                LOGGER.info(MARKER, "parameter: " + QUESTION + "" + String.valueOf(questionIndex));
                 answer = "1";
             }
             keywords.gatherAnswers(answer);
-            LOGGER.info(MARKER, "Noted user reaponse: " + answer);
+            LOGGER.info(MARKER, "Noted user response: " + answer);
         }
 
-        req.setAttribute("keywordsList", keywords.createKeywordsSet());
+        if(keywords.createKeywordsSet().size()<1) {
+            req.setAttribute("keywordsMsg", "No keywords found.");
+        } else {
+            req.setAttribute("keywordsMsg", "Keyword matching your criteria:");
+            req.setAttribute("keywordsList", keywords.createKeywordsSet());
+        }
         LOGGER.info(MARKER, "Set JSP attribute \"keywordsList\".");
-        req.setAttribute("questions", keywordsQuestionsMap.createKeywordsMap());
+        req.setAttribute("questions", keywordsQuestionsMap.getQuestionsMap());
         LOGGER.info(MARKER, "Set JSP attribute \"questions\" with keywords questionnaire.");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
