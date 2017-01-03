@@ -1,6 +1,5 @@
 package com.jbd.KeywordsFinder;
 
-import com.jbd.servlets.SearchKeywordsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -17,18 +16,23 @@ public class KeywordsQuestionsMap {
     private static final Marker MARKER = MarkerFactory.getMarker("KeywordsQuestionsMap");
 
     public static final String QUESTION = "q";
+    Map<String, String> questionsMap;
 
-    public Map<String, String> createKeywordsMap() {
-        Map<String, String> keywordsMap = new TreeMap<>();
+    public Map<String, String> createQuestionsMap() {
+        questionsMap = new TreeMap<>();
         JsonReader jsonReader = new JsonReader();
         jsonReader.readQuestionJsonArray();
-        LOGGER.info(MARKER, "Invoked readJsonArray.");
+        LOGGER.info(MARKER, "Invoked questions map.");
         for (String question : jsonReader.readQuestionJsonArray()) {
-            keywordsMap.put(QUESTION + keywordsMap.size(), question);
+            questionsMap.put(QUESTION + "" + questionsMap.size(), question);
             LOGGER.info(MARKER,
-                    "Added keyword record: " + QUESTION + "" + keywordsMap.size() + ", question " + question);
+                    "Added question record: " + QUESTION + "" + questionsMap.size() + ", question: " + question);
         }
-        return keywordsMap;
+        return questionsMap;
     }
 
+
+    public Map<String, String> getQuestionsMap() {
+        return questionsMap;
+    }
 }
