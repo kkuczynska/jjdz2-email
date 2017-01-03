@@ -30,8 +30,8 @@ public class Keywords {
     }
 
     public void gatherAnswers(String answerID) {
-        LOGGER.info(KEYWORDS_MARKER, "Creating answers from keywords form.");
         answersIDs.add(answerID);
+        LOGGER.info(KEYWORDS_MARKER, "Noted user response: " + answerID);
     }
 
     public Set<String> createKeywordsSet() {
