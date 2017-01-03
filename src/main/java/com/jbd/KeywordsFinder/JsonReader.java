@@ -27,7 +27,7 @@ public class JsonReader {
 
     public ArrayList<String> readAnswerJsonArray(String jsonNodeName) {
         FileReader fileReader = null;
-        LOGGER.info(JSONREADER_MARKER, "Reading Json file from path: " + jsonPath);
+        LOGGER.info(JSONREADER_MARKER, "Reading keywords from file: " + jsonPath);
         try {
             fileReader = new FileReader(jsonPath);
         } catch (FileNotFoundException e) {
@@ -54,7 +54,7 @@ public class JsonReader {
 
     public List<String> readQuestionJsonArray() {
         FileReader fileReader = null;
-        LOGGER.info(JSONREADER_MARKER, "Reading Json file: " + jsonPath);
+        LOGGER.info(JSONREADER_MARKER, "Reading questions from file: " + jsonPath);
         try {
             fileReader = new FileReader(jsonPath);
         } catch (FileNotFoundException e) {
@@ -74,7 +74,7 @@ public class JsonReader {
             e.printStackTrace();
         }
         JSONArray jsonArray = (JSONArray) jsonObject.get(QUESTIONS_ARRAY_NAME);
-        LOGGER.info(JSONREADER_MARKER, "Creating jsonArray from file: " + jsonPath + "found array name: "
+        LOGGER.info(JSONREADER_MARKER, "Creating jsonArray from file: " + jsonPath + " found array name: "
                 + QUESTIONS_ARRAY_NAME);
 
         return (ArrayList<String>) jsonArray;
