@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @WebServlet(urlPatterns = "emails")
 public class SearchEmailsServlet extends HttpServlet {
@@ -50,7 +51,14 @@ public class SearchEmailsServlet extends HttpServlet {
 
         String emailPath = req.getParameter("emailPath");
         LOGGER.info(MARKER, "Set value for emailPath.");
-        if (!("".equals(emailPath))) {
+        if (("".equals(emailPath))) {
+            req.setAttribute("noEmailPathGivenErrorMessage",
+                    "<span class=\"alert alert-danger\" role=\"alert\" id=\"noPathMsg\">\n" +
+                    "          <span class=\"glyphicon glyphicon-exclamation-sign\"></span>\n" +
+                    "          No path to an email file given.\n" +
+                    "           This field is required. \n" +
+                    "        </span>");
+        } else {
             try {
                 emails = fileParser.parseEmails(pathGetter.createFileListFromPath(emailPath));
             } catch (Exception e) {
@@ -58,12 +66,20 @@ public class SearchEmailsServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
-        req.setAttribute("finalEmailSet", finalEmailsSet.createUniqueEmailsSet(emails));
+        Set<Email> emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
+        if(emailSet.size() > 0) {
+            req.setAttribute("emailsFound", "Emails matching your criteria:");
+        }
+        req.setAttribute("finalEmailSet", emailSet);
         LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
 
         Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
         if ("yes".equals(req.getParameter("phoneNumbers"))) {
+            if(resultMap.size() == 0) {
+                req.setAttribute("phoneNumbersFound", "No phone numbers found.");
+            } else {
+                req.setAttribute("phoneNumbersFound", "Phone numbers found in your email file:");
+            }
             req.setAttribute("displayNumbers", resultMap);
             LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
         }
