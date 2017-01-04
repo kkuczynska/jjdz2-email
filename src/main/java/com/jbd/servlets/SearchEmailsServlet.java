@@ -69,6 +69,8 @@ public class SearchEmailsServlet extends HttpServlet {
         Set<Email> emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
         if(emailSet.size() > 0) {
             req.setAttribute("emailsFound", "Emails matching your criteria:");
+        } else if(emailSet.size() == 0) {
+            req.setAttribute("emailsFound", "No emails matching your criteria.");
         }
         req.setAttribute("finalEmailSet", emailSet);
         LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
