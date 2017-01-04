@@ -52,12 +52,10 @@ public class SearchEmailsServlet extends HttpServlet {
         String emailPath = req.getParameter("emailPath");
         LOGGER.info(MARKER, "Set value for emailPath.");
         if (("".equals(emailPath))) {
-            req.setAttribute("noEmailPathGivenErrorMessage",
-                    "<span class=\"alert alert-danger\" role=\"alert\" id=\"noPathMsg\">\n" +
-                    "          <span class=\"glyphicon glyphicon-exclamation-sign\"></span>\n" +
-                    "          No path to an email file given.\n" +
-                    "           This field is required. \n" +
-                    "        </span>");
+            req.setAttribute("emailsFound",
+                    "          <span class=\"glyphicon glyphicon-exclamation-sign\" id=\"noPathMsg\"></span>\n" +
+                            "          No path to email file given.\n" +
+                            "           This field is required. \n");
         } else {
             try {
                 emails = fileParser.parseEmails(pathGetter.createFileListFromPath(emailPath));
@@ -69,7 +67,7 @@ public class SearchEmailsServlet extends HttpServlet {
         Set<Email> emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
         if(emailSet.size() > 0) {
             req.setAttribute("emailsFound", "Emails matching your criteria:");
-        } else if(emailSet.size() == 0) {
+        } else if(0 == emailSet.size() && !("".equals(emailPath))) {
             req.setAttribute("emailsFound", "No emails matching your criteria.");
         }
         req.setAttribute("finalEmailSet", emailSet);
