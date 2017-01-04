@@ -24,13 +24,13 @@
                     <div class="col-md-6" id="searchEmailsSection">
                         If you already know what you are looking for you can start searching...<br>
                         <p><form action="emails.jsp">
-                            <input class="btn btn-primary" type="submit" value="Search emails" name="searchEmails">
+                            <input class="btn btn-warning" type="submit" value="Search emails" name="searchEmails">
                         </form></p>
                     </div>
                     <div class="col-md-6">
                         ... or you can get help with defining keywords for your search query.<br>
                         <p><form action="keywords">
-                            <input class="btn btn-primary" type="submit" value="Search keywords" name="searchKeywords">
+                            <input class="btn btn-warning" type="submit" value="Search keywords" name="searchKeywords">
                         </form></p>
                     </div>
                 </div>
