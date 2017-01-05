@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.ejb.Stateless;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
@@ -18,6 +19,7 @@ import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.*;
 
+@Stateless
 public class FileParser {
     private static final Logger LOGGER = LoggerFactory.getLogger(FileParser.class);
     private static final Marker FP_MARKER = MarkerFactory.getMarker("FileParser");
@@ -25,16 +27,16 @@ public class FileParser {
 
     private final static CharsetEncoder ENCODER = Charset.forName("UTF-8").newEncoder();
 
-    public List<Email> parseEmails (List<String> fileList) throws Exception {
+    public List<Email> parseEmails(List<String> fileList) throws Exception {
         LOGGER.info(FP_MARKER, "Parsing Started");
         emailsFromFiles.clear();
 
         for (String file : fileList) {
-            if (file.endsWith(".eml")){
+            if (file.endsWith(".eml")) {
                 LOGGER.info(FP_MARKER, "Found eml file.");
                 emailsFromFiles.add(parseEML(new File(file)));
                 LOGGER.info(FP_MARKER, "Parsing of single eml file finished.");
-            } else if (file.endsWith(".mbox")){
+            } else if (file.endsWith(".mbox")) {
                 LOGGER.info(FP_MARKER, "Found mbox file.");
                 emailsFromFiles.addAll(parseMbox(new File(file)));
                 LOGGER.info(FP_MARKER, "Parsing of single mbox file finished.");
@@ -51,7 +53,7 @@ public class FileParser {
         InputStream source = new FileInputStream(emlFile);
         MimeMessage message = new MimeMessage(mailSession, source);
 
-        return new Email(message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(),  message.getContent().toString());
+        return new Email(message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(), message.getContent().toString());
     }
 
     public List<Email> parseMbox(File mboxFile) throws IOException, MimeException {

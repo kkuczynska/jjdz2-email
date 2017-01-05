@@ -26,7 +26,7 @@ public class SessionData implements Serializable {
     private String username;
     private String usermail;
     private String privilege;
-   @Transient
+    @Transient
     private LocalDateTime loginTime;
     @Transient
     private String code = null;

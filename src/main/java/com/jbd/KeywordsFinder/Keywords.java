@@ -6,12 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.jbd.Questions.ANSWER_POSITIVE;
 
+@Stateless
 public class Keywords {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Keywords.class);
@@ -28,24 +31,42 @@ public class Keywords {
     }
 
     public void gatherAnswers(String answerID) {
-        LOGGER.info(KEYWORDS_MARKER, "Creating answers from keywords form.");
         answersIDs.add(answerID);
+        LOGGER.info(KEYWORDS_MARKER, "Noted user response: " + answerID);
     }
 
-    private static void createKeywordsSet() {
+    public List<String> getQuestionName(){
+        JsonReader jsonReader = new JsonReader();
+        List<String> questions = new ArrayList<>();
+        questions.addAll(jsonReader.readAnswerJsonArray("questions"));
+        return questions;
+    }
+
+    public Set<String> createKeywordsSet() {
+
         JsonReader jsonReader = new JsonReader();
         LOGGER.info(KEYWORDS_MARKER, "Creating HashSet with unique keywords based on user's answers.");
         for (int index = 0; index < answersIDs.size(); index++) {
             if (answersIDs.get(index).equalsIgnoreCase(ANSWER_POSITIVE)) {
                 LOGGER.info(KEYWORDS_MARKER, "Adding keywords to set.");
-                KEYWORDS_SET.addAll(jsonReader.readAnswerJsonArray(String.valueOf(index)));
+
+                System.out.println("answersIDs = " + answersIDs);
+                for (int count = 0; count < answersIDs.size(); count++) {
+                    if (ANSWER_POSITIVE.equalsIgnoreCase(answersIDs.get(count))) {
+                        KEYWORDS_SET.addAll(jsonReader.readAnswerJsonArray(String.valueOf(count)));
+                    }
+                }
+                if (KEYWORDS_SET.isEmpty()) {
+                    LOGGER.info(KEYWORDS_MARKER, "Confirming keywords set is populated with data, size is: "
+                            + KEYWORDS_SET.size());
+                    userCommunication.sendUserMessage(NO_MATCHES);
+                }
+                answersIDs.clear();
+                System.out.println("keywords size: " + KEYWORDS_SET.size());
+
             }
         }
-        if (KEYWORDS_SET.isEmpty()) {
-            LOGGER.info(KEYWORDS_MARKER, "Confirming keywords set is populated with data, size is: "
-                    + KEYWORDS_SET.size());
-            userCommunication.sendUserMessage(NO_MATCHES);
-        }
+        return KEYWORDS_SET;
     }
 
     private static void displayKeywords() {
@@ -56,4 +77,11 @@ public class Keywords {
         }
     }
 
+    public static Set<String> getKeywordsSet() {
+        return KEYWORDS_SET;
+    }
+
+    public static ArrayList<String> getAnswersIDs() {
+        return answersIDs;
+    }
 }

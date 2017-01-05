@@ -13,7 +13,8 @@ public class ContentmentVerification {
     private DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
     private List<Email> foundEmailsList;
 
-    public List<Email> searchEmailByDate(String startDateOfEmailToSearch,String endDateOfEmailToSearch, List<Email> mailListToSearch) { //startDateOfEmailToSearch musi być w formacie "yyyy-MM-dd"
+    public List<Email> searchEmailByDate(String startDateOfEmailToSearch,
+                                         String endDateOfEmailToSearch, List<Email> mailListToSearch) {
 
         foundEmailsList = new ArrayList<>();
         for (Email email : mailListToSearch) {

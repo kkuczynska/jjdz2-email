@@ -9,11 +9,14 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.ejb.Stateless;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+@Stateless
 public class JsonReader {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JsonReader.class);
@@ -24,7 +27,7 @@ public class JsonReader {
 
     public ArrayList<String> readAnswerJsonArray(String jsonNodeName) {
         FileReader fileReader = null;
-        LOGGER.info(JSONREADER_MARKER, "Reading Json file: " + jsonPath);
+        LOGGER.info(JSONREADER_MARKER, "Reading keywords from file: " + jsonPath);
         try {
             fileReader = new FileReader(jsonPath);
         } catch (FileNotFoundException e) {
@@ -49,9 +52,9 @@ public class JsonReader {
         return jsonArray;
     }
 
-    public ArrayList<String> readQuestionJsonArray() {
+    public List<String> readQuestionJsonArray() {
         FileReader fileReader = null;
-        LOGGER.info(JSONREADER_MARKER, "Reading Json file: " + jsonPath);
+        LOGGER.info(JSONREADER_MARKER, "Reading questions from file: " + jsonPath);
         try {
             fileReader = new FileReader(jsonPath);
         } catch (FileNotFoundException e) {
@@ -71,9 +74,9 @@ public class JsonReader {
             e.printStackTrace();
         }
         JSONArray jsonArray = (JSONArray) jsonObject.get(QUESTIONS_ARRAY_NAME);
-        LOGGER.info(JSONREADER_MARKER, "Creating jsonArray from file: " + jsonPath + "found array name: "
+        LOGGER.info(JSONREADER_MARKER, "Creating jsonArray from file: " + jsonPath + " found array name: "
                 + QUESTIONS_ARRAY_NAME);
+
         return (ArrayList<String>) jsonArray;
     }
-
 }

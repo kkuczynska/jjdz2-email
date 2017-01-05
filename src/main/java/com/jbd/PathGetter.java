@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import javax.ejb.Stateless;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -14,6 +15,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Stateless
 public class PathGetter {
     private static final String ACCEPTED_EXTENSIONS = ".*(.eml|.mbox)";
     private List<String> fileList = new ArrayList<>();
