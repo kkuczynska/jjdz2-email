@@ -25,7 +25,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,19 +35,14 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchKeywordsServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
-
     private int counter = 1;
-
 
     @EJB
     Keywords keywords;
     @EJB
     KeywordsQuestionsMap keywordsQuestionsMap;
-
     @Inject
     ManageUser manageUser;
-
-
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
 
@@ -71,12 +65,6 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
-
-        System.out.println("q0: "+ req.getParameter("q0"));
-        System.out.println("q1: "+ req.getParameter("q1"));
-        System.out.println("q2: "+ req.getParameter("q2"));
-        System.out.println("q3: "+ req.getParameter("q3"));
-        System.out.println("qqqqqq5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: "+ req.getParameter("qq5"));
 
         for (int questionIndex = 0;
              questionIndex < keywordsQuestionsMap.getQuestionsMap().size(); questionIndex++) {
@@ -101,7 +89,8 @@ public class SearchKeywordsServlet extends HttpServlet {
         LOGGER.info(MARKER, "Set JSP attribute \"questions\" with keywords questionnaire.");
 
 
-        if (req.getParameter("q0") != null && req.getParameter("q1") != null && req.getParameter("q2") != null && req.getParameter("q2") != null) {
+        if (req.getParameter("q0") != null && req.getParameter("q1") != null
+                && req.getParameter("q2") != null && req.getParameter("q2") != null) {
             //For save to DB
             Form form = new Form();
             String name = "Question Form " + counter;
@@ -123,10 +112,8 @@ public class SearchKeywordsServlet extends HttpServlet {
                 form_details.setForm(forConnectingWithDetails);
                 LOGGER.info("Created new form_details:");
                 manageUser.saveFormDetails(form_details);
-
             }
         }
-
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
         LOGGER.info(MARKER, "Dispatcher to keywords.jsp");
@@ -142,5 +129,4 @@ public class SearchKeywordsServlet extends HttpServlet {
         keywords.getKeywordsSet().clear();
         LOGGER.debug(MARKER, "Cleared keywords set. Size: " + keywords.getKeywordsSet().size());
     }
-
 }
