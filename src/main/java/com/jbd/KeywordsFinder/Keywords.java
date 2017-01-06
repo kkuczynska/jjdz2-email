@@ -9,6 +9,7 @@ import org.slf4j.MarkerFactory;
 import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static com.jbd.Questions.ANSWER_POSITIVE;
@@ -33,6 +34,15 @@ public class Keywords {
         answersIDs.add(answerID);
         LOGGER.info(KEYWORDS_MARKER, "Noted user response: " + answerID);
     }
+
+
+    public List<String> getQuestionName(){
+        JsonReader jsonReader = new JsonReader();
+        List<String> questions = new ArrayList<>();
+        questions.addAll(jsonReader.readAnswerJsonArray("questions"));
+        return questions;
+    }
+
 
     public Set<String> createKeywordsSet() {
 
@@ -72,4 +82,9 @@ public class Keywords {
     public static Set<String> getKeywordsSet() {
         return KEYWORDS_SET;
     }
+
+    public static ArrayList<String> getAnswersIDs() {
+        return answersIDs;
+    }
+
 }
