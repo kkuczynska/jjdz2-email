@@ -20,7 +20,8 @@ public class ContentmentVerificationTest {
     @Test
     public void should_return_email_with_correct_date() throws Exception {
         String date = "2013-01-01 00:00";
-        List<Email> resultList = cv.searchEmailByDate(date, emailList);
+        String endDate = "2016-10-01 00:00";
+        List<Email> resultList = cv.searchEmailByDate(date,endDate, emailList);
         assertThat("Given data is later then data in List", resultList.size(), is(2));
     }
 
