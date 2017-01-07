@@ -166,7 +166,7 @@
     </dependencies>
 
     <build>
-        <finalName>ROOT</finalName>
+        <finalName>jbdee</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
