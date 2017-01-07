@@ -55,7 +55,7 @@ public class Questions {
             do {
                 userCommunication.sendUserMessage(EMAIL_QUESTION);
                 emailAddress = userCommunication.getUserResponse();
-                setEMAIL(emailAddress);
+                setEmail(emailAddress);
                 if (searchCriteriaValidator.validateEmail(emailAddress) == false) {
                     LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + emailAddress);
                     EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
@@ -67,24 +67,24 @@ public class Questions {
 
         do {
             userCommunication.sendUserMessage(STARTDATE_QUESTION);
-            setSTARTDATE(userCommunication.getUserResponse());
-            if (searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()) == false) {
-                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getSTARTDATE());
+            setStartDate(userCommunication.getUserResponse());
+            if (searchCriteriaValidator.validateStartDate(searchCriteria.getStartDate()) == false) {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getStartDate());
                 STARTDATE_QUESTION = STARTDATE_QUESTION_WRONG_VALUE;
             }
-        } while (!searchCriteriaValidator.validateStartDate(searchCriteria.getSTARTDATE()));
+        } while (!searchCriteriaValidator.validateStartDate(searchCriteria.getStartDate()));
 
         do {
             userCommunication.sendUserMessage(ENDDATE_QUESTION);
-            setENDDATE(userCommunication.getUserResponse());
-            if (searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()) == false) {
-                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getENDDATE());
+            setEndDate(userCommunication.getUserResponse());
+            if (searchCriteriaValidator.validateEndDate(searchCriteria.getEndDate()) == false) {
+                LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getEndDate());
                 ENDDATE_QUESTION = ENDDATE_QUESTION_WRONG_VALUE;
             }
-        } while (!searchCriteriaValidator.validateEndDate(searchCriteria.getENDDATE()));
+        } while (!searchCriteriaValidator.validateEndDate(searchCriteria.getEndDate()));
 
         userCommunication.sendUserMessage(KEYWORD_QUESTION);
-        setKEYWORDS(userCommunication.getUserResponse());
+        setKeywords(userCommunication.getUserResponse());
     }
 
     public void keywordsForm() {

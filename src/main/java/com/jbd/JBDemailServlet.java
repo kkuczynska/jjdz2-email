@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/sendData")
+@WebServlet(urlPatterns = "/App/sendData")
 public class JBDemailServlet extends HttpServlet {
 
     @EJB
@@ -23,9 +23,6 @@ public class JBDemailServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
-        //getClass().getResource("/testlist.mbox").toExternalForm();
-        //mvn clean package wildfly:run
 
         Email e1 = new Email("qqq@wp.pl", "test test");
         Email e2 = new Email("www@wp.pl", "test 1");
@@ -41,7 +38,7 @@ public class JBDemailServlet extends HttpServlet {
 
         req.setAttribute("results", results);
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/form.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/App/form.jsp");
         dispatcher.forward(req, resp);
     }
 }

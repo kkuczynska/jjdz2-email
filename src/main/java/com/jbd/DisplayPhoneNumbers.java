@@ -3,6 +3,7 @@ package com.jbd;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.ejb.Stateless;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Stateless
 public class DisplayPhoneNumbers {
     private static final Logger LOGGER = LogManager.getLogger(JBDemail.class);
 
