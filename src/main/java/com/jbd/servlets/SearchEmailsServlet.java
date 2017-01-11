@@ -84,6 +84,8 @@ public class SearchEmailsServlet extends HttpServlet {
             LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
         }
 
+        req.setAttribute("emailFile", emailPath);
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");
         try {
