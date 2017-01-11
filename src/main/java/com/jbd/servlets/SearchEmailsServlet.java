@@ -86,8 +86,8 @@ public class SearchEmailsServlet extends HttpServlet {
 
         req.setAttribute("emailFile", emailPath);
         req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
-        req.setAttribute("startDate", "a");
-        req.setAttribute("endDate", "a");
+        req.setAttribute("startDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getStartDate()));
+        req.setAttribute("endDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getEndDate()));
         req.setAttribute("keywords", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getKeywords()));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
