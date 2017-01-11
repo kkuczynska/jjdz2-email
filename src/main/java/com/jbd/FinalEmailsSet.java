@@ -68,12 +68,12 @@ public class FinalEmailsSet {
         return emailsFinal;
     }
 
-    public String emailsSeparatedWithComma() {
-        String emails = "";
-        for (String email : searchCriteria.getEmail()) {
-            emails = emails + ", " + email;
+    public String emailsSeparatedWithComma(List<String> listToParse) {
+        String listParsed = "";
+        for (String element : listToParse) {
+            listParsed = listParsed + ", " + element;
         }
-        emails = emails.substring(2);
-        return emails;
+        listParsed = listParsed.substring(2);
+        return listParsed;
     }
 }

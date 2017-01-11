@@ -85,10 +85,10 @@ public class SearchEmailsServlet extends HttpServlet {
         }
 
         req.setAttribute("emailFile", emailPath);
-        req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma());
+        req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
         req.setAttribute("startDate", "a");
         req.setAttribute("endDate", "a");
-        req.setAttribute("keywords", "a");
+        req.setAttribute("keywords", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getKeywords()));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");
