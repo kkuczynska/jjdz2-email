@@ -68,5 +68,12 @@ public class FinalEmailsSet {
         return emailsFinal;
     }
 
-
+    public String emailsSeparatedWithComma() {
+        String emails = "";
+        for (String email : searchCriteria.getEmail()) {
+            emails = emails + ", " + email;
+        }
+        emails = emails.substring(2);
+        return emails;
+    }
 }
