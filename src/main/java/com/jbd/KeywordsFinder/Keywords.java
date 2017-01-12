@@ -81,8 +81,12 @@ public class Keywords {
         return keywordsSet;
     }
 
-    public static ArrayList<String> getAnswersIDs() {
-        return answersIDs;
+    public static int getNumberOfAnswers() {
+        return answersIDs.size();
+    }
+
+    public static void clearAnswersList() {
+        answersIDs.clear();
     }
 
 }
