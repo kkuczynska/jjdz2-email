@@ -1,16 +1,21 @@
 package com.jbd.servlets;
 
+
 import com.jbd.DBA.Form;
 import com.jbd.DBA.Form_Details;
 import com.jbd.DBA.ManageUser;
+
 import com.jbd.KeywordsFinder.Keywords;
 import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
+
 import javax.ejb.EJB;
+
 import javax.inject.Inject;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +23,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 import java.time.LocalDateTime;
 import java.util.List;
+
+
 import static com.jbd.KeywordsFinder.KeywordsQuestionsMap.QUESTION;
 
 @WebServlet(urlPatterns = "keywords")
@@ -35,6 +43,25 @@ public class SearchKeywordsServlet extends HttpServlet {
     KeywordsQuestionsMap keywordsQuestionsMap;
     @Inject
     ManageUser manageUser;
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
+
+        LOGGER.info(MARKER, "User redirected to keywords.jsp with doGet().");
+        req.setAttribute("questions", keywordsQuestionsMap.createQuestionsMap());
+        LOGGER.info(MARKER, "Set JSP attribute \"question\" with keywords questionnaire.");
+
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
+        LOGGER.info(MARKER, "Dispatcher to keywords.jsp");
+        try {
+            dispatcher.forward(req, response);
+        } catch (ServletException e) {
+            LOGGER.debug(MARKER, "Caught ServletException " + e);
+            e.printStackTrace();
+        } catch (IOException e) {
+            LOGGER.debug(MARKER, "Caught IOException " + e);
+            e.printStackTrace();
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
@@ -74,7 +101,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             manageUser.saveForm(form);
             questionnaireCounter++;
 
-            Form forConnectingWithDetails;
+            Form forConnectingWithDetails = new Form();
             forConnectingWithDetails = manageUser.getFormByName(name);
             List<String> questions = keywords.getQuestionName();
 
