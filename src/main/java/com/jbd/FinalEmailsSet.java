@@ -68,5 +68,12 @@ public class FinalEmailsSet {
         return emailsFinal;
     }
 
-
+    public String emailsSeparatedWithComma(List<String> listToParse) {
+        String listParsed = "";
+        for (String element : listToParse) {
+            listParsed = listParsed + ", " + element;
+        }
+        listParsed = listParsed.substring(2);
+        return listParsed;
+    }
 }
