@@ -21,23 +21,23 @@
                 <form method="POST" action="keywords">
                     <p>
                         Are you looking for an urgent email?
-                        <label><input type="radio" name="q0" value="yes">Yes</label>
-                        <label><input type="radio" name="q0" value="no">No</label><br/>
+                        <label><input type="radio" name="q0" value="yes" ${checkedq0yes}>Yes</label>
+                        <label><input type="radio" name="q0" value="no" ${checkedq0no}>No</label><br/>
                     </p>
                     <p>
                     Are you looking for a business email
-                        <label><input type="radio" name="q1" value="yes">Yes</label>
-                        <label><input type="radio" name="q1" value="no">No</label><br/>
+                        <label><input type="radio" name="q1" value="yes" ${checkedq1yes}>Yes</label>
+                        <label><input type="radio" name="q1" value="no" ${checkedq1no}>No</label><br/>
                     </p>
                     <p>
                         Are you looking for a family related email?
-                        <label><input type="radio" name="q2" value="yes">Yes</label>
-                        <label><input type="radio" name="q2" value="no">No</label><br/>
+                        <label><input type="radio" name="q2" value="yes" ${checkedq2yes}>Yes</label>
+                        <label><input type="radio" name="q2" value="no" ${checkedq2no}>No</label><br/>
                     </p>
                     <p>
                         Are you looking for an email about a meeting?
-                        <label><input type="radio" name="q3" value="yes">Yes</label>
-                        <label><input type="radio" name="q3" value="no">No</label><br/>
+                        <label><input type="radio" name="q3" value="yes" ${checkedq3yes}>Yes</label>
+                        <label><input type="radio" name="q3" value="no" ${checkedq3no}>No</label><br/>
                     </p>
                     <input class="btn btn-warning" type="submit" value="Search Keywords">
                 </form>
