@@ -1,3 +1,3 @@
 FROM jboss/wildfly
 
-ADD target/ROOT.war /opt/jboss/wildfly/standalone/deployments/ROOT.war
+ADD target/jbdee.war /opt/jboss/wildfly/standalone/deployments/jbdee.war
