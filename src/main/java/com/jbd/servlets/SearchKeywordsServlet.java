@@ -13,9 +13,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.EJB;
-
 import javax.inject.Inject;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,10 +21,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import static com.jbd.KeywordsFinder.KeywordsQuestionsMap.QUESTION;
 
@@ -101,6 +98,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             manageUser.saveForm(form);
             questionnaireCounter++;
 
+            //Connecting details with form
             Form forConnectingWithDetails = new Form();
             forConnectingWithDetails = manageUser.getFormByName(name);
             List<String> questions = keywords.getQuestionName();

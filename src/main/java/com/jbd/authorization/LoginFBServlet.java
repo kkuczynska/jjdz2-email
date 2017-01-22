@@ -1,8 +1,9 @@
-package com.jbd.Authorization;
+package com.jbd.authorization;
 
 import com.jbd.DBA.ManageUser;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/LoginFBServlet")
 public class LoginFBServlet extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(LoginFBServlet.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(LoginFBServlet.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("LoginFBServlet");
 
     @Inject
     FBConnection fbConnection;
@@ -38,74 +40,73 @@ public class LoginFBServlet extends HttpServlet {
     private int counter = 0;
     String privilege = "local";
     private boolean isNotInDB;
+
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        LOGGER.info("Trying to log in to FB");
+        LOGGER.info(MARKER, "Trying to log in to FB");
         code = req.getParameter("code");
         if (code == null || code.equals("")) {
             throw new RuntimeException(
                     "ERROR: Didn't get code parameter in callback.");
         }
-        LOGGER.info("Logging in FB has been successful");
+        LOGGER.info(MARKER, "Logging in FB has been successful");
 
         String accessToken = fbConnection.getAccessToken(code);
-        LOGGER.debug("Access token: " + accessToken);
+        LOGGER.debug(MARKER, "Access token: " + accessToken);
         fbGraph.setAccessToken(accessToken);
 
         String graph = fbGraph.getFBGraph();
-        LOGGER.info("Generated FBGraph");
+        LOGGER.info(MARKER, "Generated FBGraph");
         Map<String, String> fbProfileData = fbGraph.getGraphData(graph);
 
-        if(counter == 0) {
+        if (counter == 0) {
             SessionData adminUser = new SessionData();
             adminUser.setUsermail("marbar1812@gmail.com");
             adminUser.setUsername("Marcin Bartoszek");
             adminUser.setPrivilege("Admin");
             manageUser.saveUser(adminUser);
-            LOGGER.info("Added admin user");
-            counter +=1;
+            LOGGER.info(MARKER, "Added admin user");
+            counter += 1;
         }
         usersFromDatabase = manageUser.searchForAll();
-        for (SessionData user:usersFromDatabase) {
+        for (SessionData user : usersFromDatabase) {
             String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
-            if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))){
-                if(user.getPrivilege().equals("Admin")){
-                privilege = "Admin";
-                }
-                else
-                privilege = "local";
+            if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
+                if (user.getPrivilege().equals("Admin")) {
+                    privilege = "Admin";
+                } else
+                    privilege = "local";
                 isNotInDB = false;
                 break;
-            }
-            else
+            } else
                 privilege = "local";
-                isNotInDB = true;
+            isNotInDB = true;
         }
 
         sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
-        if(isNotInDB){
-            LOGGER.info("User is not in DB! Adding...");
+        if (isNotInDB) {
+            LOGGER.info(MARKER, "User is not in DB! Adding...");
             String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
             String userMail = fbProfileData.get("email");
             SessionData sessionData = new SessionData();
-            sessionData = createUserToDB(userName, userMail,privilege);
+            sessionData = createUserToDB(userName, userMail, privilege);
             manageUser.saveUser(sessionData);
-            LOGGER.info("Added succesfully- " + sessionData.getUsername());
+            LOGGER.info(MARKER, "Added succesfully- " + sessionData.getUsername());
         }
-        LOGGER.info("Logged User: " + sessionData.getUsername());
-        LOGGER.debug("Session data :" + sessionData);
+        LOGGER.info(MARKER, "Logged User: " + sessionData.getUsername());
+        LOGGER.debug(MARKER, "Session data :" + sessionData);
 
         String name = fbProfileData.get("first_name");
 
         if (sessionData.isLogged()) {
             req.setAttribute("name", name);
-            res.sendRedirect("/jbdee/App/AdminConsole.jsp");
+            res.sendRedirect("/jbdee/index.jsp");
         }
 
 
     }
 
-    public SessionData createUserToDB(String userName, String userMail, String privilege){
+    public SessionData createUserToDB(String userName, String userMail, String privilege) {
         SessionData user = new SessionData();
         user.setUsername(userName);
         user.setUsermail(userMail);

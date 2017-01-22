@@ -1,6 +1,6 @@
 package com.jbd.DBA;
 
-import com.jbd.Authorization.SessionData;
+import com.jbd.authorization.SessionData;
 import com.jbd.ContentmentVerification;
 
 import javax.ejb.EJB;
