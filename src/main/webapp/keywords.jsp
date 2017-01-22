@@ -61,9 +61,6 @@
                 </div>
             </div>
         </div><br>
-
-
-
     </div>
     <jsp:directive.include file="footer.jsp"/>
 </body>
