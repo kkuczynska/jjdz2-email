@@ -23,7 +23,7 @@
     </div>
     <div class="emailsSearch">
         <div class="col-md-4">
-            <form method="post" action="emails">
+            <form method="post" action="emails" enctype="multipart/form-data">
                 <span class="requiredEmailPath">*</span>
                 <input type="file" accept=".mbox,.eml" class="filestyle" name="emailPath" id="fileUpload"
                     data-buttonBefore="true" data-buttonName="btn-info" data-buttonText="Browse"
