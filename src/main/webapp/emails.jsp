@@ -27,7 +27,7 @@
                 <span class="requiredEmailPath">*</span>
                 <input type="file" accept=".mbox,.eml" class="filestyle" name="emailPath" id="fileUpload"
                     data-buttonBefore="true" data-buttonName="btn-info" data-buttonText="Browse"
-                    data-iconName="glyphicon glyphicon-upload"  data-placeholder="Choose file from your PC">
+                    data-iconName="glyphicon glyphicon-upload"  data-placeholder="Choose file from your PC"> <br>
                 <span class="multivalueField">**</span>
                 <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="emailaddr"/>" name="email"
                        value="${emails}"><br>
