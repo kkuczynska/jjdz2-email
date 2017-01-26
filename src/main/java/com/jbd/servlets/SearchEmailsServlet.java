@@ -56,9 +56,11 @@ public class SearchEmailsServlet extends HttpServlet {
         searchCriteria.setEndDate(req.getParameter("endDate"));
         LOGGER.info(MARKER, "Set value for end date field.");
         searchCriteria.setKeywords(req.getParameter("keywords"));
-        LOGGER.info(MARKER, "Set value for keywords field.");
 
+        LOGGER.info(MARKER, "Set value for keywords field.");
+        boolean newPah = new File(FILE_UPLOAD_PATH).mkdir();
         File uploads = new File(FILE_UPLOAD_PATH);
+
         LOGGER.info(MARKER, "Set directory for uploads");
         Part filePart = null;
         try {
@@ -139,7 +141,7 @@ public class SearchEmailsServlet extends HttpServlet {
         }
 
         file.delete();
-        if(!file.exists()) {
+        if (!file.exists()) {
             LOGGER.info(MARKER, "File " + fileName + " has been deleted from directory " + FILE_UPLOAD_PATH);
         } else {
             LOGGER.debug(MARKER, "File " + fileName + " could not be deleted from directory " + FILE_UPLOAD_PATH);
