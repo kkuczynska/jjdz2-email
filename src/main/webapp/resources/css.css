@@ -13,7 +13,7 @@ body {
     padding-left: 15px;
     padding-top: 5px;
 }
-.header #headerDateTime {
+.header #gmailUnreadMessages {
     text-align: right;
 }
 .container {
