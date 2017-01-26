@@ -14,20 +14,9 @@ function checkAuth() {
 }
 
 function handleAuthResult(authResult) {
-    var authorizeDiv = document.getElementById('authorize-div');
     if (authResult && !authResult.error) {
-        authorizeDiv.style.display = 'none';
         loadGmailApi();
-    } else {
-        authorizeDiv.style.display = 'inline';
     }
-}
-
-function handleAuthClick(event) {
-    gapi.auth.authorize(
-        {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-        handleAuthResult);
-    return false;
 }
 
 function loadGmailApi() {
@@ -41,19 +30,8 @@ function countMessages() {
     });
 
     request.execute(function (resp) {
-        var messagesUnread = resp.messagesUnread;
-        displayCount(messagesUnread);
+        document.getElementById('count').innerHTML = resp.messagesUnread;
     });
-}
-
-function appendPre(message) {
-    var pre = document.getElementById('output');
-    var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
-}
-
-function displayCount(messagesUnread) {
-    document.getElementById('count').innerHTML = messagesUnread;
 }
 
 $(document).ready(function(){
