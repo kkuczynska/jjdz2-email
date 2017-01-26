@@ -12,7 +12,7 @@
     <script src="resources/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 </head>
-<body>
+<body class="body">
 <jsp:directive.include file="header.jsp"/>
 <div id="container">
     <script type="text/javascript" src="App/LogoutFB.js">
