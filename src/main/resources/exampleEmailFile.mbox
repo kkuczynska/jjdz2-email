@@ -1,0 +1,283 @@
+From marcin.dargacz@gmail.com Fri Nov 24 02:32:47 2004
+Received: from pol.malcolmhardie.com ([213.152.32.218] helo=malcolmhardie.com)
+	by marilac.malcolmhardie.com with asmtp 
+	(Cipher TLSv1:DES-CBC3-SHA:168) (Exim 3.35 #1 (Debian))
+	id 1BF1At-0004oK-00
+	for <testlist@lists.malcolmhardie.com>; Sun, 18 Apr 2004 02:32:47 +0100
+Date: Sun, 18 Apr 2004 02:32:43 +0100
+Mime-Version: 1.0 (Apple Message framework v553)
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+From: Angus W Hardie <marcin.dargacz@gmail.com>
+To: testlist@lists.malcolmhardie.com
+Content-Transfer-Encoding: 7bit
+Message-Id: <49C69B37-90D8-11D8-80E6-000502339DF3@malcolmhardie.com>
+X-Mailer: Apple Mail (2.553)
+Subject: [ISA] Najbliższy zjazd 26 - 27 listopada 2016 r. plan ramowy + ważne informacje
+Sender: testlist-admin@lists.malcolmhardie.com
+Errors-To: testlist-admin@lists.malcolmhardie.com
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.0.11
+Precedence: bulk
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+List-Id: <testlist.lists.malcolmhardie.com>
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist/>
+
+Hej! Podsyłam Ci rozkład jazdy na najbliższy zjazd:
+
+Plan ramowy
+
+sobota, 26 listopada
+15:00 - 21:00 - warsztat: JEE (K. Marchwicki)
+
+niedziela, 27 listopada
+15:00 - 18:00 - warsztat: Hibernate (K. Marchwicki)
+18:00 - 21:00  - projekt: (K. Marchwicki, M. Dargacz)
+
+Ważne informacje
+
+Praca domowa. Przypominam, że na pracę domową powstało specjalne repozytorium: https://github.com/infoshareacademy/jjdz2-zadania-domowe i tam czekam na zadania domowe z Linux i Logger. Dodatkowo treść nowego zadania domowego znajduje się na repozytorium: https://github.com/infoshareacademy/jjdz2-materialy-arquillian w pliku Readme.md z Arquillian. Wasz kod proszę dodajcie do specjalnie przeznaczonego do tego repozytorium.
+Jesteśmy w połowie Sprintu nr 2! To czas na refleksję. Zerknijcie jak idą Wam prace nad zadaniami, bo koniec tuż tuż :)
+Materiały z ostatnich zajęć na ten moment dostępne są pod następującymi linkami:
+https://github.com/infoshareacademy/jjdz2-materialy-arquillian
+https://github.com/infoshareacademy/jjdz2-materialy-java
+
+Z mojej strony to wszystko. W razie jakiś wątpliwości piszcie śmiało!
+
+Pozdrawiam Marcin Dargacz.
+
+From k.kozlowski@nazwafirmy.com Sun Apr 18 02:35:33 2004
+Received: from pol.malcolmhardie.com ([213.152.32.218] helo=malcolmhardie.com)
+	by marilac.malcolmhardie.com with asmtp
+	(Cipher TLSv1:DES-CBC3-SHA:168) (Exim 3.35 #1 (Debian))
+	id 1BF1DY-0004ov-00
+	for <testlist@lists.malcolmhardie.com>; Sun, 18 Apr 2004 02:35:32 +0100
+Date: Sun, 18 Apr 2004 02:35:21 +0100
+Mime-Version: 1.0 (Apple Message framework v553)
+Content-Type: text/plain; charset=US-ASCII; format=flowed
+From: Angus W Hardie <k.kozlowski@nazwafirmy.com>
+To: testlist@lists.malcolmhardie.com
+Content-Transfer-Encoding: 7bit
+Message-Id: <A84AF498-90D8-11D8-80E6-000502339DF3@malcolmhardie.com>
+X-Mailer: Apple Mail (2.553)
+Subject: Nierozwiązane konflikty
+Sender: testlist-admin@lists.malcolmhardie.com
+Errors-To: testlist-admin@lists.malcolmhardie.com
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.0.11
+Precedence: bulk
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+List-Id: <testlist.lists.malcolmhardie.com>
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist/>
+
+Witaj Stefan,
+
+mama nadzieję, że dostałeś mojego maila? Prosze odpisz jak najszybciej! Dzięki
+
+
+Krystian Kozłowski
+505968789
+
+
+
+From karolina.kuczynska@gmail.com Wed Jul 06 03:09:52 2005
+Received: from awh by marilac.malcolmhardie.com with local (Exim 3.35 #1
+	(Debian)) id 1DpzMF-0007Cq-00
+	for <testlist@lists.malcolmhardie.com>; Wed, 06 Jul 2005 03:09:51 +0100
+To: testlist@lists.malcolmhardie.com
+Message-Id: <E1DpzMF-0007Cq-00@marilac.malcolmhardie.com>
+From: Angus W Hardie <karolina.kuczynska@gmail.com>
+Date: Wed, 06 Jul 2005 03:09:51 +0100
+Subject: Poganianie zespołu do pracy
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.1.5
+Precedence: list
+List-Id: testlist.lists.malcolmhardie.com
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+X-List-Received-Date: Wed, 06 Jul 2005 02:09:53 -0000
+
+Siema chopaki,
+do roboty!!!
+
+
+Karolina
+48569758456
+
+From karolina.kuczynska@gmail.com Wed Jul 06 03:31:01 2005
+Received: from awh by marilac.malcolmhardie.com with local (Exim 3.35 #1
+	(Debian)) id 1Dpzgi-0007Gc-00
+	for <testlist@lists.malcolmhardie.com>; Wed, 06 Jul 2005 03:31:00 +0100
+To: testlist@lists.malcolmhardie.com
+Message-Id: <E1Dpzgi-0007Gc-00@marilac.malcolmhardie.com>
+From: Angus W Hardie <karolina.kuczynska@gmail.com>
+Date: Wed, 06 Jul 2005 03:31:00 +0100
+Subject: Będzie jadka
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.1.5
+Precedence: list
+List-Id: testlist.lists.malcolmhardie.com
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+X-List-Received-Date: Wed, 06 Jul 2005 02:31:01 -0000
+
+Siemano, niezłe wdziano!
+
+Oto numery telefonów, o które prosiliście:
+- +48569785654
+- 48236598657
+- 48125320
+- 589785458
+- +4855552
+- +48 569895478
+- +48 669 032 254
+- 659 659 879
+- 45 56 89 25 0
+- 48 56 78 452
+- 4856987 23
+
+Narazie,
+Karolajna
+
+
+From marcin.bartoszek@gmail.com Wed Jul 06 03:32:01 2005
+Received: from awh by marilac.malcolmhardie.com with local (Exim 3.35 #1
+	(Debian)) id 1Dpzhh-0007Gp-00
+	for <testlist@lists.malcolmhardie.com>; Wed, 06 Jul 2005 03:32:01 +0100
+To: testlist@lists.malcolmhardie.com
+Message-Id: <E1Dpzhh-0007Gp-00@marilac.malcolmhardie.com>
+From: Angus W Hardie <marcin.bartoszek@gmail.com>
+Date: Wed, 06 Jul 2005 03:32:01 +0100
+Subject: Koniec żartów
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.1.5
+Precedence: list
+List-Id: testlist.lists.malcolmhardie.com
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+X-List-Received-Date: Wed, 06 Jul 2005 02:32:02 -0000
+
+Droga drużyno,
+oto ja,  Wasz skram master.
+
+Żarty się skończyły.
+
+Marcin,
+0-700 569 895 987
+
+
+From kacper.rabczak@gmail.com Wed Jul 06 03:36:18 2005
+Received: from awh by marilac.malcolmhardie.com with local (Exim 3.35 #1
+	(Debian)) id 1Dpzlq-0007HL-00
+	for <testlist@lists.malcolmhardie.com>; Wed, 06 Jul 2005 03:36:18 +0100
+To: testlist@lists.malcolmhardie.com
+Message-Id: <E1Dpzlq-0007HL-00@marilac.malcolmhardie.com>
+From: Angus W Hardie <kacper.rabczak@gmail.com>
+Date: Wed, 06 Jul 2005 03:36:18 +0100
+Subject: Test emaila
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.1.5
+Precedence: list
+List-Id: testlist.lists.malcolmhardie.com
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+X-List-Received-Date: Wed, 06 Jul 2005 02:36:18 -0000
+
+Cześć Wszystkim,
+otworzyłem nwego pull requesta.
+
+Czy ktoś z Was może zerknąć?
+W razie czego dajcie znać:
+
+kacper.rabczak@gmail.com /510 458 485
+
+
+Kacper
+
+
+From marcin.bartoszek@gmail.com Wed Nov 05 01:49:28 2008
+Received: from awh by marilac.malcolmhardie.com with local (Exim 4.63)
+	(envelope-from <awh@malcolmhardie.com>) id 1KxXWR-0001wz-U5
+	for Testlist@lists.malcolmhardie.com; Wed, 05 Nov 2008 01:49:27 +0000
+To: Testlist@lists.malcolmhardie.com
+Message-Id: <E1KxXWR-0001wz-U5@marilac.malcolmhardie.com>
+From: Angus W Hardie <marcin.bartoszek@gmail.com>
+Date: Wed, 05 Nov 2008 01:49:27 +0000
+Subject: Kontakt ze mną w tym tygodniu
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.1.9
+Precedence: list
+List-Id: <testlist.lists.malcolmhardie.com>
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+X-List-Received-Date: Wed, 05 Nov 2008 01:49:28 -0000
+
+Cześć,
+w tym tygodniu wjeżdżam do Anglii więc nie złapiecie mnie pod numerem 503 659 568 ale pod numerem +44 596879452359
+
+
+Narciarz,
+M.
+
+From michal.piechota@gmail.com Wed Apr 28 01:49:28 2016
+Received: from awh by marilac.malcolmhardie.com with local (Exim 4.63)
+	(envelope-from <awh@malcolmhardie.com>) id 1KxXWR-0001wz-U5
+	for Testlist@lists.malcolmhardie.com; Wed, 05 Nov 2008 01:49:27 +0000
+To: Testlist@lists.malcolmhardie.com
+Message-Id: <E1KxXWR-0001wz-U5@marilac.malcolmhardie.com>
+From: Angus W Hardie <michal.piechota@gmail.com>
+Date: Wed, 05 Nov 2008 01:49:27 +0000
+Subject: Kontakt ze mną w tym tygodniu
+X-BeenThere: testlist@lists.malcolmhardie.com
+X-Mailman-Version: 2.1.9
+Precedence: list
+List-Id: <testlist.lists.malcolmhardie.com>
+List-Unsubscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=unsubscribe>
+List-Archive: <http://lists.malcolmhardie.com/pipermail/testlist>
+List-Post: <mailto:testlist@lists.malcolmhardie.com>
+List-Help: <mailto:testlist-request@lists.malcolmhardie.com?subject=help>
+List-Subscribe: <http://lists.malcolmhardie.com/cgi-bin/mailman/listinfo/testlist>,
+	<mailto:testlist-request@lists.malcolmhardie.com?subject=subscribe>
+X-List-Received-Date: Wed, 05 Nov 2008 01:49:28 -0000
+
+Hej,
+czy możęcie wziąć się w garść?
+
+
+Michał
+

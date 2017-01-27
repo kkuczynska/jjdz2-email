@@ -45,7 +45,7 @@ public class SetLinuxLFInFile {
 
         LOGGER.info(FL_MARKER, "File loading finished.");
         try {
-            FileUtils.writeStringToFile(file, builder.toString());
+            FileUtils.writeStringToFile(file, builder.toString(), "UTF-8", false);
         } catch (IOException e) {
             e.printStackTrace();
         }
