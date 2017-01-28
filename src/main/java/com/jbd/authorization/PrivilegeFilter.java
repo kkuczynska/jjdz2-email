@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = {"/App/AdminConsole.jsp"})
+@WebFilter(urlPatterns = {"App/AdminConsole.jsp"})
 public class PrivilegeFilter implements Filter {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PrivilegeFilter.class);
     private static final Marker MARKER = MarkerFactory.getMarker("PrivilegeFilter");
