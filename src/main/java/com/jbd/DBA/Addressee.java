@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@NamedQuery(name = "Addressee.getAll", query = "SELECT a FROM Addressee a")
 public class Addressee implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

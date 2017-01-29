@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @SessionScoped
 public class ManageUser implements Serializable {
@@ -77,6 +78,22 @@ public class ManageUser implements Serializable {
         LOGGER.info(MARKER, "Collected data form_details");
         return form_details;
     }
+
+    @Transactional
+    public void saveAddressee(Addressee addressee) {
+        entityManager.persist(addressee);
+        LOGGER.info(MARKER, "Collected data addressee");
+    }
+
+    public List<Addressee> getAllAddressee() {
+        List<Addressee> addresseeList = new ArrayList<>();
+        TypedQuery<Addressee> query = entityManager.createNamedQuery("Addressee.getAll", Addressee.class);
+        addresseeList = query.getResultList();
+        LOGGER.debug(MARKER, "All addressee list: " + addresseeList);
+        return addresseeList;
+    }
+
+
 
 
 }
