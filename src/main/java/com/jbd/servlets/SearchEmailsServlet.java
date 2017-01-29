@@ -1,12 +1,15 @@
 package com.jbd.servlets;
 
 import com.jbd.*;
+import com.jbd.DBA.Addressee;
+import com.jbd.DBA.ManageUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -44,6 +47,9 @@ public class SearchEmailsServlet extends HttpServlet {
     FinalEmailsSet finalEmailsSet;
     @EJB
     DisplayPhoneNumbers displayPhoneNumbers;
+
+    @Inject
+    ManageUser manageUser;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
@@ -121,6 +127,16 @@ public class SearchEmailsServlet extends HttpServlet {
             req.setAttribute("displayNumbers", resultMap);
             LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
         }
+
+
+        for (String s : searchCriteria.getEmail()) {
+            Addressee addr = new Addressee();
+            addr.setAddressee(s);
+            manageUser.saveAddressee(addr);
+        }
+
+
+        searchCriteria.getEmail();
 
         req.setAttribute("emailFile", emailPath);
         req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
