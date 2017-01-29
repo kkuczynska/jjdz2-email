@@ -6,6 +6,7 @@
         <script type="text/javascript" src="LogoutFB.js"></script>
         <script type="text/javascript" src="count.js"></script>
         <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+        <meta charset="UTF-8">
     </head>
 <body class="body">
     <div class="header">
@@ -19,9 +20,11 @@
             <button class="btn btn-primary btn-xs" onclick="Logout()">
                 <fmt:message bundle="${msg}" key="logout"/></button>
         </div>
-        <div class="col-md-3" id="gmailUnreadMessages">
-            <fmt:message bundle="${msg}" key="youGot"/> <span id="count"></span>
-                <fmt:message bundle="${msg}" key="unreadMessages"/>
+        <div class="col-md-3" id="gmailUnreadMessages" >
+            <div>
+                <span class="glyphicon glyphicon-envelope"></span>
+                <fmt:message bundle="${msg}" key="youGot"/> <span id="count"></span>
+            </div>
         </div>
     </div>
 </body>
