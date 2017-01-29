@@ -23,7 +23,7 @@ public class SetLinuxLFInFile {
             fr = new FileReader(file);
         } catch (FileNotFoundException e) {
             LOGGER.error(FL_MARKER, "Failed during opening.");
-            System.exit(1);
+//            System.exit(1);
         }
 
         BufferedReader bfr = new BufferedReader(fr);
