@@ -94,6 +94,13 @@ public class SearchCriteria {
     }
 
     public String dateToDisplayInFrontEnd(String date) {
-        return date.substring(0, 10);
+        String dateParsed = "";
+
+        if(!(SearchCriteriaValidator.DEFAULT_STARTDATE.equalsIgnoreCase(date) ||
+                SearchCriteriaValidator.DEFAULT_ENDDATE.equalsIgnoreCase(date))) {
+            dateParsed = date.substring(0, 10);
+        }
+
+        return dateParsed;
     }
 }

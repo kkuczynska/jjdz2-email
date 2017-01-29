@@ -11,6 +11,7 @@
     <link href="resources/css.css" rel="stylesheet" type="text/css">
     <script src="resources/jquery.js"></script>
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <script src="resources/bootstrap/js/bootstrap-filestyle.min.js"></script>
 </head>
 <body class="body">
 <jsp:directive.include file="header.jsp"/>
@@ -22,13 +23,11 @@
     </div>
     <div class="emailsSearch">
         <div class="col-md-4">
-            <form method="post" action="emails">
+            <form method="post" action="emails" enctype="multipart/form-data">
                 <span class="requiredEmailPath">*</span>
-                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="filePath"/>" name="emailPath" id="email"
-                       value="${emailFile}">
-                <span>
-                    ${noEmailPathGivenErrorMessage}
-                </span><br>
+                <input type="file" accept=".mbox,.eml" class="filestyle" name="emailPath" id="fileUpload"
+                    data-buttonBefore="true" data-buttonName="btn-info" data-buttonText="<fmt:message bundle="${msg}" key="browse"/>"
+                    data-iconName="glyphicon glyphicon-upload"  data-placeholder="<fmt:message bundle="${msg}" key="chooseFile"/>"> <br>
                 <span class="multivalueField">**</span>
                 <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="emailaddr"/>" name="email"
                        value="${emails}"><br>

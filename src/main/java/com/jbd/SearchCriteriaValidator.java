@@ -16,6 +16,8 @@ public class SearchCriteriaValidator {
 
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;
+    public static final String DEFAULT_ENDDATE = "9999-12-12 00:00";
+    public static final String DEFAULT_STARTDATE = "1111-01-01 00:00";
 
     private static final String DATE_PATTERN = "([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9]) ([0-9]{2}):([0-9]{2})";
     private static DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm");
@@ -68,7 +70,7 @@ public class SearchCriteriaValidator {
 
     private static boolean datePatternMatching(String date) {
         boolean hasCorrectPattern = true;
-        if (!("9999-12-12 00:00".equals(date) || "1111-01-01 00:00".equals(date))) {
+        if (!(DEFAULT_ENDDATE.equals(date) || DEFAULT_STARTDATE.equals(date))) {
             boolean matches = Pattern.matches(DATE_PATTERN, date);
             if (matches == false) {
                 hasCorrectPattern = false;

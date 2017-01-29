@@ -9,21 +9,30 @@ import org.slf4j.MarkerFactory;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 @WebServlet(urlPatterns = "emails")
+@MultipartConfig
 public class SearchEmailsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchEmailsServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchEmailsServlet");
+
+    private static final String FILE_UPLOAD_PATH = "src/main/resources/temporary";
 
     @EJB
     SearchCriteria searchCriteria;
@@ -47,9 +56,38 @@ public class SearchEmailsServlet extends HttpServlet {
         searchCriteria.setEndDate(req.getParameter("endDate"));
         LOGGER.info(MARKER, "Set value for end date field.");
         searchCriteria.setKeywords(req.getParameter("keywords"));
-        LOGGER.info(MARKER, "Set value for keywords field.");
 
-        String emailPath = req.getParameter("emailPath");
+        LOGGER.info(MARKER, "Set value for keywords field.");
+        boolean newPah = new File(FILE_UPLOAD_PATH).mkdir();
+        File uploads = new File(FILE_UPLOAD_PATH);
+
+        LOGGER.info(MARKER, "Set directory for uploads");
+        Part filePart = null;
+        try {
+            filePart = req.getPart("emailPath");
+        } catch (IOException e) {
+            LOGGER.debug(MARKER, "Caught IOException: " + e);
+            e.printStackTrace();
+        } catch (ServletException e) {
+            LOGGER.debug(MARKER, "Caught ServletException: " + e);
+            e.printStackTrace();
+        }
+
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        LOGGER.info(MARKER, "Name of the uploaded file has been saved: " + fileName);
+        File file = null;
+        try {
+            file = new File(uploads, fileName);
+            try (InputStream fileContent = filePart.getInputStream();) {
+                Files.copy(fileContent, file.toPath());
+                LOGGER.info(MARKER, "File has been saved to default directory: " + FILE_UPLOAD_PATH);
+            }
+        } catch (IOException e) {
+            LOGGER.debug(MARKER, "Caught IOException: " + e);
+            e.printStackTrace();
+        }
+
+        String emailPath = FILE_UPLOAD_PATH + "/" + fileName;
         LOGGER.info(MARKER, "Set value for emailPath.");
         if (("".equals(emailPath))) {
             req.setAttribute("emailsFound",
@@ -100,6 +138,13 @@ public class SearchEmailsServlet extends HttpServlet {
         } catch (IOException e) {
             LOGGER.debug(MARKER, "Caught IOException " + e);
             e.printStackTrace();
+        }
+
+        file.delete();
+        if (!file.exists()) {
+            LOGGER.info(MARKER, "File " + fileName + " has been deleted from directory " + FILE_UPLOAD_PATH);
+        } else {
+            LOGGER.debug(MARKER, "File " + fileName + " could not be deleted from directory " + FILE_UPLOAD_PATH);
         }
     }
 }
