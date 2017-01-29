@@ -6,7 +6,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class PathGetterTest {
     private PathGetter pg = new PathGetter();
@@ -32,6 +34,6 @@ public class PathGetterTest {
 
     @Test
     public void pathToDirectoryReturnsAllFilesInIt() {
-        assertEquals(pathToFile, pg.createFileListFromPath(pathToDirectory).get(2));
+        assertThat(pg.createFileListFromPath(pathToDirectory).contains(pathToFile), is(true));
     }
 }
