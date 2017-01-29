@@ -1,10 +1,10 @@
-package com.jbd.Authorization;
+package com.jbd.authorization;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(LogoutServlet.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(LogoutServlet.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("LogoutServlet");
     @Inject
     SessionData sessionData;
 
@@ -27,16 +27,15 @@ public class LogoutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         sessionData.logout();
         HttpSession session = request.getSession(false);
-        if(session != null){
+        if (session != null) {
             session.invalidate();
             fbConnection.clearAccessToken();
             System.out.println(sessionData.toString());
-            LOGGER.info("User has been logout");
-        }
-        else
-            LOGGER.info("No active session!");
+            LOGGER.info(MARKER, "User has been logout");
+        } else
+            LOGGER.info(MARKER, "No active session!");
 
-        response.sendRedirect("/jbdee/App/Bye.jsp");
+        response.sendRedirect("/jbdee/index.jsp");
 
     }
 }

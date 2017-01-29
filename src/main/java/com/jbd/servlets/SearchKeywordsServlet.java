@@ -1,8 +1,10 @@
 package com.jbd.servlets;
 
+
 import com.jbd.DBA.Form;
 import com.jbd.DBA.Form_Details;
 import com.jbd.DBA.ManageUser;
+
 import com.jbd.KeywordsFinder.Keywords;
 import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
 import org.slf4j.Logger;
@@ -30,7 +32,7 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchKeywordsServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
-    private int counter = 1;
+    private int questionnaireCounter = 1;
 
     @EJB
     Keywords keywords;
@@ -38,7 +40,6 @@ public class SearchKeywordsServlet extends HttpServlet {
     KeywordsQuestionsMap keywordsQuestionsMap;
     @Inject
     ManageUser manageUser;
-
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
 
@@ -61,11 +62,6 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
-        System.out.println("q0: " + req.getParameter("q0"));
-        System.out.println("q1: " + req.getParameter("q1"));
-        System.out.println("q2: " + req.getParameter("q2"));
-        System.out.println("q3: " + req.getParameter("q3"));
-        System.out.println("qqqqqq5!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!: " + req.getParameter("qq5"));
 
         for (int questionIndex = 0;
              questionIndex < keywordsQuestionsMap.getQuestionsMap().size(); questionIndex++) {
@@ -74,6 +70,9 @@ public class SearchKeywordsServlet extends HttpServlet {
             if ("yes".equalsIgnoreCase(req.getParameter(QUESTION + "" + String.valueOf(questionIndex)))) {
                 LOGGER.info(MARKER, "parameter: " + QUESTION + "" + String.valueOf(questionIndex));
                 answer = "1";
+                req.setAttribute("checked" + QUESTION + "" + String.valueOf(questionIndex) + "yes", "checked");
+            } else if ("no".equalsIgnoreCase(req.getParameter(QUESTION + "" + String.valueOf(questionIndex)))) {
+                req.setAttribute("checked" + QUESTION + "" + String.valueOf(questionIndex) + "no", "checked");
             }
             keywords.gatherAnswers(answer);
             LOGGER.info(MARKER, "Noted user response: " + answer);
@@ -89,29 +88,28 @@ public class SearchKeywordsServlet extends HttpServlet {
         req.setAttribute("questions", keywordsQuestionsMap.getQuestionsMap());
         LOGGER.info(MARKER, "Set JSP attribute \"questions\" with keywords questionnaire.");
 
-        if (req.getParameter("q0") != null && req.getParameter("q1") != null && req.getParameter("q2") != null && req.getParameter("q2") != null) {
-            //For save to DB
+        if (req.getParameter("q0") != null && req.getParameter("q1") != null
+                && req.getParameter("q2") != null && req.getParameter("q2") != null) {
             Form form = new Form();
-            String name = "Question Form " + counter;
+            String name = "Question Form " + questionnaireCounter;
             form.setName(name);
             form.setCreationTime(LocalDateTime.now());
             LOGGER.info("Created new form: " + form.getName());
             manageUser.saveForm(form);
-            counter++;
+            questionnaireCounter++;
 
             //Connecting details with form
             Form forConnectingWithDetails = new Form();
             forConnectingWithDetails = manageUser.getFormByName(name);
             List<String> questions = keywords.getQuestionName();
 
-            for (int i = 0; i < questions.size(); i++) {
+            for (int questionIndex = 0; questionIndex < questions.size(); questionIndex++) {
                 Form_Details form_details = new Form_Details();
-                form_details.setQuestion(questions.get(i));
-                form_details.setResponse(req.getParameter("q" + i));
+                form_details.setQuestion(questions.get(questionIndex));
+                form_details.setResponse(req.getParameter("q" + questionIndex));
                 form_details.setForm(forConnectingWithDetails);
                 LOGGER.info("Created new form_details:");
                 manageUser.saveFormDetails(form_details);
-
             }
         }
 
@@ -128,6 +126,7 @@ public class SearchKeywordsServlet extends HttpServlet {
         }
         keywords.getKeywordsSet().clear();
         LOGGER.debug(MARKER, "Cleared keywords set. Size: " + keywords.getKeywordsSet().size());
+        keywords.clearAnswersList();
+        LOGGER.debug(MARKER, "Cleared answers list. Size: " + keywords.getNumberOfAnswers());
     }
-
 }

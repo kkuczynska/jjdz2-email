@@ -92,4 +92,8 @@ public class SearchCriteria {
         }
         return parsedList;
     }
+
+    public String dateToDisplayInFrontEnd(String date) {
+        return date.substring(0, 10);
+    }
 }

@@ -1,33 +1,34 @@
-package com.jbd.Authorization;
+package com.jbd.authorization;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
 @WebFilter(urlPatterns = {"/App/*"})
 public class AuthorizationFilter implements Filter {
-    private static final Logger LOGGER = LogManager.getLogger(AuthorizationFilter.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AuthorizationFilter.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("AuthorizationFilter");
 
-    @Inject SessionData sessionData;
+    @Inject
+    SessionData sessionData;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        if(!sessionData.isLogged()){
-            LOGGER.info("User is not Logged to access this page");
+        if (!sessionData.isLogged()) {
+            LOGGER.info(MARKER, "User is not Logged to access this page");
             ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/LoginFB.jsp");
             return;
         }
 
         servletRequest.setAttribute("sessionData", sessionData);
-        filterChain.doFilter(servletRequest,servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
 
 
     }
