@@ -20,10 +20,15 @@
             <button class="btn btn-primary btn-xs" onclick="Logout()">
                 <fmt:message bundle="${msg}" key="logout"/></button>
         </div>
-        <div class="col-md-3" id="gmailUnreadMessages" >
-            <div>
+        <div class="col-md-3" id="gmailUnreadMessages">
+            <div id="numberOfGmails" style="display: none">
                 <span class="glyphicon glyphicon-envelope"></span>
                 <fmt:message bundle="${msg}" key="youGot"/> <span id="count"></span>
+            </div>
+            <div>
+                <button id="authorise-button" style="display: inline" onclick="checkAuth()">
+                    Authorize
+                </button>
             </div>
         </div>
     </div>
