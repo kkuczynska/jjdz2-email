@@ -1,8 +1,9 @@
 package com.jbd.DBA;
 
-import com.jbd.Authorization.SessionData;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.jbd.authorization.SessionData;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
@@ -16,7 +17,8 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/App/update")
 public class UpdateServlet extends HttpServlet {
-    private static final Logger LOGGER = LogManager.getLogger(UpdateServlet.class);
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UpdateServlet.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("UpdateServlet");
 
     @Inject
     ManageUser manageUser;
@@ -37,15 +39,15 @@ public class UpdateServlet extends HttpServlet {
                 String privileged = user.getPrivilege();
                 if (privileged.equals("Admin")) {
                     user.setPrivilege("local");
-                    LOGGER.info("Set privilege to: local");
+                    LOGGER.info(MARKER, "Set privilege to: local");
                 } else {
                     user.setPrivilege("Admin");
-                    LOGGER.info("Set privilege to: Admin");
+                    LOGGER.info(MARKER, "Set privilege to: Admin");
                 }
                 manageUser.updateUser(user);
             }
         }
-        LOGGER.info("No parameters in request");
+        LOGGER.info(MARKER, "No parameters in request");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/App/AdminConsole.jsp");
         dispatcher.forward(req, resp);
