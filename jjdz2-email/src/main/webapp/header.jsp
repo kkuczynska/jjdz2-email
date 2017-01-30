@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
-<script type="text/javascript" src="LogoutFB.js">
+<script type="text/javascript" src="App/LogoutFB.js">
 </script>
 <div class="header">
     <div class="col-md-6" name="headerText">
