@@ -1,5 +1,6 @@
 .idea
 jjdz2-email.iml
+jjdz2-email(1).iml
 target
 src/main/mail.iml
 logs
