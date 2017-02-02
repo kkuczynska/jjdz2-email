@@ -9,7 +9,7 @@ public class Form_Details implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_form_details")
     private Long id;
-    private String question;
+    private int question;
     private String response;
     @ManyToOne
     @JoinColumn(name = "form_id")
@@ -40,11 +40,11 @@ public class Form_Details implements Serializable {
         this.form = form;
     }
 
-    public String getQuestion() {
+    public int getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
+    public void setQuestion(int question) {
         this.question = question;
     }
 
