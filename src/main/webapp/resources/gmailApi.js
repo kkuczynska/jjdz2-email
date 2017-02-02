@@ -1,6 +1,6 @@
 // Your Client ID can be retrieved from your project in the Google
 // Developer Console, https://console.developers.google.com
-var CLIENT_ID = 'aa569832515580-0fdmssh0p1n5dafr11apkvf2mh61gero.apps.googleusercontent.com';
+var CLIENT_ID = '569832515580-0fdmssh0p1n5dafr11apkvf2mh61gero.apps.googleusercontent.com';
 
 var SCOPES = ['https://www.googleapis.com/auth/gmail.readonly'];
 
@@ -15,10 +15,25 @@ function checkAuth() {
 
 function handleAuthResult(authResult) {
     var numberOfGmails = document.getElementById("numberOfGmails");
+    var authorize = document.getElementById("authorize");
     if (authResult && !authResult.error) {
         numberOfGmails.style.display = 'inline';
+        authorize.style.display = 'none';
         loadGmailApi();
     }
+    else {
+        authorize.style.display = 'inline';
+        numberOfGmails.style.display = 'none';
+    }
+}
+
+function handleAuthClick(event) {
+    gapi.auth.authorize({
+        client_id : CLIENT_ID,
+        scope : SCOPES,
+        immediate : false
+        }, handleAuthResult);
+    return false;
 }
 
 function loadGmailApi() {
