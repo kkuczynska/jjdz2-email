@@ -25,11 +25,6 @@
                 <span class="glyphicon glyphicon-envelope"></span>
                 <fmt:message bundle="${msg}" key="youGot"/> <span id="count"></span>
             </div>
-            <div>
-                <button id="authorise-button" style="display: inline" onclick="checkAuth()">
-                    Authorize
-                </button>
-            </div>
         </div>
     </div>
 </body>

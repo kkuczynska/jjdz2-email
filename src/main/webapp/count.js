@@ -14,15 +14,10 @@ function checkAuth() {
 }
 
 function handleAuthResult(authResult) {
-    var authoriseButton = document.getElementById("authorise-button");
     var numberOfGmails = document.getElementById("numberOfGmails");
     if (authResult && !authResult.error) {
-        authoriseButton.style.display = 'none';
         numberOfGmails.style.display = 'inline';
         loadGmailApi();
-    } else if(authResult && authResult.error) {
-        authoriseButton.style.display = 'inline';
-        numberOfGmails.style.display = 'none';
     }
 }
 
