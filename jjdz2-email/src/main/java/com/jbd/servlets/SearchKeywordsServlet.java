@@ -102,10 +102,12 @@ public class SearchKeywordsServlet extends HttpServlet {
             Form forConnectingWithDetails = new Form();
             forConnectingWithDetails = manageUser.getFormByName(name);
             List<String> questions = keywords.getQuestionName();
+            int questionNumber =1;
 
             for (int questionIndex = 0; questionIndex < questions.size(); questionIndex++) {
                 Form_Details form_details = new Form_Details();
-                form_details.setQuestion(questions.get(questionIndex));
+                //form_details.setQuestion(questions.get(questionIndex));
+                form_details.setQuestion(questionNumber++);
                 form_details.setResponse(req.getParameter("q" + questionIndex));
                 form_details.setForm(forConnectingWithDetails);
                 LOGGER.info("Created new form_details:");
