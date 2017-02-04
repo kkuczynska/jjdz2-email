@@ -32,6 +32,7 @@
     </properties>
 
     <dependencies>
+        <!--mysql-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -60,6 +61,7 @@
                 <configuration>
                     <username>${wildfly.adminUsername}</username>
                     <password>${wildfly.adminPassword}</password>
+                    <port>9991</port>
                     <java-opts>
                         <java-opt>-Djboss.socket.binding.port-offset=1</java-opt>
                     </java-opts>
