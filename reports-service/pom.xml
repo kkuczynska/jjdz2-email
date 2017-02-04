@@ -4,38 +4,53 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>com.infoshare</groupId>
+        <artifactId>jjdz2-email</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <groupId>com.infoshare</groupId>
-    <artifactId>jjdz2-email</artifactId>
+    <artifactId>reports-api</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>ws: parent</name>
+    <packaging>war</packaging>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <failOnMissingWebXml>false</failOnMissingWebXml>
-
-        <wildfly.version>10.1.0.Final</wildfly.version>
 
         <wildfly.adminUsername>admin</wildfly.adminUsername>
         <wildfly.adminPassword>admin</wildfly.adminPassword>
         <wildfly.add-user>${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false</wildfly.add-user>
     </properties>
 
-    <modules>
-        <module>jjdz2-email</module>
-        <module>reports-service</module>
-    </modules>
-
     <build>
+        <finalName>reporting</finalName>
         <plugins>
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>1.1.0.Alpha11</version>
+                <configuration>
+                    <username>${wildfly.adminUsername}</username>
+                    <password>${wildfly.adminPassword}</password>
+                    <java-opts>
+                        <java-opt>-Djboss.socket.binding.port-offset=1</java-opt>
+                    </java-opts>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
         </plugins>
     </build>
+
 
 </project>
