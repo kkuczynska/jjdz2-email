@@ -1,4 +1,4 @@
-package database;
+package com.jbd.database;
 
 import javax.persistence.*;
 import java.io.Serializable;
