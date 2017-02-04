@@ -1,5 +1,6 @@
 .idea
 report-api.iml
+reports-api.iml
 target
 src/main/mail.iml
 logs
