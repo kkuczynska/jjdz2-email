@@ -58,7 +58,7 @@ public class SearchEmailsServlet extends HttpServlet {
         searchCriteria.setKeywords(req.getParameter("keywords"));
 
         LOGGER.info(MARKER, "Set value for keywords field.");
-        boolean newPah = new File(FILE_UPLOAD_PATH).mkdir();
+        new File(FILE_UPLOAD_PATH).mkdir();
         File uploads = new File(FILE_UPLOAD_PATH);
 
         LOGGER.info(MARKER, "Set directory for uploads");
