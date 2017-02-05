@@ -7,7 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="../resources/css.css" rel="stylesheet" type="text/css">
 </head>
-<body>
+<body class="body">
 <jsp:directive.include file="../header.jsp"/>
 <div id="container">
     <script type="text/javascript" src="LogoutFB.js">
