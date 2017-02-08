@@ -17,20 +17,30 @@
         <p>Add new admins or edit existing one</p>
         <p>Welcome! ${sessionData.username} </p>
     </div>
-
     <div class="underJumbotron">
         <form method="post" action="search">
             <button class="btn btn-warning" onclick="location.href=search">Search</button>
         </form>
         <p>Add new admin or edit exisitng one </p>
         <form method="post" action="update">
+            <c:set var="Admin" scope="session" value="Admin"/>
+            <c:set var="Local" scope="session" value="Local User"/>
+            <c:set var="Priv" scope="session" value="0"/>
+
             <ul>
                 <c:forEach items="${userList}" var="user">
-                    <li> ${user.id} . ${user.username} - ${user.privilege}<input type="checkbox" name="isPrivileged"
+                    <c:if test="${user.privilege == 1}">
+                    <li> ${user.id} . ${user.username} - ${Admin}   <input type="checkbox" name="isPrivileged"
                                                                                  value=${user.id}></li>
+                    </c:if>
+                    <c:if test="${user.privilege == 2}">
+                    <li> ${user.id} . ${user.username} - ${Local}   <input type="checkbox" name="isPrivileged"
+                                                                                        value=${user.id}></li>
+                    </c:if>
                 </c:forEach>
-                <input class="btn btn-warning" type="submit" value="Update">
-            </ul
+
+            </ul>
+            <input class="btn btn-warning" type="submit" value="Update">
         </form>
         <p>
         <form action="../index.jsp">

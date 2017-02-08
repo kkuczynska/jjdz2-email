@@ -30,26 +30,31 @@ public class UpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
-        String[] isPrivileged = req.getParameterValues("isPrivileged");
-        if (isPrivileged.length != 0) {
-            System.out.println("Privileged " + isPrivileged.toString());
-            for (int i = 0; i < isPrivileged.length; i++) {
-                SessionData user = manageUser.getUser(Long.parseLong(isPrivileged[i]));
-                String privileged = user.getPrivilege();
-                if (privileged.equals("Admin")) {
-                    user.setPrivilege("local");
-                    LOGGER.info(MARKER, "Set privilege to: local");
-                } else {
-                    user.setPrivilege("Admin");
-                    LOGGER.info(MARKER, "Set privilege to: Admin");
+        try {
+            String[] isPrivileged = req.getParameterValues("isPrivileged");
+            if (isPrivileged.length != 0) {
+                System.out.println("Privileged " + isPrivileged.toString());
+                for (int i = 0; i < isPrivileged.length; i++) {
+                    SessionData user = manageUser.getUser(Long.parseLong(isPrivileged[i]));
+                    int privileged = user.getPrivilege();
+                    if (privileged == SessionData.ADMIN) {
+                        user.setPrivilege(SessionData.LOCAL_USER);
+                        LOGGER.info(MARKER, "Set privilege to: local");
+                    } else {
+                        user.setPrivilege(SessionData.ADMIN);
+                        LOGGER.info(MARKER, "Set privilege to: Admin");
+                    }
+                    manageUser.updateUser(user);
                 }
-                manageUser.updateUser(user);
             }
+            LOGGER.info(MARKER, "No parameters in request");
         }
-        LOGGER.info(MARKER, "No parameters in request");
-
+        catch (NullPointerException e){
+            e.printStackTrace();
+            System.out.println("Brak parametrow");
+        }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/App/AdminConsole.jsp");
+        req.setAttribute("null", "No parameters!");
         dispatcher.forward(req, resp);
 
 
