@@ -20,6 +20,8 @@ import java.util.Locale;
 public class SessionData implements Serializable {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SessionData.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
+    public static final int ADMIN = 1;
+    public static final int LOCAL_USER = 2;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +30,7 @@ public class SessionData implements Serializable {
     private boolean isLogged = false;
     private String username;
     private String usermail;
-    private String privilege;
+    private int privilege;
     @Transient
     private LocalDateTime loginTime;
     @Transient
@@ -85,11 +87,11 @@ public class SessionData implements Serializable {
         this.loginTime = loginTime;
     }
 
-    public String getPrivilege() {
+    public int getPrivilege() {
         return privilege;
     }
 
-    public void setPrivilege(String privilege) {
+    public void setPrivilege(int privilege) {
         this.privilege = privilege;
     }
 
@@ -101,16 +103,16 @@ public class SessionData implements Serializable {
         this.locale = locale;
     }
 
-    public void login(String code, String username, String usermail, String privilege) {
+    public void login(String code, String username, String usermail, int privilege) {
         if (!code.equals("")) {
             this.isLogged = true;
             this.username = username;
             this.usermail = usermail;
             this.code = code;
             this.loginTime = LocalDateTime.now();
-            if (privilege.equals(null)) {
-                this.privilege = "local";
-            } else if (privilege.equals("local")) {
+            if (privilege != ADMIN || privilege != LOCAL_USER) {
+                this.privilege = LOCAL_USER;
+            } else if (privilege == LOCAL_USER) {
                 this.privilege = privilege;
             } else
                 this.privilege = privilege;
