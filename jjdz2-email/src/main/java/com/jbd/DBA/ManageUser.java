@@ -11,9 +11,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @SessionScoped
 public class ManageUser implements Serializable {
@@ -92,8 +90,5 @@ public class ManageUser implements Serializable {
         LOGGER.debug(MARKER, "All addressee list: " + addresseeList);
         return addresseeList;
     }
-
-
-
 
 }

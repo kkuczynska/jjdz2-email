@@ -30,6 +30,17 @@
     </div>
 </div>
 
+<form method="get" action="simpleReport">
+<div>
+    <!--<span class="reportsMsg">${phoneNumbersFound}</span> <br/>-->
+    <ol>
+        <c:forEach items="${displayReport}" var="report">
+        <li> ${report.key} || ${report.value}
+            </c:forEach>
+    </ol>
+</div>
+</form>
+
 <jsp:directive.include file="footer.jsp"/>
 </body>
 </html>

@@ -36,6 +36,7 @@ public class SearchEmailsServlet extends HttpServlet {
     private static final Marker MARKER = MarkerFactory.getMarker("SearchEmailsServlet");
 
     private static final String FILE_UPLOAD_PATH = "src/main/resources/temporary";
+    public static final int MINIMUM_EMAIL_ADDRESS_LENGTH = 3;
 
     @EJB
     SearchCriteria searchCriteria;
@@ -130,11 +131,12 @@ public class SearchEmailsServlet extends HttpServlet {
 
 
         for (String s : searchCriteria.getEmail()) {
-            Addressee addr = new Addressee();
-            addr.setAddressee(s);
-            manageUser.saveAddressee(addr);
+            if(s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
+                Addressee addr = new Addressee();
+                addr.setAddressee(s);
+                manageUser.saveAddressee(addr);
+            }
         }
-
 
         searchCriteria.getEmail();
 
