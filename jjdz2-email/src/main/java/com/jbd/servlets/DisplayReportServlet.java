@@ -32,7 +32,7 @@ public class DisplayReportServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOGGER.info(MARKER, "User requested report");
+        LOGGER.trace(MARKER, "User requested report");
         toDisplay = new TreeMap<>();
         fromDatabase = manageUser.getAllAddressee();
         toDisplay = fromDatabase
@@ -42,6 +42,11 @@ public class DisplayReportServlet extends HttpServlet{
         toDisplay.put("test",6L);
 
         req.setAttribute("displayReport", toDisplay);
+
+        LOGGER.trace("Keys: " + toDisplay.keySet().size());
+        LOGGER.trace(MARKER, "Keys: " + toDisplay.keySet().size());
+
+        System.out.println("KEYS!!!!!! " + toDisplay.keySet().size());
 
         LOGGER.info(MARKER, "report");
 

@@ -33,11 +33,14 @@
 <form method="get" action="simpleReport">
 <div>
     <!--<span class="reportsMsg">${phoneNumbersFound}</span> <br/>-->
+    <span>Keys: ${displayReport.keySet().size}</span>
     <ol>
         <c:forEach items="${displayReport}" var="report">
         <li> ${report.key} || ${report.value}
             </c:forEach>
     </ol>
+
+    <input type="submit" value="CLICK ME MFC">
 </div>
 </form>
 
