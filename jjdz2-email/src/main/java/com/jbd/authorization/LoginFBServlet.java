@@ -38,7 +38,7 @@ public class LoginFBServlet extends HttpServlet {
     private SessionData userFromDatabase;
     private List<SessionData> usersFromDatabase;
     private int counter = 0;
-    String privilege = "local";
+    int privilege = 2;
     private boolean isNotInDB;
 
     public void doGet(HttpServletRequest req, HttpServletResponse res)
@@ -63,7 +63,7 @@ public class LoginFBServlet extends HttpServlet {
             SessionData adminUser = new SessionData();
             adminUser.setUsermail("marbar1812@gmail.com");
             adminUser.setUsername("Marcin Bartoszek");
-            adminUser.setPrivilege("Admin");
+            adminUser.setPrivilege(SessionData.ADMIN);
             manageUser.saveUser(adminUser);
             LOGGER.info(MARKER, "Added admin user");
             counter += 1;
@@ -72,14 +72,14 @@ public class LoginFBServlet extends HttpServlet {
         for (SessionData user : usersFromDatabase) {
             String userName = fbProfileData.get("first_name") + " " + fbProfileData.get("last_name");
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
-                if (user.getPrivilege().equals("Admin")) {
-                    privilege = "Admin";
+                if (user.getPrivilege() == SessionData.ADMIN) {
+                    privilege = SessionData.ADMIN;
                 } else
-                    privilege = "local";
+                    privilege = SessionData.LOCAL_USER;
                 isNotInDB = false;
                 break;
             } else
-                privilege = "local";
+                privilege = SessionData.LOCAL_USER;
             isNotInDB = true;
         }
 
@@ -106,7 +106,7 @@ public class LoginFBServlet extends HttpServlet {
 
     }
 
-    public SessionData createUserToDB(String userName, String userMail, String privilege) {
+    public SessionData createUserToDB(String userName, String userMail, int privilege) {
         SessionData user = new SessionData();
         user.setUsername(userName);
         user.setUsermail(userMail);

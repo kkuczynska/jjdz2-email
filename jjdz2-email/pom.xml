@@ -62,12 +62,26 @@
             <artifactId>json</artifactId>
             <version>20160810</version>
         </dependency>
-        <!--facebook-->
+
+        <!-- for jee -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>org.facebook4j</groupId>
             <artifactId>facebook4j-core</artifactId>
             <version>[2.4,)</version>
         </dependency>
+        <!--FBRest-->
         <dependency>
             <groupId>com.restfb</groupId>
             <artifactId>restfb</artifactId>
@@ -79,38 +93,47 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version>
         </dependency>
+        <!-- slf4j log4j binder -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-slf4j-impl</artifactId>
             <version>2.7</version>
         </dependency>
-        <!--mail-->
+
+        <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
         <dependency>
             <groupId>javax.mail</groupId>
             <artifactId>javax.mail-api</artifactId>
             <version>1.5.6</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.5.6</version>
         </dependency>
+        <!-- mime4j test-->
+        <!-- https://mvnrepository.com/artifact/org.apache.james/apache-mime4j-dom -->
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-mime4j-dom</artifactId>
             <version>0.8.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.apache.james/apache-mime4j-mbox-iterator -->
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-mime4j-mbox-iterator</artifactId>
             <version>0.8.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
-        <!-- JEE -->
+
+
+        <!-- for jee -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
@@ -133,6 +156,12 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-java8</artifactId>
             <version>5.2.6.Final</version>
+            <!--<exclusions>-->
+                <!--<exclusion>-->
+                    <!--<groupId>dom4j</groupId>-->
+                    <!--<artifactId>dom4j</artifactId>-->
+                <!--</exclusion>-->
+            <!--</exclusions>-->
         </dependency>
         <dependency>
             <groupId>dom4j</groupId>
@@ -183,7 +212,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>

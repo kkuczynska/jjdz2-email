@@ -10,7 +10,7 @@
     <link href="resources/css.css" rel="stylesheet" type="text/css">
     <script src="js/bootstrap.min.js"></script>
 </head>
-<body>
+<body class="body">
 <jsp:directive.include file="header.jsp"/>
 <div id="container">
     <script type="text/javascript" src="App/LogoutFB.js">
