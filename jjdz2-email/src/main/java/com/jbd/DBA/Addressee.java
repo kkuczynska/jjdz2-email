@@ -4,9 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@NamedQuery(name = "Addressee.getAll", query = "SELECT a.addressee FROM Addressee a GROUP BY a.addressee")
-//@NamedQuery(name = "Addressee.getAll", query = "SELECT a.addressee, COUNT(a) FROM Addressee a GROUP BY a.addressee")
-//@NamedNativeQuery(name = "Addressee.getAll", query = "SELECT addressee, COUNT(*) AS 'count' FROM Addressee GROUP BY addressee")
+@NamedQuery(name = "Addressee.getAll", query = "SELECT a.addressee FROM Addressee a")
 public class Addressee implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

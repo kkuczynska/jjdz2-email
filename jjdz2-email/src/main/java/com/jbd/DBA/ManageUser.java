@@ -83,9 +83,9 @@ public class ManageUser implements Serializable {
         LOGGER.info(MARKER, "Collected data addressee");
     }
 
-    public List<Addressee> getAllAddressee() {
-        List<Addressee> addresseeList = new ArrayList<>();
-        TypedQuery<Addressee> query = entityManager.createNamedQuery("Addressee.getAll", Addressee.class);
+    public List<String> getAllAddressee() {
+        List<String> addresseeList = new ArrayList<>();
+        TypedQuery<String> query = entityManager.createNamedQuery("Addressee.getAll", String.class);
         addresseeList = query.getResultList();
         LOGGER.debug(MARKER, "All addressee list: " + addresseeList);
         return addresseeList;

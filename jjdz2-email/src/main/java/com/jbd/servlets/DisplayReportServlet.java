@@ -25,7 +25,7 @@ public class DisplayReportServlet extends HttpServlet{
     private static final Logger LOGGER = LoggerFactory.getLogger(DisplayReportServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("DisplayReportServlet");
     private Map<String, Long> toDisplay;
-    private List<Addressee> fromDatabase;
+    private List<String> fromDatabase;
 
     @Inject
     ManageUser manageUser;
@@ -37,7 +37,7 @@ public class DisplayReportServlet extends HttpServlet{
         fromDatabase = manageUser.getAllAddressee();
         toDisplay = fromDatabase
                 .stream()
-                .collect(Collectors.groupingBy(Addressee::getAddressee, Collectors.counting()));
+                .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
         toDisplay.put("test",6L);
 
