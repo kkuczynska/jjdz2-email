@@ -13,7 +13,7 @@
         <div class="col-md-3" name="headerText">
             <fmt:message bundle="${msg}" key="jbd"/>
         </div>
-        <div class="col-md-3" id="gmailUnreadMessages">
+        <div class="col-md-2" id="gmailUnreadMessages">
             <button id="authorize" onclick="handleAuthClick()" class="btn btn-primary btn-xs" style="display: none">
                 <fmt:message bundle="${msg}" key="authorize"/>
             </button>
@@ -21,6 +21,13 @@
                 <span class="glyphicon glyphicon-envelope"></span>
                 <fmt:message bundle="${msg}" key="youGot"/> <span id="count"></span>
             </div>
+        </div>
+        <div class="col-md-1" id="simpleReport">
+            <form action="simpleReport.jsp">
+            <button id="report" class="btn btn-primary btn-xs">
+                <fmt:message bundle="${msg}" key="report"/>
+            </button>
+            </form>
         </div>
         <div class="col-md-3" id="language">
             <a href="?locale=pl" class="language"><fmt:message bundle="${msg}" key="english"/></a>
