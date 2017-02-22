@@ -1,6 +1,5 @@
 package com.jbd.servlets;
 
-import com.jbd.DBA.Addressee;
 import com.jbd.DBA.ManageUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,24 +31,16 @@ public class DisplayReportServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOGGER.trace(MARKER, "User requested report");
+        LOGGER.info(MARKER, "User requested report.");
         toDisplay = new TreeMap<>();
         fromDatabase = manageUser.getAllAddressee();
         toDisplay = fromDatabase
                 .stream()
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
-        toDisplay.put("test",6L);
-
         req.setAttribute("displayReport", toDisplay);
 
-        LOGGER.trace("Keys: " + toDisplay.keySet().size());
-        LOGGER.trace(MARKER, "Keys: " + toDisplay.keySet().size());
-
-        System.out.println("KEYS!!!!!! " + toDisplay.keySet().size());
-
-        LOGGER.info(MARKER, "report");
-
+        LOGGER.info(MARKER, "Report ready. Displaying: " + toDisplay.size() + " records.");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/simpleReport.jsp");
         try {
@@ -61,7 +52,6 @@ public class DisplayReportServlet extends HttpServlet{
             LOGGER.debug(MARKER, "Caught IOException " + e);
             e.printStackTrace();
         }
-        //super.doGet(req, resp);
 
     }
 }
