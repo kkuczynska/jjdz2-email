@@ -34,6 +34,4 @@ public class Addressee implements Serializable{
                 ", addressee='" + addressee + '\'' +
                 '}';
     }
-
-
 }

@@ -90,5 +90,4 @@ public class ManageUser implements Serializable {
         LOGGER.debug(MARKER, "All addressee list: " + addresseeList);
         return addresseeList;
     }
-
 }

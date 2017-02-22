@@ -129,7 +129,6 @@ public class SearchEmailsServlet extends HttpServlet {
             LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
         }
 
-
         for (String s : searchCriteria.getEmail()) {
             if(s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
                 Addressee addr = new Addressee();
@@ -137,8 +136,6 @@ public class SearchEmailsServlet extends HttpServlet {
                 manageUser.saveAddressee(addr);
             }
         }
-
-        searchCriteria.getEmail();
 
         req.setAttribute("emailFile", emailPath);
         req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));

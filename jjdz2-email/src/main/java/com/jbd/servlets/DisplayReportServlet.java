@@ -39,7 +39,6 @@ public class DisplayReportServlet extends HttpServlet{
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()));
 
         req.setAttribute("displayReport", toDisplay);
-
         LOGGER.info(MARKER, "Report ready. Displaying: " + toDisplay.size() + " records.");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/simpleReport.jsp");
@@ -52,6 +51,5 @@ public class DisplayReportServlet extends HttpServlet{
             LOGGER.debug(MARKER, "Caught IOException " + e);
             e.printStackTrace();
         }
-
     }
 }
