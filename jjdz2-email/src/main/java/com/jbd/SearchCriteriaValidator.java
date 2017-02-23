@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class SearchCriteriaValidator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchCriteriaValidator.class);
-    private static final Marker SEARCHCRITERIAVALIDATOR_MARKER = MarkerFactory.getMarker("SearchCriteriaValidator");
+    private static final Marker MARKER = MarkerFactory.getMarker("SearchCriteriaValidator");
 
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;
@@ -27,31 +27,31 @@ public class SearchCriteriaValidator {
         boolean validateChars = validateUnacceptableCharsExisting(email);
         if (validateChars == false || !email.contains("@") || !email.contains(".")) {
             isEmailCorrect = false;
-            LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER, "Incorrect user input: " + email);
+            LOGGER.debug(MARKER, "Incorrect user input: " + email);
         }
         return isEmailCorrect;
     }
 
     public static boolean validateStartDate(String startDate) {
         boolean isStartdateCorrect = datePatternMatching(startDate);
-        LOGGER.info(SEARCHCRITERIAVALIDATOR_MARKER, "Validation of start date: " + startDate + "outcome: " + isStartdateCorrect);
+        LOGGER.info(MARKER, "Validation of start date: " + startDate + " outcome: " + isStartdateCorrect);
         return isStartdateCorrect;
     }
 
     public static boolean validateEndDate(String endDate) {
         boolean isEnddateCorrect = datePatternMatching(endDate);
-         if (isEnddateCorrect == true) {
-        LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
-        boolean isEndDateAfterStartDate = endDateFormatted
-                .isAfter(LocalDate.parse(SearchCriteria.getStartDate(), dateFormatter));
-        LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER,
-                "End date after start date validation, outcome: " + isEndDateAfterStartDate);
+        if (isEnddateCorrect == true) {
+            LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
+            boolean isEndDateAfterStartDate = endDateFormatted
+                    .isAfter(LocalDate.parse(SearchCriteria.getStartDate(), dateFormatter));
+            LOGGER.debug(MARKER,
+                    "End date after start date validation, outcome: " + isEndDateAfterStartDate);
 
-        if (isEndDateAfterStartDate == false) {
-            isEnddateCorrect = false;
+            if (isEndDateAfterStartDate == false) {
+                isEnddateCorrect = false;
+            }
         }
-          }
-        LOGGER.info(SEARCHCRITERIAVALIDATOR_MARKER, "Validation of end date: " + endDate + " outcome: " + isEnddateCorrect);
+        LOGGER.info(MARKER, "Validation of end date: " + endDate + " outcome: " + isEnddateCorrect);
         return isEnddateCorrect;
     }
 
@@ -62,7 +62,7 @@ public class SearchCriteriaValidator {
         for (String unacceptableChar : unacceptableChars) {
             if (validateInput.contains(unacceptableChar)) {
                 hasUnacceptableChars = false;
-                LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER, "Input contains unacceptable characters: [" + unacceptableChar + "]");
+                LOGGER.debug(MARKER, "Input contains unacceptable characters: [" + unacceptableChar + "]");
             }
         }
         return hasUnacceptableChars;
@@ -74,10 +74,10 @@ public class SearchCriteriaValidator {
             boolean matches = Pattern.matches(DATE_PATTERN, date);
             if (matches == false) {
                 hasCorrectPattern = false;
-                LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER, "Date " + date + " does not match pattern: " + DATE_PATTERN);
+                LOGGER.debug(MARKER, "Date " + date + " does not match pattern: " + DATE_PATTERN);
             } else {
                 LocalDate endDateFormatted = LocalDate.parse(date, dateFormatter);
-                LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER, "Date " + date + " does match pattern: " + DATE_PATTERN);
+                LOGGER.debug(MARKER, "Date " + date + " does match pattern: " + DATE_PATTERN);
                 hasCorrectPattern = validateDayMonthYear(endDateFormatted.getDayOfMonth(),
                         endDateFormatted.getMonthValue(), endDateFormatted.getYear());
             }
@@ -91,9 +91,9 @@ public class SearchCriteriaValidator {
                 month > MAX_MONTHS_IN_YEAR || month == 0 ||
                 year == 0) {
             isDateCorrect = false;
-            LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER, "Date is not correct: " + day + " " + month + " " + year);
+            LOGGER.debug(MARKER, "Date is not correct: " + day + " " + month + " " + year);
         } else {
-            LOGGER.debug(SEARCHCRITERIAVALIDATOR_MARKER, "Date is correct: " + day + " " + month + " " + year);
+            LOGGER.debug(MARKER, "Date is correct: " + day + " " + month + " " + year);
         }
         return isDateCorrect;
     }

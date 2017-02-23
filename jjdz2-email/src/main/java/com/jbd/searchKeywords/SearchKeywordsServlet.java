@@ -1,12 +1,10 @@
-package com.jbd.servlets;
+package com.jbd.searchKeywords;
 
 
-import com.jbd.DBA.Form;
-import com.jbd.DBA.Form_Details;
-import com.jbd.DBA.ManageUser;
+import com.jbd.database.Form;
+import com.jbd.database.Form_Details;
+import com.jbd.database.ManageUser;
 
-import com.jbd.KeywordsFinder.Keywords;
-import com.jbd.KeywordsFinder.KeywordsQuestionsMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -22,10 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.jbd.KeywordsFinder.KeywordsQuestionsMap.QUESTION;
+import static com.jbd.searchKeywords.KeywordsQuestionsMap.QUESTION;
 
 @WebServlet(urlPatterns = "keywords")
 public class SearchKeywordsServlet extends HttpServlet {

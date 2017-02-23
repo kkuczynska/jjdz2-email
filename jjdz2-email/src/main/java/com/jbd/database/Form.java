@@ -1,4 +1,4 @@
-package com.jbd.DBA;
+package com.jbd.database;
 
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.jbd.KeywordsFinder;
+package com.jbd.searchKeywords;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

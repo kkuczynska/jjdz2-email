@@ -1,4 +1,4 @@
-package com.jbd.KeywordsFinder;
+package com.jbd.searchKeywords;
 
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
