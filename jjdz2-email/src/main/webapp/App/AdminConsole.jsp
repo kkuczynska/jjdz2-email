@@ -4,7 +4,6 @@
 <head>
     <title>JBD Email Search Engine</title>
     <link rel="stylesheet" href="../resources/bootstrap/css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link href="../resources/css.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="../resources/gmailApi.js"></script>
