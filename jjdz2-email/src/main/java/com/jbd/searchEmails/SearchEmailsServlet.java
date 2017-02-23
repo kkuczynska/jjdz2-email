@@ -1,4 +1,4 @@
-package com.jbd.servlets;
+package com.jbd.searchEmails;
 
 import com.jbd.*;
 import com.jbd.DBA.Addressee;
@@ -48,6 +48,8 @@ public class SearchEmailsServlet extends HttpServlet {
     FinalEmailsSet finalEmailsSet;
     @EJB
     DisplayPhoneNumbers displayPhoneNumbers;
+    @EJB
+    PhoneNumbers phoneNumbers;
 
     @Inject
     ManageUser manageUser;
@@ -55,6 +57,10 @@ public class SearchEmailsServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
         List<Email> emails = new ArrayList<>();
+        String message = "";
+        File file = null;
+        String fileName = "";
+        Set<Email> emailSet = null;
 
         searchCriteria.setEmail(req.getParameter("email"));
         LOGGER.info(MARKER, "Set value for email field.");
@@ -63,8 +69,8 @@ public class SearchEmailsServlet extends HttpServlet {
         searchCriteria.setEndDate(req.getParameter("endDate"));
         LOGGER.info(MARKER, "Set value for end date field.");
         searchCriteria.setKeywords(req.getParameter("keywords"));
-
         LOGGER.info(MARKER, "Set value for keywords field.");
+
         new File(FILE_UPLOAD_PATH).mkdir();
         File uploads = new File(FILE_UPLOAD_PATH);
 
@@ -80,9 +86,9 @@ public class SearchEmailsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         LOGGER.info(MARKER, "Name of the uploaded file has been saved: " + fileName);
-        File file = null;
+
         try {
             file = new File(uploads, fileName);
             try (InputStream fileContent = filePart.getInputStream();) {
@@ -96,7 +102,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         String emailPath = FILE_UPLOAD_PATH + "/" + fileName;
         LOGGER.info(MARKER, "Set value for emailPath.");
-        if (("".equals(emailPath))) {
+        if (("".equals(fileName))) {
             req.setAttribute("emailsFound",
                     "          <span class=\"glyphicon glyphicon-exclamation-sign\" id=\"noPathMsg\"></span>\n" +
                             "          No path to email file given.\n" +
@@ -108,25 +114,18 @@ public class SearchEmailsServlet extends HttpServlet {
                 LOGGER.debug(MARKER, "Wrong path has been given by user.");
                 e.printStackTrace();
             }
-        }
-        Set<Email> emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
-        if (emailSet.size() > 0) {
-            req.setAttribute("emailsFound", "Emails matching your criteria:");
-        } else if (0 == emailSet.size() && !("".equals(emailPath))) {
-            req.setAttribute("emailsFound", "No emails matching your criteria.");
-        }
-        req.setAttribute("finalEmailSet", emailSet);
-        LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
 
-        Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
-        if ("yes".equals(req.getParameter("phoneNumbers"))) {
-            if (resultMap.size() == 0) {
-                req.setAttribute("phoneNumbersFound", "No phone numbers found.");
-            } else {
-                req.setAttribute("phoneNumbersFound", "Phone numbers found in your email file:");
+
+            emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
+            if (emailSet.size() > 0) {
+                req.setAttribute("emailsFound", "Emails matching your criteria: ");
+            } else if (0 == emailSet.size() && !("".equals(emailPath))) {
+                req.setAttribute("emailsFound", "No emails matching your criteria.");
             }
-            req.setAttribute("displayNumbers", resultMap);
-            LOGGER.info(MARKER, "Set JSP attribute \"displayNumbers\".");
+            LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
+
+            Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
+            message = phoneNumbers.setPhoneNumbersMessage(req.getParameter("phoneNumbers"), resultMap, req);
         }
 
         for (String s : searchCriteria.getEmail()) {
@@ -137,6 +136,8 @@ public class SearchEmailsServlet extends HttpServlet {
             }
         }
 
+        req.setAttribute("phoneNumbersFound", message);
+        req.setAttribute("finalEmailSet", emailSet);
         req.setAttribute("emailFile", emailPath);
         req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
         req.setAttribute("startDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getStartDate()));

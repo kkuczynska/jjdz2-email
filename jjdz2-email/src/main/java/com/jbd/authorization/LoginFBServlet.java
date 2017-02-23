@@ -1,6 +1,6 @@
 package com.jbd.authorization;
 
-import com.jbd.DBA.ManageUser;
+import com.jbd.database.ManageUser;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;

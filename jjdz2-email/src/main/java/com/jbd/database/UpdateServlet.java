@@ -1,4 +1,4 @@
-package com.jbd.DBA;
+package com.jbd.database;
 
 import com.jbd.authorization.SessionData;
 import org.slf4j.LoggerFactory;

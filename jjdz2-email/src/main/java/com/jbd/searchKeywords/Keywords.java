@@ -1,4 +1,4 @@
-package com.jbd.KeywordsFinder;
+package com.jbd.searchKeywords;
 
 import com.jbd.UserCommunication;
 import org.slf4j.Logger;

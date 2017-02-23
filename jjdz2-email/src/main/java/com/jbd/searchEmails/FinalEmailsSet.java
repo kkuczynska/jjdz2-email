@@ -1,12 +1,18 @@
-package com.jbd;
+package com.jbd.searchEmails;
 
+import com.jbd.ContentmentVerification;
+import com.jbd.Email;
+import com.jbd.SearchCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.Stateless;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 @Stateless
 public class FinalEmailsSet {

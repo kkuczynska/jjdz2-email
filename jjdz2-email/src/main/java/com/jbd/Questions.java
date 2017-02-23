@@ -1,7 +1,7 @@
 package com.jbd;
 
-import com.jbd.KeywordsFinder.JsonReader;
-import com.jbd.KeywordsFinder.Keywords;
+import com.jbd.searchKeywords.JsonReader;
+import com.jbd.searchKeywords.Keywords;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;

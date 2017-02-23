@@ -23,20 +23,24 @@
     </div>
     <div class="emailsSearch">
         <div class="col-md-4">
-            <form method="post" action="emails" enctype="multipart/form-data">
+            <form id="emailForm" method="post" action="emails" enctype="multipart/form-data">
                 <span class="requiredEmailPath">*</span>
                 <input type="file" accept=".mbox,.eml" class="filestyle" name="emailPath" id="fileUpload"
                     data-buttonBefore="true" data-buttonName="btn-info" data-buttonText="<fmt:message bundle="${msg}" key="browse"/>"
                     data-iconName="glyphicon glyphicon-upload"  data-placeholder="<fmt:message bundle="${msg}" key="chooseFile"/>"> <br>
                 <span class="multivalueField">**</span>
-                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="emailaddr"/>" name="email"
-                       value="${emails}"><br>
-                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="startDate"/>" name="startDate"
-                       value="${startDate}"><br>
-                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="endDate"/>" name="endDate"
-                       value="${endDate}"><br>
+                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="emailaddr"/>"
+                    name="email" value="${emails}"><br>
+                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="startDate"/>"
+                    name="startDate" value="${startDate}" maxlength="10" pattern="([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])"
+                    title="The date should be in YYYY-MM-DD format">
+                <br>
+                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="endDate"/>"
+                    name="endDate" value="${endDate}" maxlength="10" pattern="([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])"
+                    title="The date should be in YYYY-MM-DD format"><br>
                 <span class="multivalueField">**</span>
-                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="keyword"/>" name="keywords" value="${keywords}">
+                <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="keyword"/>"
+                    name="keywords" value="${keywords}">
                 <br/>
                 <p class="requiredFields">
                     <fmt:message bundle="${msg}" key="reqField"/> <br/>
@@ -44,7 +48,8 @@
                 </p>
                 <span class="numbersMsg"><fmt:message bundle="${msg}" key="phoneNumb"/></span><br/>
                 <span class="phoneNumbersSelection">
-                         <label><input type="checkbox" name="phoneNumbers" class="phoneNumbers" value="yes"> <fmt:message bundle="${msg}" key="yes"/></label>
+                         <label><input type="checkbox" name="phoneNumbers" class="phoneNumbers" value="yes">
+                            <fmt:message bundle="${msg}" key="yes"/></label>
                          <label><input type="checkbox" name="phoneNumbers" class="phoneNumbers"
                                        value="no"> <fmt:message bundle="${msg}" key="no"/></label><br/><br>
                     </span>
@@ -58,14 +63,15 @@
             </p>
             <p>
             <form action="index.jsp">
-                <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goToMainPage"/>" name="goBackToKeywordsFinder">
+                <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}"
+                    key="goToMainPage"/>" name="goBackToKeywordsFinder">
             </form>
             </p>
 
         </div>
         <div class="col-md-8">
             <div>
-                <span class="emailsFoundMsg">${emailsFound}</span> <br/>
+                <span class="emailsFoundMsg" id="emailsFoundMsg">${emailsFound}</span> <br/>
                 <ol>
                     <c:forEach items="${finalEmailSet}" var="email" varStatus="theCount">
                         <li> ${email.from}: ${email.subject}
