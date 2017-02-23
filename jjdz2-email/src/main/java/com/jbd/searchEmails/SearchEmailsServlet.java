@@ -1,8 +1,8 @@
 package com.jbd.searchEmails;
 
 import com.jbd.*;
-import com.jbd.DBA.Addressee;
-import com.jbd.DBA.ManageUser;
+import com.jbd.database.Addressee;
+import com.jbd.database.ManageUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;

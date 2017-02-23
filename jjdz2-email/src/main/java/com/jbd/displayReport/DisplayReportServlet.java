@@ -1,6 +1,6 @@
-package com.jbd.servlets;
+package com.jbd.displayReport;
 
-import com.jbd.DBA.ManageUser;
+import com.jbd.database.ManageUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
