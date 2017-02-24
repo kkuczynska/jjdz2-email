@@ -1,12 +1,15 @@
 package com.jbd.searchEmails;
 
 import com.jbd.*;
+import com.jbd.database.Addressee;
+import com.jbd.database.ManageUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -33,6 +36,7 @@ public class SearchEmailsServlet extends HttpServlet {
     private static final Marker MARKER = MarkerFactory.getMarker("SearchEmailsServlet");
 
     private static final String FILE_UPLOAD_PATH = "src/main/resources/temporary";
+    public static final int MINIMUM_EMAIL_ADDRESS_LENGTH = 3;
 
     @EJB
     SearchCriteria searchCriteria;
@@ -46,6 +50,9 @@ public class SearchEmailsServlet extends HttpServlet {
     DisplayPhoneNumbers displayPhoneNumbers;
     @EJB
     PhoneNumbers phoneNumbers;
+
+    @Inject
+    ManageUser manageUser;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
 
@@ -120,6 +127,15 @@ public class SearchEmailsServlet extends HttpServlet {
             Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
             message = phoneNumbers.setPhoneNumbersMessage(req.getParameter("phoneNumbers"), resultMap, req);
         }
+
+        for (String s : searchCriteria.getEmail()) {
+            if(s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
+                Addressee addr = new Addressee();
+                addr.setAddressee(s);
+                manageUser.saveAddressee(addr);
+            }
+        }
+
         req.setAttribute("phoneNumbersFound", message);
         req.setAttribute("finalEmailSet", emailSet);
         req.setAttribute("emailFile", emailPath);
