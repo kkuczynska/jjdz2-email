@@ -15,6 +15,8 @@ import javax.ejb.Stateless;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 import java.util.*;
@@ -75,8 +77,74 @@ public class FileParser {
             } else {
                 messageBody = getTxtPart(mess);
             }
+
+            String s1 = mess.getSubject();
+            System.out.println(s1);
+            String s2 = messageBody.substring(0,9);
+            System.out.println(s2);
+
+            byte b1[] = s1.getBytes();
+            byte b11[] = s1.getBytes("UTF-8");
+            byte b2[] = s2.getBytes();
+            byte b22[] = s2.getBytes("UTF-8");
+
+            //System.out.println((int) s1.charAt(0));
+            //System.out.println((int) s2.charAt(0));
+
+            char c1 = s1.charAt(0);
+            byte b3[] = (String.valueOf(c1)).getBytes();
+
+            //System.out.println(c1);
+            //System.out.println((int)c1);
+            System.out.println("---");
+            for (int i = 0; i < b3.length; i++){
+                System.out.print(" " + b3[i]);
+            }
+            System.out.println();
+            //System.out.println("---");
+
+            //System.out.println(new String(b3, "UTF-8"));
+
+            //System.out.println(new String(b1, "UTF-8"));
+            System.out.println(new String(b1));
+            System.out.println("test");
+
+
+            char cc[] = s1.toCharArray();
+            int ii[] = new int[cc.length];
+            byte xx[] = new byte[cc.length];
+            for (int i = 0; i < cc.length; i++){
+                System.out.println((int) cc[i]);
+                ii[i] = (int) cc[i];
+                System.out.println(ii[i]);
+            }
+            for (int i = 0; i < cc.length; i++){
+                //System.out.println((int) cc[i]);
+                xx[i] = (byte) ii[i];
+                //System.out.println(ii[i]);
+            }
+
+            String experimental = new String (xx,"UTF-8");
+
+            System.out.println(experimental);
+
+            //char[] c = "aaaaaaaaaa".toCharArray();
+            ByteBuffer bb = Charset.forName("UTF-8").encode(CharBuffer.wrap(cc));
+            byte[] bbb = new byte[bb.remaining()];
+            bb.get(bbb);
+            System.out.println(Arrays.toString(bbb));
+
+
+
+
+
+//            Email e = new Email(mess.getFrom().get(0).getAddress(),
+//                    mess.getSubject(),
+//                    mess.getDate(),
+//                    messageBody);
+//            emails.add(e);
             Email e = new Email(mess.getFrom().get(0).getAddress(),
-                    mess.getSubject(),
+                    experimental,
                     mess.getDate(),
                     messageBody);
             emails.add(e);
