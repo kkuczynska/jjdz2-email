@@ -33,11 +33,11 @@
                     name="email" value="${emails}"><br>
                 <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="startDate"/>"
                     name="startDate" value="${startDate}" maxlength="10" pattern="([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])"
-                    title="The date should be in YYYY-MM-DD format">
+                    title="<fmt:message bundle="${msg}" key="wrongDateMsg"/>">
                 <br>
                 <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="endDate"/>"
                     name="endDate" value="${endDate}" maxlength="10" pattern="([12][09][0-9][0-9])-([01][0-9])-([0-3][0-9])"
-                    title="The date should be in YYYY-MM-DD format"><br>
+                    title="<fmt:message bundle="${msg}" key="wrongDateMsg"/>"><br>
                 <span class="multivalueField">**</span>
                 <input type="text" class="form-control" placeholder="<fmt:message bundle="${msg}" key="keyword"/>"
                     name="keywords" value="${keywords}">
