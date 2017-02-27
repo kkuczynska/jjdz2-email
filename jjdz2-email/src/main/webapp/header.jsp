@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="messages" var="msg"/>
 <html>
     <head>
@@ -6,7 +7,6 @@
         <script type="text/javascript" src="App/LogoutFB.js"></script>
         <script type="text/javascript" src="resources/gmailApi.js"></script>
         <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
-        <meta charset="UTF-8">
     </head>
 <body class="body">
     <div class="header">
