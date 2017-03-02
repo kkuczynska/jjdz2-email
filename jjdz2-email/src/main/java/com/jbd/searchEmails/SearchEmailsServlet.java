@@ -140,7 +140,7 @@ public class SearchEmailsServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             try {
                 req.setCharacterEncoding("UTF-8");
-                LOGGER.error(MARKER,"Encoding Set.");
+                LOGGER.info(MARKER,"Encoding Set.");
             } catch (UnsupportedEncodingException e) {
                 LOGGER.error(MARKER,"Encoding fail.");
                 e.printStackTrace();
