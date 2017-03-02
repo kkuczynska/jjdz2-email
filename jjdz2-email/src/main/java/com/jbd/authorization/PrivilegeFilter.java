@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebFilter(urlPatterns = {"App/AdminConsole.jsp"})
+@WebFilter(urlPatterns = {"/App/AdminConsole.jsp"})
 public class PrivilegeFilter implements Filter {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(PrivilegeFilter.class);
     private static final Marker MARKER = MarkerFactory.getMarker("PrivilegeFilter");
@@ -21,6 +21,7 @@ public class PrivilegeFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        LOGGER.info(MARKER,"Active Privilege Filter");
         if (sessionData.getPrivilege() == SessionData.LOCAL_USER) {
             LOGGER.info(MARKER, "User is not previliged to access this page - user previlige:  " + sessionData.getPrivilege() + ", require Admin");
             ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/index.jsp");

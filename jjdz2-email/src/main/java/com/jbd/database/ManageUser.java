@@ -45,6 +45,14 @@ public class ManageUser implements Serializable {
         return userList;
     }
 
+    public List<SessionData> searchForAllWithoutID() {
+        List<SessionData> userListWithoutID = new ArrayList<>();
+        TypedQuery<SessionData> query = entityManager.createNamedQuery("SessionData.findAllWithoutID", SessionData.class);
+        userListWithoutID = query.getResultList();
+        LOGGER.debug(MARKER, "All user list: " + userListWithoutID);
+        return userListWithoutID;
+    }
+
     @Transactional
     public void updateUser(SessionData user) {
         entityManager.merge(user);

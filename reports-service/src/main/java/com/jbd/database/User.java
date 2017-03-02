@@ -1,14 +1,9 @@
-package com.jbd.authorization;
-
-
+package com.jbd.database;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 
 import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
@@ -16,20 +11,11 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
-
 @SessionScoped
 @Entity
 @Table(name = "User")
-@NamedQueries({
-@NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p"),
-@NamedQuery(name = "SessionData.findAllWithoutID", query = "select c.username, c.usermail FROM SessionData c")
-
-})
-public class SessionData implements Serializable {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SessionData.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("SessionData");
-    public static final int ADMIN = 1;
-    public static final int LOCAL_USER = 2;
+@NamedQuery(name = "User.findAll", query = "select p FROM User p")
+public class User implements Serializable, Comparable<User> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +24,7 @@ public class SessionData implements Serializable {
     private boolean isLogged = false;
     private String username;
     private String usermail;
+    @Transient
     private int privilege;
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
@@ -112,33 +99,6 @@ public class SessionData implements Serializable {
         this.locale = locale;
     }
 
-    public void login(String code, String username, String usermail, int privilege) {
-        if (!code.equals("")) {
-            this.isLogged = true;
-            this.username = username;
-            this.usermail = usermail;
-            this.code = code;
-            this.loginTime = LocalDateTime.now();
-            if(privilege == ADMIN){
-                this.privilege = ADMIN;
-            }
-            else if (privilege == LOCAL_USER)
-                this.privilege = LOCAL_USER;
-            else
-                this.privilege = LOCAL_USER;
-        }
-
-
-    }
-
-    public void logout() {
-        this.isLogged = false;
-        this.username = "";
-        this.usermail = "";
-        this.code = null;
-        LOGGER.info(MARKER,"Logout Successful");
-
-    }
 
     @Override
     public String toString() {
@@ -153,4 +113,14 @@ public class SessionData implements Serializable {
                 '}';
     }
 
+
+    @Override
+    public int compareTo(User o) {
+        if (getLoginTime().isEqual(o.getLoginTime()))
+            return 0;
+        else if (getLoginTime().isAfter(o.getLoginTime()))
+            return 1;
+        else
+            return -1;
+    }
 }
