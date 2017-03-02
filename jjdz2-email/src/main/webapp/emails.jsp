@@ -4,6 +4,7 @@
 <fmt:setBundle basename="messages" var="msg"/>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>JBD Email Search Engine</title>
     <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
     <script src="resources/jquery/jquery-3.1.1.min.js"></script>

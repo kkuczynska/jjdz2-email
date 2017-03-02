@@ -21,6 +21,7 @@ import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -133,6 +134,16 @@ public class SearchEmailsServlet extends HttpServlet {
                 Addressee addr = new Addressee();
                 addr.setAddressee(s);
                 manageUser.saveAddressee(addr);
+            }
+        }
+
+        if (req.getCharacterEncoding() == null) {
+            try {
+                req.setCharacterEncoding("UTF-8");
+                LOGGER.info(MARKER,"Encoding Set.");
+            } catch (UnsupportedEncodingException e) {
+                LOGGER.error(MARKER,"Encoding fail.");
+                e.printStackTrace();
             }
         }
 

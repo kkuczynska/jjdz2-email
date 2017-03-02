@@ -1,7 +1,10 @@
 package com.jbd;
 
 import org.apache.james.mime4j.MimeException;
-import org.apache.james.mime4j.dom.*;
+import org.apache.james.mime4j.dom.Entity;
+import org.apache.james.mime4j.dom.Message;
+import org.apache.james.mime4j.dom.Multipart;
+import org.apache.james.mime4j.dom.TextBody;
 import org.apache.james.mime4j.mboxiterator.CharBufferWrapper;
 import org.apache.james.mime4j.mboxiterator.MboxIterator;
 import org.apache.james.mime4j.message.BodyPart;
@@ -17,7 +20,9 @@ import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 @Stateless
 public class FileParser {
@@ -47,7 +52,7 @@ public class FileParser {
         return emailsFromFiles;
     }
 
-    public Email parseEML(File emlFile) throws Exception {
+    private Email parseEML(File emlFile) throws Exception {
         LOGGER.info(FP_MARKER, "Parsing eml file.");
         Session mailSession = Session.getDefaultInstance(new Properties());
         InputStream source = new FileInputStream(emlFile);
@@ -56,7 +61,7 @@ public class FileParser {
         return new Email(message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(), message.getContent().toString());
     }
 
-    public List<Email> parseMbox(File mboxFile) throws IOException, MimeException {
+    private List<Email> parseMbox(File mboxFile) throws IOException, MimeException {
         SetLinuxLFInFile s = new SetLinuxLFInFile();
         mboxFile = s.RewriteFile(mboxFile);
 
@@ -75,8 +80,17 @@ public class FileParser {
             } else {
                 messageBody = getTxtPart(mess);
             }
+
+            String subject = mess.getSubject();
+            char subjectArray[] = subject.toCharArray();
+            byte subjectBytes[] = new byte[subjectArray.length];
+            for (int i = 0; i < subjectArray.length; i++){
+                subjectBytes[i] = (byte) subjectArray[i];
+            }
+            String finalSubject = new String (subjectBytes,"UTF-8");
+
             Email e = new Email(mess.getFrom().get(0).getAddress(),
-                    mess.getSubject(),
+                    finalSubject,
                     mess.getDate(),
                     messageBody);
             emails.add(e);
