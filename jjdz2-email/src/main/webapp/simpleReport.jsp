@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <fmt:setBundle basename="messages" var="msg"/>
 <html>
 <head>
@@ -40,8 +41,8 @@
         <div class="col-md-12">
         <ol>
             <c:forEach items="${displayReport}" var="report">
-            <li> ${report.key} || ${report.value}
-                </c:forEach>
+                <li> ${fn:escapeXml(report.key)} || ${fn:escapeXml(report.value)}
+            </c:forEach>
         </ol>
         </div>
     </div>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setBundle basename="messages" var="msg"/>
 <html>
@@ -19,7 +20,7 @@
     <div class="jumbotron">
         <h1>Welcome</h1>
         <p>Add new admins or edit existing one</p>
-        <p>Welcome! ${sessionData.username} </p>
+        <p>Welcome! ${fn:escapeXml(sessionData.username)} </p>
     </div>
     <div class="underJumbotron">
         <div class="col-md-3">
@@ -64,12 +65,12 @@
                 <ul>
                     <c:forEach items="${userList}" var="user">
                         <c:if test="${user.privilege == 1}">
-                            <li> ${user.id} . ${user.username} - ${Admin} <input type="checkbox" name="isPrivileged"
-                                                                                 value=${user.id}></li>
+                            <li> ${fn:escapeXml(user.id)} . ${fn:escapeXml(user.username)} - ${fn:escapeXml(Admin)} <input type="checkbox" name="isPrivileged"
+                                                                                 value=${fn:escapeXml(user.id)}></li>
                         </c:if>
                         <c:if test="${user.privilege == 2}">
-                            <li> ${user.id} . ${user.username} - ${Local} <input type="checkbox" name="isPrivileged"
-                                                                                 value=${user.id}></li>
+                            <li> ${fn:escapeXml(user.id)} . ${fn:escapeXml(user.username)} - ${fn:escapeXml(Local)} <input type="checkbox" name="isPrivileged"
+                                                                                 value=${fn:escapeXml(user.id)}></li>
                         </c:if>
                     </c:forEach>
 

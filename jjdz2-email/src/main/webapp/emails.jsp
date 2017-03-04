@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <fmt:setBundle basename="messages" var="msg"/>
 <html lang="en">
 <head>
@@ -75,8 +76,8 @@
                 <span class="emailsFoundMsg" id="emailsFoundMsg">${emailsFound}</span> <br/>
                 <ol>
                     <c:forEach items="${finalEmailSet}" var="email" varStatus="theCount">
-                        <li> ${email.from}: ${email.subject}
-                            <span hidden id="semailContent"> ${email.content} </span>
+                        <li> ${fn:escapeXml(email.from)}: ${fn:escapeXml(email.subject)}
+                            <span hidden id="semailContent"> ${fn:escapeXml(email.content)} </span>
                             <input class="btn btn-warning smaller" type="button" value="View email" data-toggle="modal"
                                    data-target="#${theCount.index}">
                             <div hidden id="${theCount.index}" class="modal fade" role="dialog">
@@ -84,14 +85,14 @@
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><span
-                                                    class="emailSubject">Email from</span> ${email.from}
-                                                <span class="emailDate">(${email.data})</span></h4>
+                                                    class="emailSubject">Email from</span> ${fn:escapeXml(email.from)}
+                                                <span class="emailDate">(${fn:escapeXml(email.data)})</span></h4>
                                         </div>
                                         <div class="modal-body">
-                                            <span class="emailSubject"> Subject: </span> ${email.subject}
+                                            <span class="emailSubject"> Subject: </span> ${fn:escapeXml(email.subject)}
                                         </div>
                                         <div class="modal-body">
-                                                ${email.content}
+                                                ${fn:escapeXml(email.content)}
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-warning" data-dismiss="modal">Close
@@ -108,7 +109,7 @@
                 <span class="phoneNumbersFoundMsg">${phoneNumbersFound}</span> <br/>
                 <ol>
                     <c:forEach items="${displayNumbers}" var="phone">
-                    <li> ${phone.key} || ${phone.value}
+                    <li> ${fn:escapeXml(phone.key)} || ${fn:escapeXml(phone.value)}
                         </c:forEach>
                 </ol>
             </div>
