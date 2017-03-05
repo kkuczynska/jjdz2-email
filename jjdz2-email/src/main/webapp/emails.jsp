@@ -63,6 +63,21 @@
                        name="goBackToKeywordsFinder">
             </form>
             </p>
+
+
+
+
+            <p>
+            <form action="weirdcutemails.jsp">
+                <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}" key="goToWeirdCutEmails"/>"
+                       name="goBackToweirdcutemails">
+            </form>
+            </p>
+
+
+
+
+
             <p>
             <form action="index.jsp">
                 <input class="btn btn-warning" type="submit" value="<fmt:message bundle="${msg}"

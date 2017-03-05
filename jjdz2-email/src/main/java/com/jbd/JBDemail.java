@@ -1,19 +1,29 @@
 package com.jbd;
 
+import com.jbd.cutEmails.FiveDaysNoAnswer;
+import com.jbd.cutEmails.RudeWordsInContent;
+import com.jbd.cutEmails.TwoMailsNoAnswer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.util.*;
 
 public class JBDemail {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(JBDemail.class);
     private static final Marker MAIN_MARKER = MarkerFactory.getMarker("Main");
 
     public static void main(String[] args) throws Exception {
+        ArrayList<String> content = new ArrayList<>();
+        TwoMailsNoAnswer twoMailsNoAnswer = new TwoMailsNoAnswer();
+        RudeWordsInContent rudeWordsInContent = new RudeWordsInContent();
+        FiveDaysNoAnswer fiveDaysNoAnswer = new FiveDaysNoAnswer();
+        List<Date> sortedEmailDatesInDate = new ArrayList<>();
+        List<LocalDateTime> afterAllList = new ArrayList<>();
+
+
         List<String> filesInStrings;
         List<Email> eMailKeeper = new ArrayList<>();
         List<Email> partialEMailKeeper = new ArrayList<>();
@@ -61,7 +71,8 @@ public class JBDemail {
                         "6 - to look for phone numbers in emails\n" +
                         "7 - to display parsed emails\n" +
                         "8 - to display filtered emails\n" +
-                        "9 - to display number of filtered emails" +
+                        "9 - to display number of filtered emails\n" +
+                        "10 - to check if Some of emails were cut wierdly\n" +
                         "q - to quit");
             } else {
                 LOGGER.info(MAIN_MARKER,"Displaying full options for user.");
@@ -75,6 +86,7 @@ public class JBDemail {
                         "7 - to display parsed emails\n" +
                         "8 - to display filtered emails\n" +
                         "9 - to display number of filtered emails\n" +
+                        "10 - to check if some of emails were cut wierdly\n" +
                         "q - to quit");
             }
 
@@ -89,7 +101,7 @@ public class JBDemail {
             if ("2".equals(input)) {
                 LOGGER.info(MAIN_MARKER,"User picked option 2.");
                 filesInStrings = pG.createFileListFromPath(pG.askUserAboutInputPath());
-                LOGGER.info(MAIN_MARKER, "Found: " + pG.getFileList().size() + " files.");
+                LOGGER.info(MAIN_MARKER,"Found: " + pG.getFileList().size() + " files.");
                 eMailKeeper = fP.parseEmails(filesInStrings);
                 LOGGER.info(MAIN_MARKER,"Total emails parsed: " + eMailKeeper.size());
                 partialEMailKeeper = eMailKeeper;
@@ -126,15 +138,32 @@ public class JBDemail {
                 LOGGER.info(MAIN_MARKER,"User picked option 8.");
                 printEmails(partialEMailKeeper);
             }
-            if ("9".equals(input) && path != 0){
+            if ("9".equals(input) && path != 0) {
                 LOGGER.info(MAIN_MARKER,"User picked option 9.");
                 System.out.println(partialEMailKeeper.size());
             }
+            if ("10".equals(input) && path != 0) {
+                LOGGER.info(MAIN_MARKER,"User picked option 10.");
+                fiveDaysNoAnswer.dateSort(eMailKeeper);
+                fiveDaysNoAnswer.LocalDateTimeToDateParse();
+                fiveDaysNoAnswer.erasingFreeDaysFromDates(sortedEmailDatesInDate);
+                fiveDaysNoAnswer.dateToLocalDateTimeParse();
+                fiveDaysNoAnswer.checkIfWasAnswer(afterAllList);
+                fiveDaysNoAnswer.chceckIfContentBetween();
+
+                twoMailsNoAnswer.addingAdressesToList(eMailKeeper);
+                twoMailsNoAnswer.addingDatesToList(eMailKeeper);
+                twoMailsNoAnswer.removingUserMailFromList(eMailKeeper);
+                twoMailsNoAnswer.decideIfTwoAnswers();
+
+                rudeWordsInContent.iteratingThroughList(eMailKeeper);
+                rudeWordsInContent.ifRudeWord(content);
+            }
         }
     }
-
-    public static void printEmails(List<Email> list){
+    public static void printEmails(List<Email> list) {
         for (Email email : list) {
+
             System.out.println("--------------------");
             System.out.println(email.getData());
             System.out.println(email.toString());
