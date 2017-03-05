@@ -78,24 +78,25 @@
                     <c:forEach items="${finalEmailSet}" var="email" varStatus="theCount">
                         <li> ${fn:escapeXml(email.from)}: ${fn:escapeXml(email.subject)}
                             <span hidden id="semailContent"> ${fn:escapeXml(email.content)} </span>
-                            <input class="btn btn-warning smaller" type="button" value="View email" data-toggle="modal"
+                            <input class="btn btn-warning smaller" type="button" value="<fmt:message bundle="${msg}" key="viewEmail"/>" data-toggle="modal"
                                    data-target="#${theCount.index}">
                             <div hidden id="${theCount.index}" class="modal fade" role="dialog">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title"><span
-                                                    class="emailSubject">Email from</span> ${fn:escapeXml(email.from)}
+                                                    class="emailSubject"><fmt:message bundle="${msg}" key="from"/>:</span> ${fn:escapeXml(email.from)}
                                                 <span class="emailDate">(${fn:escapeXml(email.data)})</span></h4>
                                         </div>
                                         <div class="modal-body">
-                                            <span class="emailSubject"> Subject: </span> ${fn:escapeXml(email.subject)}
+                                            <span class="emailSubject"> <fmt:message bundle="${msg}" key="subject"/>: </span> ${fn:escapeXml(email.subject)}
                                         </div>
                                         <div class="modal-body">
                                                 ${fn:escapeXml(email.content)}
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-warning" data-dismiss="modal">Close
+                                            <button type="button" class="btn btn-warning" data-dismiss="modal">
+                                                <fmt:message bundle="${msg}" key="close"/>
                                             </button>
                                         </div>
                                     </div>
