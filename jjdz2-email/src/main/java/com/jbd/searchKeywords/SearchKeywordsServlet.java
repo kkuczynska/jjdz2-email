@@ -2,7 +2,7 @@ package com.jbd.searchKeywords;
 
 
 import com.jbd.database.Form;
-import com.jbd.database.Form_Details;
+import com.jbd.database.FormDetails;
 import com.jbd.database.ManageUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -101,7 +101,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             int questionNumber = 1;
 
             for (int questionIndex = 0; questionIndex < questions.size(); questionIndex++) {
-                Form_Details form_details = new Form_Details();
+                FormDetails form_details = new FormDetails();
                 //form_details.setQuestion(questions.get(questionIndex));
                 form_details.setQuestion(questionNumber++);
                 form_details.setResponse(req.getParameter("q" + questionIndex));

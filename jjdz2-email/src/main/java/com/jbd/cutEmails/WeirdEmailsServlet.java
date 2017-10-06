@@ -26,11 +26,11 @@ import java.util.List;
 import java.util.Map;
 
 @WebServlet(urlPatterns = "weirdcutemails")
-public class MyServlet extends HttpServlet {
+public class WeirdEmailsServlet extends HttpServlet {
 
     public LocalDateTime data6 = LocalDateTime.of(2015, Month.DECEMBER, 05, 23, 59, 59);
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyServlet.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WeirdEmailsServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
     private int questionnaireCounter = 1;
     private List<Email> recivedEamils = new ArrayList<>();

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Form_Details implements Serializable {
+public class FormDetails implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_form_details")
@@ -50,7 +50,7 @@ public class Form_Details implements Serializable {
 
     @Override
     public String toString() {
-        return "Form_Details{" +
+        return "FormDetails{" +
                 "id=" + id +
                 ", question='" + question + '\'' +
                 ", response='" + response + '\'' +

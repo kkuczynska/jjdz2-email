@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@WebServlet(urlPatterns = "/sendUserServlet")
+@WebServlet(urlPatterns = "/SendUserServlet")
 
-public class sendUserServlet extends HttpServlet {
-    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(sendUserServlet.class);
+public class SendUserServlet extends HttpServlet {
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SendUserServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("ManageDB");
 
     @Inject

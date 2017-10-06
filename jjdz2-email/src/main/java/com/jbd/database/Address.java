@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@NamedQuery(name = "Addressee.getAll", query = "SELECT a.addressee FROM Addressee a")
-public class Addressee implements Serializable {
+@NamedQuery(name = "Address.getAll", query = "SELECT a.addressee FROM Address a")
+public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;
@@ -29,7 +29,7 @@ public class Addressee implements Serializable {
 
     @Override
     public String toString() {
-        return "Addressee{" +
+        return "Address{" +
                 "Id=" + Id +
                 ", addressee='" + addressee + '\'' +
                 '}';

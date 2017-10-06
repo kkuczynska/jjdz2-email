@@ -1,7 +1,7 @@
 package com.jbd.searchEmails;
 
 import com.jbd.SearchCriteria;
-import com.jbd.database.Addressee;
+import com.jbd.database.Address;
 import com.jbd.database.ManageUser;
 import com.jbd.fileManagement.FileParser;
 import com.jbd.fileManagement.PathGetter;
@@ -137,7 +137,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         for (String s : searchCriteria.getEmail()) {
             if (s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
-                Addressee addr = new Addressee();
+                Address addr = new Address();
                 addr.setAddressee(s);
                 manageUser.saveAddressee(addr);
             }

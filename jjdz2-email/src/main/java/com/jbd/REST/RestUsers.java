@@ -16,7 +16,7 @@ import java.util.List;
 @Stateless
 @Path("/users")
 
-public class restUsers {
+public class RestUsers {
 
     @Inject
     ManageUser manageUser;

@@ -75,26 +75,26 @@ public class ManageUser implements Serializable {
     }
 
     @Transactional
-    public void saveFormDetails(Form_Details form_details) {
+    public void saveFormDetails(FormDetails form_details) {
         entityManager.persist(form_details);
         LOGGER.info(MARKER, "Save form_details to DB successfully!");
     }
 
-    public Form_Details getFormDetails(Long id) {
-        Form_Details form_details = entityManager.find(Form_Details.class, id);
+    public FormDetails getFormDetails(Long id) {
+        FormDetails form_details = entityManager.find(FormDetails.class, id);
         LOGGER.info(MARKER, "Collected data form_details");
         return form_details;
     }
 
     @Transactional
-    public void saveAddressee(Addressee addressee) {
-        entityManager.persist(addressee);
-        LOGGER.info(MARKER, "Collected data addressee");
+    public void saveAddressee(Address address) {
+        entityManager.persist(address);
+        LOGGER.info(MARKER, "Collected data address");
     }
 
     public List<String> getAllAddressee() {
         List<String> addresseeList = new ArrayList<>();
-        TypedQuery<String> query = entityManager.createNamedQuery("Addressee.getAll", String.class);
+        TypedQuery<String> query = entityManager.createNamedQuery("Address.getAll", String.class);
         addresseeList = query.getResultList();
         LOGGER.debug(MARKER, "All addressee list: " + addresseeList);
         return addresseeList;
