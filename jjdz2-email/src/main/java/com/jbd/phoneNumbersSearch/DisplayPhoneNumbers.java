@@ -85,19 +85,6 @@ public class DisplayPhoneNumbers {
 
 
         }
-
-        LOGGER.info("Results: " + resultMap.toString());
-        System.out.println("Phone Numbers: ");
-        System.out.println("---------------");
-        for (String key : resultMap.keySet()) {
-            System.out.print(key + ": " + "[ ");
-            for (String value : resultMap.get(key)) {
-                System.out.print("-" + value + " ");
-            }
-            System.out.print("]");
-            System.out.println();
-
-        }
         return resultMap;
     }
 }

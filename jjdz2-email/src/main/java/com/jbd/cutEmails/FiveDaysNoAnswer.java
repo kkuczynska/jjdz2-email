@@ -109,17 +109,6 @@ public class FiveDaysNoAnswer {
         }
         return ifTrue;
     }
-
-//    public List<Email> fdnaList (){
-//        if(afterAllList.isEmpty()){
-//            System.out.println("lista jest pusta, nie ma żadnych wiadomości na które nie było odpowiedzi przez 5 dni roboczych");
-//        }
-//        else{
-//            System.out.println("lista adresów z którymi został przerwany kontakt :  ");
-//            System.out.println(afterAllList);
-//        }
-//        return afterAllList;
-//    }
 }
 
 

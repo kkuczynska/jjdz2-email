@@ -1,6 +1,5 @@
 package com.jbd.searchKeywords;
 
-import com.jbd.UserCommunication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -12,8 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.jbd.Questions.ANSWER_POSITIVE;
-
 @Stateless
 public class Keywords {
 
@@ -22,12 +19,11 @@ public class Keywords {
 
     private static Set<String> keywordsSet = new HashSet();
     private static ArrayList<String> answersIDs = new ArrayList<>();
-    private static UserCommunication userCommunication = new UserCommunication();
     private static final String NO_MATCHES = "Sorry! \nThere is no keywords matching your query.";
+    private static final String ANSWER_POSITIVE = "1";
 
     public void createAndDisplayKeywordsHashSet() {
         createKeywordsSet();
-        displayKeywords();
     }
 
     public void gatherAnswers(String answerID) {
@@ -50,7 +46,6 @@ public class Keywords {
             if (answersIDs.get(index).equalsIgnoreCase(ANSWER_POSITIVE)) {
                 LOGGER.info(KEYWORDS_MARKER, "Adding keywords to set.");
 
-                System.out.println("answersIDs = " + answersIDs);
                 for (int count = 0; count < answersIDs.size(); count++) {
                     if (ANSWER_POSITIVE.equalsIgnoreCase(answersIDs.get(count))) {
                         keywordsSet.addAll(jsonReader.readAnswerJsonArray(String.valueOf(count)));
@@ -59,22 +54,12 @@ public class Keywords {
                 if (keywordsSet.isEmpty()) {
                     LOGGER.info(KEYWORDS_MARKER, "Confirming keywords set is populated with data, size is: "
                             + keywordsSet.size());
-                    userCommunication.sendUserMessage(NO_MATCHES);
                 }
                 answersIDs.clear();
-                System.out.println("keywords size: " + keywordsSet.size());
 
             }
         }
         return keywordsSet;
-    }
-
-    private static void displayKeywords() {
-        UserCommunication userCommunication = new UserCommunication();
-        LOGGER.info(KEYWORDS_MARKER, "Displaying all keywords matching user's query.");
-        for (String keyword : keywordsSet) {
-            userCommunication.sendUserMessage(keyword);
-        }
     }
 
     public static Set<String> getKeywordsSet() {

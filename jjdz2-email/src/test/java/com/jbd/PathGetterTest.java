@@ -25,7 +25,6 @@ public class PathGetterTest {
         InputStream in = new ByteArrayInputStream(input.getBytes());
         System.setIn(in);
         assertEquals(absolutePath, pg.askUserAboutInputPath());
-        System.out.println(absolutePath);
     }
 
     @Test

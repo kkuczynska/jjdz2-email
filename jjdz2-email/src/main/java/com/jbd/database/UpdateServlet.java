@@ -50,7 +50,6 @@ public class UpdateServlet extends HttpServlet {
             LOGGER.info(MARKER, "No parameters in request");
         } catch (NullPointerException e) {
             e.printStackTrace();
-            System.out.println("Brak parametrow");
         }
         RequestDispatcher dispatcher = req.getRequestDispatcher("/App/AdminConsole.jsp");
         req.setAttribute("null", "No parameters!");

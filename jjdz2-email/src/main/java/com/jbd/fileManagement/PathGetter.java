@@ -31,7 +31,6 @@ public class PathGetter {
         String inputPath;
         do {
             LOGGER.info(PG_MARKER, "Waiting for user to type path.");
-            System.out.println("Type correct path to file or directory:");
             inputPath = scanner.nextLine();
             if (inputPath.equals("")) {
                 inputPath = new File("").getAbsolutePath();

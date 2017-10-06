@@ -30,7 +30,6 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate();
             fbConnection.clearAccessToken();
-            System.out.println(sessionData.toString());
             LOGGER.info(MARKER, "User has been logout");
         } else
             LOGGER.info(MARKER, "No active session!");
