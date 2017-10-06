@@ -1,7 +1,7 @@
 package com.jbd.cutEmails;
 
-import com.jbd.Email;
-import com.jbd.MailHolder;
+import com.jbd.searchEmails.Email;
+import com.jbd.searchEmails.MailHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.time.Month;

@@ -1,4 +1,4 @@
-package com.jbd;
+package com.jbd.searchEmails;
 
 import javax.ejb.Stateless;
 import java.time.format.DateTimeFormatter;

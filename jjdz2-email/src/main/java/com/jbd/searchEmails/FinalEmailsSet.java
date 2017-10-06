@@ -1,7 +1,5 @@
 package com.jbd.searchEmails;
 
-import com.jbd.ContentmentVerification;
-import com.jbd.Email;
 import com.jbd.SearchCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

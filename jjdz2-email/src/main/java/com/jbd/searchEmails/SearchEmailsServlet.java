@@ -1,9 +1,12 @@
 package com.jbd.searchEmails;
 
 import com.jbd.*;
-import com.jbd.MailHolder;
 import com.jbd.database.Addressee;
 import com.jbd.database.ManageUser;
+import com.jbd.fileManagement.FileParser;
+import com.jbd.fileManagement.PathGetter;
+import com.jbd.phoneNumbersSearch.DisplayPhoneNumbers;
+import com.jbd.phoneNumbersSearch.PhoneNumbers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;

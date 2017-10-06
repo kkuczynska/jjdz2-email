@@ -1,4 +1,4 @@
-package com.jbd;
+package com.jbd.searchEmails;
 
 import java.util.List;
 import java.util.Scanner;

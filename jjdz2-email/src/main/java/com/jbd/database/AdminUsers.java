@@ -1,7 +1,7 @@
 package com.jbd.database;
 
 import com.jbd.authorization.SessionData;
-import com.jbd.ContentmentVerification;
+import com.jbd.searchEmails.ContentmentVerification;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;

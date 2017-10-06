@@ -1,5 +1,7 @@
-package com.jbd;
+package com.jbd.phoneNumbersSearch;
 
+import com.jbd.JBDemail;
+import com.jbd.searchEmails.Email;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

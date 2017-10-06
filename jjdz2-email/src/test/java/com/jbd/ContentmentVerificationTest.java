@@ -1,5 +1,7 @@
 package com.jbd;
 
+import com.jbd.searchEmails.ContentmentVerification;
+import com.jbd.searchEmails.Email;
 import org.junit.Test;
 
 import java.util.Arrays;

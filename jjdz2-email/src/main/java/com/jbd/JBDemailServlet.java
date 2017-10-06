@@ -1,6 +1,7 @@
 package com.jbd;
 
-import com.sun.net.httpserver.HttpServer;
+import com.jbd.searchEmails.ContentmentVerification;
+import com.jbd.searchEmails.Email;
 
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -10,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

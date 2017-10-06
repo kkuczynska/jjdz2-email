@@ -1,4 +1,4 @@
-package com.jbd;
+package com.jbd.searchEmails;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

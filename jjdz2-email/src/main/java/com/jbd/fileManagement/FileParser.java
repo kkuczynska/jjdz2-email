@@ -1,5 +1,6 @@
-package com.jbd;
+package com.jbd.fileManagement;
 
+import com.jbd.searchEmails.Email;
 import org.apache.james.mime4j.MimeException;
 import org.apache.james.mime4j.dom.Entity;
 import org.apache.james.mime4j.dom.Message;

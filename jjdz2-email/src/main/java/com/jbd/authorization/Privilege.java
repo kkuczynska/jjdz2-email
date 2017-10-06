@@ -1,4 +1,4 @@
-package com.jbd;
+package com.jbd.authorization;
 
 /**
  * Created by Admin on 25.12.2016.

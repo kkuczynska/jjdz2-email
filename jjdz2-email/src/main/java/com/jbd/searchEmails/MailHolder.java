@@ -1,4 +1,6 @@
-package com.jbd;
+package com.jbd.searchEmails;
+
+import com.jbd.searchEmails.Email;
 
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
