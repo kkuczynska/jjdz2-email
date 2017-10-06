@@ -16,8 +16,8 @@ public class Form implements Serializable {
     @Column(nullable = false)
     private String name;
     private LocalDateTime creationTime;
-    @OneToMany(mappedBy = "form" )
-   // @JoinColumn(name = "form_id", referencedColumnName = "id_form")
+    @OneToMany(mappedBy = "form")
+    // @JoinColumn(name = "form_id", referencedColumnName = "id_form")
     private List<Form_Details> details;
 
     public Long getId() {

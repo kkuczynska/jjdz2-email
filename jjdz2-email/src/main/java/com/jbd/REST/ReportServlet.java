@@ -1,7 +1,6 @@
 package com.jbd.REST;
 
 import com.jbd.Report;
-import com.jbd.authorization.SessionData;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -14,13 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -42,14 +38,14 @@ public class ReportServlet extends HttpServlet {
 
         Report[] reports = response1.readEntity(Report[].class);
 
-        for (int i =0; i < reports.length; i++ ){
-         reportList.add(reports[i]);
+        for (int i = 0; i < reports.length; i++) {
+            reportList.add(reports[i]);
         }
         LOGGER.info(MARKER, "Created successfully Report List From JSON");
 
         request.setAttribute("reportList", reportList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/App/AdminConsole.jsp");
-        dispatcher.forward(request,response);
+        dispatcher.forward(request, response);
 
 
     }

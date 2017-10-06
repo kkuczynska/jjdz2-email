@@ -29,8 +29,8 @@ public class Questions {
     private static String POSSIBLE_ANSWERS = " (yes / no)";
     private static final String KEYWORDS_HELP_QUESTION = "Do you need help with keywords? (yes / no)";
     private static final String KEYWORDS_HEADER = "\n--------------------------------------" +
-                                                  "\nKeywords matching your query: " +
-                                                  "\n--------------------------------------";
+            "\nKeywords matching your query: " +
+            "\n--------------------------------------";
     private final String ANSWER_NO = "no";
     private final String ANSWER_YES = "yes";
 
@@ -112,8 +112,8 @@ public class Questions {
                             LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + keywordFormAnswer);
                             userCommunication.sendUserMessage(WRONG_INPUT);
                         }
-                    } while(!(keywordFormAnswer.equalsIgnoreCase(ANSWER_YES) ||
-                                keywordFormAnswer.equalsIgnoreCase(ANSWER_NO)));
+                    } while (!(keywordFormAnswer.equalsIgnoreCase(ANSWER_YES) ||
+                            keywordFormAnswer.equalsIgnoreCase(ANSWER_NO)));
 
                 }
                 userCommunication.sendUserMessage(KEYWORDS_HEADER);

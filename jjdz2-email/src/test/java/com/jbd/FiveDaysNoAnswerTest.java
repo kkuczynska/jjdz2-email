@@ -4,7 +4,9 @@ import com.jbd.cutEmails.FiveDaysNoAnswer;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;

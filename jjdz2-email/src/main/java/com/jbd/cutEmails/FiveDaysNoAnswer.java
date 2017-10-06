@@ -10,8 +10,12 @@ import javax.ejb.Stateless;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
+
 @Stateless
 public class FiveDaysNoAnswer {
     public LocalDateTime data6 = LocalDateTime.of(2015, Month.DECEMBER, 05, 23, 59, 59);
@@ -71,7 +75,7 @@ public class FiveDaysNoAnswer {
         return output;
     }
 
-    public boolean checkIfWasAnswer(LocalDateTime afterAll){
+    public boolean checkIfWasAnswer(LocalDateTime afterAll) {
         List<LocalDateTime> s = new ArrayList<>();
         s.add(afterAll);
         List<Date> dates = this.LocalDateTimeToDateParse(s);
@@ -80,7 +84,7 @@ public class FiveDaysNoAnswer {
         s = this.dateToLocalDateTimeParse(dates);
         LocalDateTime fiveDaysAgo = LocalDateTime.now().minusDays(5);
 
-        if(s.isEmpty()){
+        if (s.isEmpty()) {
             return false;
         } else {
             return s.get(0).isBefore(fiveDaysAgo);

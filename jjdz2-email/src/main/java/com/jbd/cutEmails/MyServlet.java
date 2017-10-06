@@ -20,7 +20,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet(urlPatterns = "weirdcutemails")
 public class MyServlet extends HttpServlet {
@@ -33,8 +36,8 @@ public class MyServlet extends HttpServlet {
     private List<Email> recivedEamils = new ArrayList<>();
 
     private List<Email> fdnaMails = new ArrayList<>();
-@EJB
-RudeWordsInContent rudeWordsInContent;
+    @EJB
+    RudeWordsInContent rudeWordsInContent;
     @EJB
     FiveDaysNoAnswer fiveDaysNoAnswer;
     @Inject
@@ -45,21 +48,20 @@ RudeWordsInContent rudeWordsInContent;
         List<Email> emails = new ArrayList<>();
         recivedEamils = mailHolder.getMails();
 
-        Map<String,String> parsedQueryString = splitQuery(req.getQueryString());
+        Map<String, String> parsedQueryString = splitQuery(req.getQueryString());
         List<Email> outputEmails = new ArrayList<>();
 
-        switch (parsedQueryString.get("type")){
-            case "rudewords":{
-                for (Email email : recivedEamils)
-                {
-                    if(rudeWordsInContent.ifRudeWord(email.getContent())){
+        switch (parsedQueryString.get("type")) {
+            case "rudewords": {
+                for (Email email : recivedEamils) {
+                    if (rudeWordsInContent.ifRudeWord(email.getContent())) {
                         outputEmails.add(email);
                     }
                 }
             }
-            case "fivedays":{
-                for (Email email : recivedEamils){
-                    if(fiveDaysNoAnswer.checkIfWasAnswer(email.getData())){
+            case "fivedays": {
+                for (Email email : recivedEamils) {
+                    if (fiveDaysNoAnswer.checkIfWasAnswer(email.getData())) {
                         outputEmails.add(email);
                     }
                 }

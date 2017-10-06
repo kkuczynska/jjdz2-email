@@ -1,6 +1,7 @@
 package com.jbd.searchEmails;
 
-import java.time.*;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -23,10 +24,10 @@ public class Email {
         this.from = from;
         DateTimeFormatter formatterLongVersion = DateTimeFormatter.RFC_1123_DATE_TIME;
         DateTimeFormatter formatterShortVersion = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        if(data.length()> LENGTH_LIMIT){
+        if (data.length() > LENGTH_LIMIT) {
             this.data = LocalDateTime.parse(data, formatterLongVersion);
         } else {
-            this.data = LocalDateTime.parse(data,formatterShortVersion);
+            this.data = LocalDateTime.parse(data, formatterShortVersion);
         }
         this.subject = subject;
         this.content = content;
@@ -37,6 +38,7 @@ public class Email {
         this.subject = subject;
 
     }
+
     public Email(String from) {
         this.from = from;
     }

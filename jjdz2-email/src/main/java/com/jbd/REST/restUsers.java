@@ -30,7 +30,7 @@ public class restUsers {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<SessionData> users(){
+    public List<SessionData> users() {
         List<SessionData> userList = manageUser.searchForAll();
         return userList;
     }

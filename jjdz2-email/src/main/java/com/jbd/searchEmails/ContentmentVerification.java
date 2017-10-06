@@ -1,12 +1,12 @@
 package com.jbd.searchEmails;
 
 import javax.ejb.Stateless;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.time.*;
 
 @Stateless
 public class ContentmentVerification {
@@ -18,8 +18,8 @@ public class ContentmentVerification {
 
         foundEmailsList = new ArrayList<>();
         for (Email email : mailListToSearch) {
-            LocalDateTime date = LocalDateTime.parse(startDateOfEmailToSearch,formatter1);
-            LocalDateTime dateEnd = LocalDateTime.parse(endDateOfEmailToSearch,formatter1);
+            LocalDateTime date = LocalDateTime.parse(startDateOfEmailToSearch, formatter1);
+            LocalDateTime dateEnd = LocalDateTime.parse(endDateOfEmailToSearch, formatter1);
             if (email.getData().isAfter(date) && email.getData().isBefore(dateEnd)) {
                 foundEmailsList.add(email);
             }

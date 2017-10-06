@@ -20,7 +20,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = "simpleReport")
-public class DisplayReportServlet extends HttpServlet{
+public class DisplayReportServlet extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(DisplayReportServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("DisplayReportServlet");
     private Map<String, Long> toDisplay;

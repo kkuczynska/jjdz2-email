@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 @Stateless
 public class RudeWordsInContent {
     private static final Logger LOGGER = LoggerFactory.getLogger(RudeWordsInContent.class);
@@ -21,6 +22,7 @@ public class RudeWordsInContent {
     ArrayList<String> content1 = new ArrayList<>();
 
     String regex = "Micha";
+
     public void iteratingThroughList(List<Email> eMailKeeper) {
 
         for (Email email : eMailKeeper) {
@@ -29,7 +31,7 @@ public class RudeWordsInContent {
         }
     }
 
-    public boolean ifRudeWord(String content){
+    public boolean ifRudeWord(String content) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(content);
         return matcher.find();

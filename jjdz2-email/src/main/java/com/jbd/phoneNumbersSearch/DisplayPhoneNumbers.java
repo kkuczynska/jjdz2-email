@@ -60,12 +60,12 @@ public class DisplayPhoneNumbers {
                     phoneList.add(phoneNumber.trim());
                     resultMap.put(email.getFrom(), phoneList);
                     LOGGER.info("Added record to map: " + resultMap.get(email.getFrom()) + " for user : " + email.getFrom());
-                    } else {
+                } else {
                     if (resultMap.containsKey(email.getFrom())) {
                         LOGGER.info("Found User: " + email.getFrom());
                         isDuplicate = searchDuplicates(resultMap, phoneNumber);
                         if (!isDuplicate) {
-                            LOGGER.info("No duplicates found, adding number: " + phoneNumber +" for: " +email.getFrom());
+                            LOGGER.info("No duplicates found, adding number: " + phoneNumber + " for: " + email.getFrom());
                             List<String> phoneNumberList;
                             phoneNumberList = resultMap.get(email.getFrom());
                             phoneNumberList.add(phoneNumber);
@@ -94,7 +94,7 @@ public class DisplayPhoneNumbers {
         for (String key : resultMap.keySet()) {
             System.out.print(key + ": " + "[ ");
             for (String value : resultMap.get(key)) {
-                System.out.print("-"+ value + " " );
+                System.out.print("-" + value + " ");
             }
             System.out.print("]");
             System.out.println();

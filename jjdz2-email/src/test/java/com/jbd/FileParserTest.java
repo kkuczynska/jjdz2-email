@@ -22,12 +22,12 @@ public class FileParserTest {
     @Test
     public void parseEmlFile() throws Exception {
         List<Email> e = fP.parseEmails(Arrays.asList(pathToEMLFile));
-        assertThat(e.get(0).getFrom(), is ("yolo@exampleeml.com"));
+        assertThat(e.get(0).getFrom(), is("yolo@exampleeml.com"));
     }
 
     @Test
     public void parseMbox() throws Exception {
         List<Email> e = fP.parseEmails(Arrays.asList(pathToMBOXFile));
-        assertThat(e.size(), is (7));
+        assertThat(e.size(), is(7));
     }
 }

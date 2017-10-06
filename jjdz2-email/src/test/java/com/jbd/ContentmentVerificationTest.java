@@ -23,7 +23,7 @@ public class ContentmentVerificationTest {
     public void should_return_email_with_correct_date() throws Exception {
         String date = "2013-01-01 00:00";
         String endDate = "2016-10-01 00:00";
-        List<Email> resultList = cv.searchEmailByDate(date,endDate, emailList);
+        List<Email> resultList = cv.searchEmailByDate(date, endDate, emailList);
         assertThat("Given data is later then data in List", resultList.size(), is(2));
     }
 
@@ -33,7 +33,7 @@ public class ContentmentVerificationTest {
                 new String("Marcin.bart@gmail.com"),
                 new String("Karolina@onet.pl")
         );
-        List<Email> resultList = cv.searchEmailByName(emailString,emailList);
+        List<Email> resultList = cv.searchEmailByName(emailString, emailList);
         assertThat("Given emails are wrong", resultList.size(), is(2));
     }
 
@@ -43,7 +43,7 @@ public class ContentmentVerificationTest {
                 new String("wazny"),
                 new String("straszny")
         );
-        List<Email> resultList = cv.searchEmailByTitleWithKeyWords(keyWords,emailList);
+        List<Email> resultList = cv.searchEmailByTitleWithKeyWords(keyWords, emailList);
         assertThat("Returned wrong Titles!", resultList.size(), is(2));
     }
 }

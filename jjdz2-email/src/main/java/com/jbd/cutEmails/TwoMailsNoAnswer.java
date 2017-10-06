@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TwoMailsNoAnswer{
+public class TwoMailsNoAnswer {
     private static final Logger LOGGER = LoggerFactory.getLogger(TwoMailsNoAnswer.class);
     private static final Marker TWOMAILSNOANSWER_MARKER = MarkerFactory.getMarker("TwoMailsNoAnswer");
 
@@ -42,8 +42,8 @@ public class TwoMailsNoAnswer{
     }
 
     public void decideIfTwoAnswers() {// This code waits for else feature
-         // Boolean checkIf = recieverMailDate.isBefore(ourOneBeforeLastDate);
-       // LOGGER.info(TWOMAILSNOANSWER_MARKER, "if true we send two emails and get no answer   :   " + checkIf);
+        // Boolean checkIf = recieverMailDate.isBefore(ourOneBeforeLastDate);
+        // LOGGER.info(TWOMAILSNOANSWER_MARKER, "if true we send two emails and get no answer   :   " + checkIf);
     }
 }
 

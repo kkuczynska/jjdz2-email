@@ -85,10 +85,10 @@ public class FileParser {
             String subject = mess.getSubject();
             char subjectArray[] = subject.toCharArray();
             byte subjectBytes[] = new byte[subjectArray.length];
-            for (int i = 0; i < subjectArray.length; i++){
+            for (int i = 0; i < subjectArray.length; i++) {
                 subjectBytes[i] = (byte) subjectArray[i];
             }
-            String finalSubject = new String (subjectBytes,"UTF-8");
+            String finalSubject = new String(subjectBytes, "UTF-8");
 
             Email e = new Email(mess.getFrom().get(0).getAddress(),
                     finalSubject,

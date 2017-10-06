@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 @Entity
 @NamedQuery(name = "Addressee.getAll", query = "SELECT a.addressee FROM Addressee a")
-public class Addressee implements Serializable{
+public class Addressee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;

@@ -21,7 +21,7 @@ public class PrivilegeFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        LOGGER.info(MARKER,"Active Privilege Filter");
+        LOGGER.info(MARKER, "Active Privilege Filter");
         if (sessionData.getPrivilege() == SessionData.LOCAL_USER) {
             LOGGER.info(MARKER, "User is not previliged to access this page - user previlige:  " + sessionData.getPrivilege() + ", require Admin");
             ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/index.jsp");

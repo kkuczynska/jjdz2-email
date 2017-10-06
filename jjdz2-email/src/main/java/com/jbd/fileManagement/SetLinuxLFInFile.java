@@ -13,7 +13,7 @@ public class SetLinuxLFInFile {
     private static final Marker FL_MARKER = MarkerFactory.getMarker("SetLinuxLFInFile");
     private StringBuilder builder;
 
-    public File RewriteFile(File file){
+    public File RewriteFile(File file) {
         LOGGER.info(FL_MARKER, "File loading started.");
         builder = new StringBuilder();
         FileReader fr = null;
@@ -28,7 +28,7 @@ public class SetLinuxLFInFile {
 
         BufferedReader bfr = new BufferedReader(fr);
         try {
-            while((line = bfr.readLine()) != null){
+            while ((line = bfr.readLine()) != null) {
                 builder.append(line).append("\n");
             }
         } catch (IOException e) {

@@ -26,10 +26,10 @@ public class PathGetter {
         return fileList;
     }
 
-    public String askUserAboutInputPath(){
+    public String askUserAboutInputPath() {
         Scanner scanner = new Scanner(System.in);
         String inputPath;
-        do{
+        do {
             LOGGER.info(PG_MARKER, "Waiting for user to type path.");
             System.out.println("Type correct path to file or directory:");
             inputPath = scanner.nextLine();
@@ -46,13 +46,13 @@ public class PathGetter {
         Matcher matcher = pattern.matcher(inputPath);
         fileList.clear();
         LOGGER.info(PG_MARKER, "Looking for files in given path.");
-        if(matcher.matches()){
+        if (matcher.matches()) {
             fileList.add(inputPath);
-        } else{
+        } else {
             File[] files = new File(inputPath).listFiles();
-            for (File file : files){
-                if(file.isFile() && (file.getAbsolutePath().toLowerCase().endsWith(".mbox")
-                        || file.getAbsolutePath().toLowerCase().endsWith(".eml"))){
+            for (File file : files) {
+                if (file.isFile() && (file.getAbsolutePath().toLowerCase().endsWith(".mbox")
+                        || file.getAbsolutePath().toLowerCase().endsWith(".eml"))) {
                     fileList.add(file.getAbsolutePath());
                 }
             }

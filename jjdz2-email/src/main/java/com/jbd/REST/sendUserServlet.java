@@ -33,7 +33,7 @@ public class sendUserServlet extends HttpServlet {
     @Inject
     ManageUser manageUser;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<SessionData> usersListFromDB = new ArrayList<>();
         usersListFromDB = manageUser.searchForAll();
         LOGGER.info(MARKER, "Get users from DB");

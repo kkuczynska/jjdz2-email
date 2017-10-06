@@ -2,7 +2,7 @@ package com.jbd;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SearchCriteriaValidatorTest {
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();

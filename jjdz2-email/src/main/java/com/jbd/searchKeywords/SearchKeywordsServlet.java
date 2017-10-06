@@ -4,7 +4,6 @@ package com.jbd.searchKeywords;
 import com.jbd.database.Form;
 import com.jbd.database.Form_Details;
 import com.jbd.database.ManageUser;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -99,7 +98,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             Form forConnectingWithDetails = new Form();
             forConnectingWithDetails = manageUser.getFormByName(name);
             List<String> questions = keywords.getQuestionName();
-            int questionNumber =1;
+            int questionNumber = 1;
 
             for (int questionIndex = 0; questionIndex < questions.size(); questionIndex++) {
                 Form_Details form_details = new Form_Details();

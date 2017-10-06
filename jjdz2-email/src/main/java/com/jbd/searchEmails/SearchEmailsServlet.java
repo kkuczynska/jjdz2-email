@@ -1,6 +1,6 @@
 package com.jbd.searchEmails;
 
-import com.jbd.*;
+import com.jbd.SearchCriteria;
 import com.jbd.database.Addressee;
 import com.jbd.database.ManageUser;
 import com.jbd.fileManagement.FileParser;
@@ -136,7 +136,7 @@ public class SearchEmailsServlet extends HttpServlet {
         }
 
         for (String s : searchCriteria.getEmail()) {
-            if(s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
+            if (s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
                 Addressee addr = new Addressee();
                 addr.setAddressee(s);
                 manageUser.saveAddressee(addr);
@@ -146,9 +146,9 @@ public class SearchEmailsServlet extends HttpServlet {
         if (req.getCharacterEncoding() == null) {
             try {
                 req.setCharacterEncoding("UTF-8");
-                LOGGER.info(MARKER,"Encoding Set.");
+                LOGGER.info(MARKER, "Encoding Set.");
             } catch (UnsupportedEncodingException e) {
-                LOGGER.error(MARKER,"Encoding fail.");
+                LOGGER.error(MARKER, "Encoding fail.");
                 e.printStackTrace();
             }
         }

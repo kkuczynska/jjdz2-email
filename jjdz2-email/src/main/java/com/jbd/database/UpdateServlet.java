@@ -48,8 +48,7 @@ public class UpdateServlet extends HttpServlet {
                 }
             }
             LOGGER.info(MARKER, "No parameters in request");
-        }
-        catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
             System.out.println("Brak parametrow");
         }

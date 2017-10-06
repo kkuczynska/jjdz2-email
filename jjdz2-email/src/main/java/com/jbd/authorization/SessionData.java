@@ -1,7 +1,6 @@
 package com.jbd.authorization;
 
 
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -21,8 +20,8 @@ import java.util.Locale;
 @Entity
 @Table(name = "User")
 @NamedQueries({
-@NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p"),
-@NamedQuery(name = "SessionData.findAllWithoutID", query = "select c.username, c.usermail FROM SessionData c")
+        @NamedQuery(name = "SessionData.findAll", query = "select p FROM SessionData p"),
+        @NamedQuery(name = "SessionData.findAllWithoutID", query = "select c.username, c.usermail FROM SessionData c")
 
 })
 public class SessionData implements Serializable {
@@ -119,10 +118,9 @@ public class SessionData implements Serializable {
             this.usermail = usermail;
             this.code = code;
             this.loginTime = LocalDateTime.now();
-            if(privilege == ADMIN){
+            if (privilege == ADMIN) {
                 this.privilege = ADMIN;
-            }
-            else if (privilege == LOCAL_USER)
+            } else if (privilege == LOCAL_USER)
                 this.privilege = LOCAL_USER;
             else
                 this.privilege = LOCAL_USER;
@@ -136,7 +134,7 @@ public class SessionData implements Serializable {
         this.username = "";
         this.usermail = "";
         this.code = null;
-        LOGGER.info(MARKER,"Logout Successful");
+        LOGGER.info(MARKER, "Logout Successful");
 
     }
 
