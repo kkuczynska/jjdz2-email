@@ -22,10 +22,9 @@ import java.util.List;
 
 
 @WebServlet(urlPatterns = "/SendUserServlet")
-
 public class SendUserServlet extends HttpServlet {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SendUserServlet.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("ManageDB");
+    private static final Marker MARKER = MarkerFactory.getMarker("SendUserServlet");
 
     @Inject
     SessionData sessionData;

@@ -18,7 +18,7 @@ import java.util.Map;
 @Stateless
 public class FBGraph {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(FBGraph.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("SearchEmailsServlet");
+    private static final Marker MARKER = MarkerFactory.getMarker("FBGraph");
     @Inject
     LoginFBServlet loginFBServlet;
 

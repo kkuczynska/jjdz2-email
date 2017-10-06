@@ -15,7 +15,6 @@ import java.util.List;
 
 @Stateless
 @Path("/users")
-
 public class RestUsers {
 
     @Inject

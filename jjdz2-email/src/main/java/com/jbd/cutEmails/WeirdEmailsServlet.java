@@ -31,7 +31,7 @@ public class WeirdEmailsServlet extends HttpServlet {
     public LocalDateTime data6 = LocalDateTime.of(2015, Month.DECEMBER, 05, 23, 59, 59);
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WeirdEmailsServlet.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
+    private static final Marker MARKER = MarkerFactory.getMarker("WeirdEmailsServlet");
     private int questionnaireCounter = 1;
 
     private List<Email> fdnaMails = new ArrayList<>();
