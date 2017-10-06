@@ -17,6 +17,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -38,9 +39,7 @@ public class ReportServlet extends HttpServlet {
 
         Report[] reports = response1.readEntity(Report[].class);
 
-        for (int i = 0; i < reports.length; i++) {
-            reportList.add(reports[i]);
-        }
+        Arrays.stream(reports).forEach(r -> reportList.add(r));
         LOGGER.info(MARKER, "Created successfully Report List From JSON");
 
         request.setAttribute("reportList", reportList);

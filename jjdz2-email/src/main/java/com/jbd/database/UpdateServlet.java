@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 
 
 @WebServlet(urlPatterns = "/App/update")
@@ -33,7 +34,6 @@ public class UpdateServlet extends HttpServlet {
         try {
             String[] isPrivileged = req.getParameterValues("isPrivileged");
             if (isPrivileged.length != 0) {
-                System.out.println("Privileged " + isPrivileged.toString());
                 for (int i = 0; i < isPrivileged.length; i++) {
                     SessionData user = manageUser.getUser(Long.parseLong(isPrivileged[i]));
                     int privileged = user.getPrivilege();

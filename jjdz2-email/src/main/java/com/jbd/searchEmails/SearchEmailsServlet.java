@@ -138,7 +138,7 @@ public class SearchEmailsServlet extends HttpServlet {
         for (String s : searchCriteria.getEmail()) {
             if (s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
                 Address addr = new Address();
-                addr.setAddressee(s);
+                addr.setAddress(s);
                 manageUser.saveAddressee(addr);
             }
         }

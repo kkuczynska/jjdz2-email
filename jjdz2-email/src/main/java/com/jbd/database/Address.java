@@ -4,12 +4,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@NamedQuery(name = "Address.getAll", query = "SELECT a.addressee FROM Address a")
+@NamedQuery(name = "Address.getAll", query = "SELECT a.address FROM Address a")
 public class Address implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int Id;
-    private String addressee;
+    private String address;
 
     public int getId() {
         return Id;
@@ -19,19 +19,19 @@ public class Address implements Serializable {
         Id = id;
     }
 
-    public String getAddressee() {
-        return addressee;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAddressee(String addressee) {
-        this.addressee = addressee;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Override
     public String toString() {
         return "Address{" +
                 "Id=" + Id +
-                ", addressee='" + addressee + '\'' +
+                ", address='" + address + '\'' +
                 '}';
     }
 }
