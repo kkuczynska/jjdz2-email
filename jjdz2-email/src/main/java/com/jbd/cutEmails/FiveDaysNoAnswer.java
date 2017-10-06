@@ -1,7 +1,6 @@
 package com.jbd.cutEmails;
 
 import com.jbd.searchEmails.Email;
-import com.jbd.JBDemail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;

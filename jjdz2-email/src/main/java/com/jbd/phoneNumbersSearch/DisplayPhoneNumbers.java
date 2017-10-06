@@ -1,6 +1,5 @@
 package com.jbd.phoneNumbersSearch;
 
-import com.jbd.JBDemail;
 import com.jbd.searchEmails.Email;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +14,7 @@ import java.util.regex.Pattern;
 
 @Stateless
 public class DisplayPhoneNumbers {
-    private static final Logger LOGGER = LogManager.getLogger(JBDemail.class);
+    private static final Logger LOGGER = LogManager.getLogger(DisplayPhoneNumbers.class);
 
     String phonePattern = "(\\s\\d{3}[\\-,\\s]?\\d{3}[\\-,\\s]?\\d{3}\\b)"; // 515417888
 
