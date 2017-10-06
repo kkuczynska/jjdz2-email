@@ -13,7 +13,7 @@ import java.time.ZoneId;
 import java.util.*;
 import java.util.stream.Collectors;
 @Stateless
-public class FiveDaysNoAnswer extends JBDemail {
+public class FiveDaysNoAnswer {
     public LocalDateTime data6 = LocalDateTime.of(2015, Month.DECEMBER, 05, 23, 59, 59);
 
 
