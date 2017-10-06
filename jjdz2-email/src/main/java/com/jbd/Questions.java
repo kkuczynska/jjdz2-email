@@ -17,22 +17,12 @@ public class Questions {
     public static final String ANSWER_POSITIVE = "1";
     public static final String ANSWER_NEGATIVE = "0";
     private static String EMAIL_QUESTION = "Provide email address (xxxx@xx.xx)";
-    private static String KEYWORD_QUESTION = "Provide keywords to find in email subject. Separate them with commas.";
     private static String STARTDATE_QUESTION = "Provide start date (YYYY-MM-DD)";
     private static String ENDDATE_QUESTION = "Provide end date (YYYY-MM-DD)";
-    private static String NUMBER_OF_EMAILS_QUESTION = "How many email addresses would you like to find?";
-    private static String ADDITIONAL_EMAIL_QUESTION = "Provide additional email address.";
-    private static String EMAIL_QUESTION_WRONG_VALUE = "Wrong format, please try again (xxxx@xx.xx)";
-    private static String STARTDATE_QUESTION_WRONG_VALUE = "Wrong format or invalid date, please provide new start date (YYYY-MM-DD)";
-    private static String ENDDATE_QUESTION_WRONG_VALUE = "Wrong format or invalid date, please provide new end date (YYYY-MM-DD)";
-    private String WRONG_INPUT = "Accepted answers: yes , no";
-    private static String POSSIBLE_ANSWERS = " (yes / no)";
     private static final String KEYWORDS_HELP_QUESTION = "Do you need help with keywords? (yes / no)";
     private static final String KEYWORDS_HEADER = "\n--------------------------------------" +
             "\nKeywords matching your query: " +
             "\n--------------------------------------";
-    private final String ANSWER_NO = "no";
-    private final String ANSWER_YES = "yes";
 
     private UserCommunication userCommunication = new UserCommunication();
     private SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
@@ -48,6 +38,7 @@ public class Questions {
     private void generalForm() {
         int numberOfEmailAddresses;
         LOGGER.info(QUESTIONS_MARKER, "General search form displaying started.");
+        String NUMBER_OF_EMAILS_QUESTION = "How many email addresses would you like to find?";
         userCommunication.sendUserMessage(NUMBER_OF_EMAILS_QUESTION);
         numberOfEmailAddresses = Integer.valueOf(userCommunication.getUserResponse());
 
@@ -56,11 +47,11 @@ public class Questions {
                 userCommunication.sendUserMessage(EMAIL_QUESTION);
                 emailAddress = userCommunication.getUserResponse();
                 setEmail(emailAddress);
-                if (searchCriteriaValidator.validateEmail(emailAddress) == false) {
+                if (!searchCriteriaValidator.validateEmail(emailAddress)) {
                     LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + emailAddress);
-                    EMAIL_QUESTION = EMAIL_QUESTION_WRONG_VALUE;
+                    EMAIL_QUESTION = "Wrong format, please try again (xxxx@xx.xx)";
                 } else if (!(numberOfEmailAddresses == 1 && index == 0)) {
-                    EMAIL_QUESTION = ADDITIONAL_EMAIL_QUESTION;
+                    EMAIL_QUESTION = "Provide additional email address.";
                 }
             } while (!searchCriteriaValidator.validateEmail(emailAddress));
         }
@@ -68,21 +59,22 @@ public class Questions {
         do {
             userCommunication.sendUserMessage(STARTDATE_QUESTION);
             setStartDate(userCommunication.getUserResponse());
-            if (searchCriteriaValidator.validateStartDate(searchCriteria.getStartDate()) == false) {
+            if (!searchCriteriaValidator.validateStartDate(searchCriteria.getStartDate())) {
                 LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getStartDate());
-                STARTDATE_QUESTION = STARTDATE_QUESTION_WRONG_VALUE;
+                STARTDATE_QUESTION = "Wrong format or invalid date, please provide new start date (YYYY-MM-DD)";
             }
         } while (!searchCriteriaValidator.validateStartDate(searchCriteria.getStartDate()));
 
         do {
             userCommunication.sendUserMessage(ENDDATE_QUESTION);
             setEndDate(userCommunication.getUserResponse());
-            if (searchCriteriaValidator.validateEndDate(searchCriteria.getEndDate()) == false) {
+            if (!searchCriteriaValidator.validateEndDate(searchCriteria.getEndDate())) {
                 LOGGER.debug(QUESTIONS_MARKER, "Incorrect user input: " + searchCriteria.getEndDate());
-                ENDDATE_QUESTION = ENDDATE_QUESTION_WRONG_VALUE;
+                ENDDATE_QUESTION = "Wrong format or invalid date, please provide new end date (YYYY-MM-DD)";
             }
         } while (!searchCriteriaValidator.validateEndDate(searchCriteria.getEndDate()));
 
+        String KEYWORD_QUESTION = "Provide keywords to find in email subject. Separate them with commas.";
         userCommunication.sendUserMessage(KEYWORD_QUESTION);
         setKeywords(userCommunication.getUserResponse());
     }
@@ -93,15 +85,19 @@ public class Questions {
         String answer = "";
 
         LOGGER.info(QUESTIONS_MARKER, "Keywords form displaying started.");
+        String ANSWER_YES = "yes";
+        String ANSWER_NO = "no";
         do {
             userCommunication.sendUserMessage(KEYWORDS_HELP_QUESTION);
             answer = userCommunication.getUserResponse();
 
+            String WRONG_INPUT = "Accepted answers: yes , no";
             if (answer.equalsIgnoreCase(ANSWER_YES)) {
                 for (String question : jsonReader.readQuestionJsonArray()) {
                     String keywordFormAnswer;
 
                     do {
+                        String POSSIBLE_ANSWERS = " (yes / no)";
                         userCommunication.sendUserMessage(question + POSSIBLE_ANSWERS);
                         keywordFormAnswer = userCommunication.getUserResponse();
                         if (keywordFormAnswer.equalsIgnoreCase(ANSWER_YES)) {

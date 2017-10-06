@@ -23,8 +23,6 @@ import java.util.stream.Collectors;
 public class DisplayReportServlet extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(DisplayReportServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("DisplayReportServlet");
-    private Map<String, Long> toDisplay;
-    private List<String> fromDatabase;
 
     @Inject
     ManageUser manageUser;
@@ -32,8 +30,8 @@ public class DisplayReportServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info(MARKER, "User requested report.");
-        toDisplay = new TreeMap<>();
-        fromDatabase = manageUser.getAllAddressee();
+        Map<String, Long> toDisplay = new TreeMap<>();
+        List<String> fromDatabase = manageUser.getAllAddressee();
         toDisplay = fromDatabase
                 .stream()
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()));

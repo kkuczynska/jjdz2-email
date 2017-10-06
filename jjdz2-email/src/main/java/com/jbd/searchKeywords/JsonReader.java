@@ -23,7 +23,6 @@ public class JsonReader {
     private static final Marker JSONREADER_MARKER = MarkerFactory.getMarker("JsonReader");
 
     private static final String jsonPath = "src/main/resources/KeywordsForm.json";
-    private String QUESTIONS_ARRAY_NAME = "questions";
 
     public ArrayList<String> readAnswerJsonArray(String jsonNodeName) {
         FileReader fileReader = null;
@@ -47,9 +46,8 @@ public class JsonReader {
             e.printStackTrace();
         }
         LOGGER.info(JSONREADER_MARKER, "Creating JsonArray from file: " + jsonPath);
-        JSONArray jsonArray = (JSONArray) jsonObject.get(jsonNodeName);
 
-        return jsonArray;
+        return (JSONArray) jsonObject.get(jsonNodeName);
     }
 
     public List<String> readQuestionJsonArray() {
@@ -73,6 +71,7 @@ public class JsonReader {
             LOGGER.debug(JSONREADER_MARKER, "ParseException thrown while parsing file: " + jsonPath);
             e.printStackTrace();
         }
+        String QUESTIONS_ARRAY_NAME = "questions";
         JSONArray jsonArray = (JSONArray) jsonObject.get(QUESTIONS_ARRAY_NAME);
         LOGGER.info(JSONREADER_MARKER, "Creating jsonArray from file: " + jsonPath + " found array name: "
                 + QUESTIONS_ARRAY_NAME);

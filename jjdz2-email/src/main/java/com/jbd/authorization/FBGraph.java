@@ -36,8 +36,6 @@ public class FBGraph {
     public FBGraph() {
     }
 
-    ;
-
     public String getFBGraph() {
         String graph = null;
         try {

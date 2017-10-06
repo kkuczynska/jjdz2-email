@@ -33,7 +33,6 @@ public class WeirdEmailsServlet extends HttpServlet {
     private static final Logger LOGGER = LoggerFactory.getLogger(WeirdEmailsServlet.class);
     private static final Marker MARKER = MarkerFactory.getMarker("SearchKeywordsServlet");
     private int questionnaireCounter = 1;
-    private List<Email> recivedEamils = new ArrayList<>();
 
     private List<Email> fdnaMails = new ArrayList<>();
     @EJB
@@ -46,7 +45,7 @@ public class WeirdEmailsServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         List<Email> emails = new ArrayList<>();
-        recivedEamils = mailHolder.getMails();
+        List<Email> recivedEamils = mailHolder.getMails();
 
         Map<String, String> parsedQueryString = splitQuery(req.getQueryString());
         List<Email> outputEmails = new ArrayList<>();

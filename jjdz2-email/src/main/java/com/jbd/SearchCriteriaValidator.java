@@ -25,7 +25,7 @@ public class SearchCriteriaValidator {
     public static boolean validateEmail(String email) {
         boolean isEmailCorrect = true;
         boolean validateChars = validateUnacceptableCharsExisting(email);
-        if (validateChars == false || !email.contains("@") || !email.contains(".")) {
+        if (!validateChars || !email.contains("@") || !email.contains(".")) {
             isEmailCorrect = false;
             LOGGER.debug(MARKER, "Incorrect user input: " + email);
         }
@@ -40,14 +40,14 @@ public class SearchCriteriaValidator {
 
     public static boolean validateEndDate(String endDate) {
         boolean isEnddateCorrect = datePatternMatching(endDate);
-        if (isEnddateCorrect == true) {
+        if (isEnddateCorrect) {
             LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
             boolean isEndDateAfterStartDate = endDateFormatted
                     .isAfter(LocalDate.parse(SearchCriteria.getStartDate(), dateFormatter));
             LOGGER.debug(MARKER,
                     "End date after start date validation, outcome: " + isEndDateAfterStartDate);
 
-            if (isEndDateAfterStartDate == false) {
+            if (!isEndDateAfterStartDate) {
                 isEnddateCorrect = false;
             }
         }
@@ -72,7 +72,7 @@ public class SearchCriteriaValidator {
         boolean hasCorrectPattern = true;
         if (!(DEFAULT_ENDDATE.equals(date) || DEFAULT_STARTDATE.equals(date))) {
             boolean matches = Pattern.matches(DATE_PATTERN, date);
-            if (matches == false) {
+            if (!matches) {
                 hasCorrectPattern = false;
                 LOGGER.debug(MARKER, "Date " + date + " does not match pattern: " + DATE_PATTERN);
             } else {

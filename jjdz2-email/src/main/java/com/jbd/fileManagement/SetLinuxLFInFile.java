@@ -11,11 +11,10 @@ import java.io.*;
 public class SetLinuxLFInFile {
     private static final Logger LOGGER = LoggerFactory.getLogger(SetLinuxLFInFile.class);
     private static final Marker FL_MARKER = MarkerFactory.getMarker("SetLinuxLFInFile");
-    private StringBuilder builder;
 
     public File RewriteFile(File file) {
         LOGGER.info(FL_MARKER, "File loading started.");
-        builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
         FileReader fr = null;
         String line;
 

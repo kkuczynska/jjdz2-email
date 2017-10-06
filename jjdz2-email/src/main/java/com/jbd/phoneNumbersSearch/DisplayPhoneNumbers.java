@@ -18,8 +18,6 @@ public class DisplayPhoneNumbers {
 
     String phonePattern = "(\\s\\d{3}[\\-,\\s]?\\d{3}[\\-,\\s]?\\d{3}\\b)"; // 515417888
 
-    private Pattern patternPhone;
-
     private boolean searchDuplicates(Map<String, List<String>> mapToSearch, String stringTooSearch) {
         boolean foundDuplicate = false;
         for (String key : mapToSearch.keySet()) {
@@ -47,7 +45,7 @@ public class DisplayPhoneNumbers {
 
     public Map<String, List<String>> searchPhoneNumbers(List<Email> emailList) {
         Map<String, List<String>> resultMap = new TreeMap<>();
-        patternPhone = Pattern.compile(phonePattern);
+        Pattern patternPhone = Pattern.compile(phonePattern);
         boolean isDuplicate = false;
 
         for (Email email : emailList) {

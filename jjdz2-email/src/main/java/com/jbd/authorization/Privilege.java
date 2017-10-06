@@ -6,9 +6,7 @@ package com.jbd.authorization;
 public enum Privilege {
     ADMIN("Administrator"), LOCAL("Local User");
 
-    private String type;
-
     Privilege(String privileges) {
-        this.type = privileges;
+        String type = privileges;
     }
 }

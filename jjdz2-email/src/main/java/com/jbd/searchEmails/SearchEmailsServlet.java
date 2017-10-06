@@ -98,7 +98,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         try {
             file = new File(uploads, fileName);
-            try (InputStream fileContent = filePart.getInputStream();) {
+            try (InputStream fileContent = filePart.getInputStream()) {
                 Files.copy(fileContent, file.toPath());
                 LOGGER.info(MARKER, "File has been saved to default directory: " + FILE_UPLOAD_PATH);
             }

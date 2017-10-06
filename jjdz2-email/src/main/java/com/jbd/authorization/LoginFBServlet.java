@@ -38,9 +38,7 @@ public class LoginFBServlet extends HttpServlet {
     ManageUser manageUser;
 
     private static final long serialVersionUID = 1L;
-    private String code = "";
     private SessionData userFromDatabase;
-    private List<SessionData> usersFromDatabase;
     private int counter = 0;
     int privilege = 2;
     private boolean isNotInDB;
@@ -48,7 +46,7 @@ public class LoginFBServlet extends HttpServlet {
     public void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         LOGGER.info(MARKER, "Trying to log in to FB");
-        code = req.getParameter("code");
+        String code = req.getParameter("code");
         if (code == null || code.equals("")) {
             throw new RuntimeException(
                     "ERROR: Didn't get code parameter in callback.");
@@ -76,7 +74,7 @@ public class LoginFBServlet extends HttpServlet {
             LOGGER.info(MARKER, "Added admin user");
             counter += 1;
         }
-        usersFromDatabase = manageUser.searchForAll();
+        List<SessionData> usersFromDatabase = manageUser.searchForAll();
         for (SessionData user : usersFromDatabase) {
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
                 if (user.getPrivilege() == SessionData.ADMIN) {

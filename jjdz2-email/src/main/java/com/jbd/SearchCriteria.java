@@ -68,8 +68,7 @@ public class SearchCriteria {
 
     public static List<String> getKeywords() {
         LOGGER.info(MARKER, "Keywords passed parsing method");
-        List<String> keywordsParsed = searchCriteriaCommaParser(keywords);
-        return keywordsParsed;
+        return searchCriteriaCommaParser(keywords);
     }
 
     public static void setKeywords(String keywords) {
