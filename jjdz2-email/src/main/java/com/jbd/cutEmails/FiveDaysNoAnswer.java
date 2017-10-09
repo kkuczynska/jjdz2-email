@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 public class FiveDaysNoAnswer {
     public LocalDateTime data6 = LocalDateTime.of(2015, Month.DECEMBER, 05, 23, 59, 59);
 
-
     private static final Logger LOGGER = LoggerFactory.getLogger(FiveDaysNoAnswer.class);
     private static final Marker FIVEDAYSNOANSWER_MARKER = MarkerFactory.getMarker("FiveDaysNoAnswer");
 

@@ -15,13 +15,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @WebServlet(urlPatterns = "/App/search")
 public class AdminUsers extends HttpServlet {
 
     @Inject
     ManageUser manageUser;
-
     @EJB
     ContentmentVerification verification;
 
@@ -35,7 +33,5 @@ public class AdminUsers extends HttpServlet {
         req.setAttribute("userList", userList);
         RequestDispatcher dispatcher = req.getRequestDispatcher("/App/AdminConsole.jsp");
         dispatcher.forward(req, resp);
-
-
     }
 }

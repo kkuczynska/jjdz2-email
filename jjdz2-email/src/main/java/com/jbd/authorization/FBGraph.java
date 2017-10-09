@@ -19,15 +19,15 @@ import java.util.Map;
 public class FBGraph {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(FBGraph.class);
     private static final Marker MARKER = MarkerFactory.getMarker("FBGraph");
+
+    private String accessToken;
+
     @Inject
     LoginFBServlet loginFBServlet;
 
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
-
-    private String accessToken;
-
 
     public FBGraph(String accessToken) {
         this.accessToken = accessToken;
@@ -39,12 +39,10 @@ public class FBGraph {
     public String getFBGraph() {
         String graph = null;
         try {
-
             String g = "https://graph.facebook.com/v2.8/me?fields=id,first_name,last_name,email&" + accessToken;
             URL u = new URL(g);
             URLConnection c = u.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    c.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
             String inputLine;
             StringBuffer b = new StringBuffer();
             while ((inputLine = in.readLine()) != null) {
@@ -55,7 +53,6 @@ public class FBGraph {
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("ERROR in getting FB graph data. " + e);
-
         }
         return graph;
     }

@@ -1,6 +1,5 @@
 package com.jbd.searchKeywords;
 
-
 import com.jbd.database.Form;
 import com.jbd.database.FormDetails;
 import com.jbd.database.ManageUser;
@@ -38,7 +37,6 @@ public class SearchKeywordsServlet extends HttpServlet {
     ManageUser manageUser;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
-
         LOGGER.info(MARKER, "User redirected to keywords.jsp with doGet().");
         req.setAttribute("questions", keywordsQuestionsMap.createQuestionsMap());
         LOGGER.info(MARKER, "Set JSP attribute \"question\" with keywords questionnaire.");
@@ -58,7 +56,6 @@ public class SearchKeywordsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
-
         for (int questionIndex = 0;
              questionIndex < keywordsQuestionsMap.getQuestionsMap().size(); questionIndex++) {
             String answer = "0";
@@ -94,7 +91,6 @@ public class SearchKeywordsServlet extends HttpServlet {
             manageUser.saveForm(form);
             questionnaireCounter++;
 
-            //Connecting details with form
             Form forConnectingWithDetails = new Form();
             forConnectingWithDetails = manageUser.getFormByName(name);
             List<String> questions = keywords.getQuestionName();
@@ -102,7 +98,6 @@ public class SearchKeywordsServlet extends HttpServlet {
 
             for (int questionIndex = 0; questionIndex < questions.size(); questionIndex++) {
                 FormDetails form_details = new FormDetails();
-                //form_details.setQuestion(questions.get(questionIndex));
                 form_details.setQuestion(questionNumber++);
                 form_details.setResponse(req.getParameter("q" + questionIndex));
                 form_details.setForm(forConnectingWithDetails);

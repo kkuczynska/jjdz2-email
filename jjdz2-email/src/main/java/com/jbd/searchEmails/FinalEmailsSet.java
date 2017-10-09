@@ -67,7 +67,6 @@ public class FinalEmailsSet {
                 }
             }
         }
-
         LOGGER.info(MARKER, "Final email set completed.");
         return emailsFinal;
     }

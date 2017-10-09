@@ -36,7 +36,6 @@ public class Email {
     public Email(String from, String subject) {
         this.from = from;
         this.subject = subject;
-
     }
 
     public Email(String from) {

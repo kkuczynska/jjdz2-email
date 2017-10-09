@@ -27,13 +27,10 @@ public class LoginFBServlet extends HttpServlet {
 
     @Inject
     FBConnection fbConnection;
-
     @Inject
     FBGraph fbGraph;
-
     @Inject
     SessionData sessionData;
-
     @Inject
     ManageUser manageUser;
 
@@ -74,6 +71,7 @@ public class LoginFBServlet extends HttpServlet {
             LOGGER.info(MARKER, "Added admin user");
             counter += 1;
         }
+
         List<SessionData> usersFromDatabase = manageUser.searchForAll();
         for (SessionData user : usersFromDatabase) {
             if (user.getUsername().equals(userName) && user.getUsermail().equals(fbProfileData.get("email"))) {
@@ -88,7 +86,9 @@ public class LoginFBServlet extends HttpServlet {
             isNotInDB = true;
         }
 
-        sessionData.login(code, fbProfileData.get("first_name") + " " + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
+        sessionData
+                .login(code, fbProfileData.get("first_name") + " "
+                        + fbProfileData.get("last_name"), fbProfileData.get("email"), privilege);
 
         if (isNotInDB) {
             LOGGER.info(MARKER, "User is not in DB! Adding...");
@@ -100,18 +100,14 @@ public class LoginFBServlet extends HttpServlet {
 
         sendJsonToReportSystem(createUserForReport(userName, userMail));
 
-
         LOGGER.info(MARKER, "Logged User: " + sessionData.getUsername() + " Privilege: " + sessionData.getPrivilege());
         LOGGER.debug(MARKER, "Session data :" + sessionData);
 
         String name = fbProfileData.get("first_name");
-
         if (sessionData.isLogged()) {
             req.setAttribute("name", name);
             res.sendRedirect("/jbdee/index.jsp");
         }
-
-
     }
 
     public SessionData createUserToDB(String userName, String userMail, int privilege) {
@@ -131,7 +127,6 @@ public class LoginFBServlet extends HttpServlet {
         return user;
     }
 
-
     public void sendJsonToReportSystem(SessionData sessionData) {
         Response user = ClientBuilder.newClient()
                 .target("http://localhost:8081/reporting/reportApi/users")
@@ -139,9 +134,4 @@ public class LoginFBServlet extends HttpServlet {
                 .accept(MediaType.APPLICATION_JSON)
                 .post(Entity.json(sessionData));
     }
-
-
 }
-
-
-

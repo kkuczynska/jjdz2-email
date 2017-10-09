@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @WebServlet(urlPatterns = "/SendUserServlet")
 public class SendUserServlet extends HttpServlet {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(SendUserServlet.class);
@@ -28,7 +27,6 @@ public class SendUserServlet extends HttpServlet {
 
     @Inject
     SessionData sessionData;
-
     @Inject
     ManageUser manageUser;
 

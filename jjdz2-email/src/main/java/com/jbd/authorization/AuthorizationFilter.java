@@ -10,7 +10,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
 @WebFilter(urlPatterns = {"/App/*"})
 public class AuthorizationFilter implements Filter {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(AuthorizationFilter.class);
@@ -20,7 +19,8 @@ public class AuthorizationFilter implements Filter {
     SessionData sessionData;
 
     @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
         if (!sessionData.isLogged()) {
             LOGGER.info(MARKER, "User is not Logged to access this page");
             ((HttpServletResponse) servletResponse).sendRedirect("/jbdee/LoginFB.jsp");

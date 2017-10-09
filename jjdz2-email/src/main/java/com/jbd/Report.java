@@ -1,6 +1,5 @@
 package com.jbd;
 
-
 import com.jbd.authorization.SessionData;
 
 public class Report {

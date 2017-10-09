@@ -35,7 +35,6 @@ public class ManageUser implements Serializable {
         else
             LOGGER.info(MARKER, "No user at DB with id: " + id);
         return sessionData;
-
     }
 
     public List<SessionData> searchForAll() {

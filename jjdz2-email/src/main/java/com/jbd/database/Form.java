@@ -1,6 +1,5 @@
 package com.jbd.database;
 
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,7 +16,6 @@ public class Form implements Serializable {
     private String name;
     private LocalDateTime creationTime;
     @OneToMany(mappedBy = "form")
-    // @JoinColumn(name = "form_id", referencedColumnName = "id_form")
     private List<FormDetails> details;
 
     public Long getId() {

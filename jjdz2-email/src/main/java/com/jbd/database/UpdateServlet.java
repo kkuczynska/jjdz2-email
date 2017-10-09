@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Arrays;
 
-
 @WebServlet(urlPatterns = "/App/update")
 public class UpdateServlet extends HttpServlet {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(UpdateServlet.class);
@@ -23,10 +22,8 @@ public class UpdateServlet extends HttpServlet {
 
     @Inject
     ManageUser manageUser;
-
     @Inject
     SessionData sessionData;
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -54,7 +51,5 @@ public class UpdateServlet extends HttpServlet {
         RequestDispatcher dispatcher = req.getRequestDispatcher("/App/AdminConsole.jsp");
         req.setAttribute("null", "No parameters!");
         dispatcher.forward(req, resp);
-
-
     }
 }

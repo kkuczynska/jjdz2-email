@@ -66,7 +66,6 @@ public class WeirdEmailsServlet extends HttpServlet {
                 }
             }
         }
-
         req.setAttribute("displayMails", outputEmails);
 
         LOGGER.info(MARKER, "Displaying: " + recivedEamils.size() + " records.");

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 @WebServlet(urlPatterns = "/App/createReport")
 public class ReportServlet extends HttpServlet {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(ReportServlet.class);
@@ -45,8 +44,6 @@ public class ReportServlet extends HttpServlet {
         request.setAttribute("reportList", reportList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/App/AdminConsole.jsp");
         dispatcher.forward(request, response);
-
-
     }
 }
 

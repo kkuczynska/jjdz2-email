@@ -31,7 +31,6 @@ public class KeywordsQuestionsMap {
         return questionsMap;
     }
 
-
     public Map<String, String> getQuestionsMap() {
         return questionsMap;
     }

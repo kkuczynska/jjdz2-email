@@ -15,7 +15,6 @@ public class FormDetails implements Serializable {
     @JoinColumn(name = "form_id")
     private Form form;
 
-
     public Long getId() {
         return id;
     }

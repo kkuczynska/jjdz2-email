@@ -33,7 +33,6 @@ public class DisplayPhoneNumbers {
             if (foundDuplicate)
                 break;
         }
-
         return foundDuplicate;
     }
 
@@ -85,8 +84,6 @@ public class DisplayPhoneNumbers {
                 }
 
             }
-
-
         }
         return resultMap;
     }

@@ -7,7 +7,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
-
 @SessionScoped
 public class FBConnection implements Serializable {
     public static final String FB_APP_ID = "1783631111890477";

@@ -39,7 +39,6 @@ public class Keywords {
     }
 
     public Set<String> createKeywordsSet() {
-
         JsonReader jsonReader = new JsonReader();
         LOGGER.info(KEYWORDS_MARKER, "Creating HashSet with unique keywords based on user's answers.");
         for (int index = 0; index < answersIDs.size(); index++) {
@@ -56,7 +55,6 @@ public class Keywords {
                             + keywordsSet.size());
                 }
                 answersIDs.clear();
-
             }
         }
         return keywordsSet;
@@ -73,5 +71,4 @@ public class Keywords {
     public static void clearAnswersList() {
         answersIDs.clear();
     }
-
 }

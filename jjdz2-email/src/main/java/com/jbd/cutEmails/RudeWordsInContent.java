@@ -38,8 +38,6 @@ public class RudeWordsInContent {
     }
 
     public boolean ifRudeWord(ArrayList<String> content) {
-
-
         Pattern pattern = Pattern.compile(regex);
 
         for (String var : content1) {
@@ -48,9 +46,7 @@ public class RudeWordsInContent {
             if (found) {
                 LOGGER.info(RUDEWORDSINCONTENT_MARKER, "if true that means there were swearings in message   :   " + found);
             }
-
         }
-
         return true;
     }
 }

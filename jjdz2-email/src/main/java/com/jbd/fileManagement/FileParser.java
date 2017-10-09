@@ -59,7 +59,8 @@ public class FileParser {
         InputStream source = new FileInputStream(emlFile);
         MimeMessage message = new MimeMessage(mailSession, source);
 
-        return new Email(message.getFrom()[0].toString(), message.getSubject(), message.getSentDate(), message.getContent().toString());
+        return new Email(message.getFrom()[0].toString(),
+                message.getSubject(), message.getSentDate(), message.getContent().toString());
     }
 
     private List<Email> parseMbox(File mboxFile) throws IOException, MimeException {

@@ -1,6 +1,5 @@
 package com.jbd.authorization;
 
-
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -14,7 +13,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Locale;
-
 
 @SessionScoped
 @Entity
@@ -125,8 +123,6 @@ public class SessionData implements Serializable {
             else
                 this.privilege = LOCAL_USER;
         }
-
-
     }
 
     public void logout() {
@@ -135,7 +131,6 @@ public class SessionData implements Serializable {
         this.usermail = "";
         this.code = null;
         LOGGER.info(MARKER, "Logout Successful");
-
     }
 
     @Override
@@ -150,5 +145,4 @@ public class SessionData implements Serializable {
                 ", code='" + code + '\'' +
                 '}';
     }
-
 }
