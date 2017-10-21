@@ -158,10 +158,10 @@ public class SearchEmailsServlet extends HttpServlet {
         req.setAttribute("phoneNumbersFound", message);
         req.setAttribute("finalEmailSet", emailSet);
         req.setAttribute("emailFile", emailPath);
-        req.setAttribute("emails", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getEmail()));
+        req.setAttribute("emails", finalEmailsSet.joinStringsWithComma(searchCriteria.getEmail()));
         req.setAttribute("startDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getStartDate()));
         req.setAttribute("endDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getEndDate()));
-        req.setAttribute("keywords", finalEmailsSet.emailsSeparatedWithComma(searchCriteria.getKeywords()));
+        req.setAttribute("keywords", finalEmailsSet.joinStringsWithComma(searchCriteria.getKeywords()));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");

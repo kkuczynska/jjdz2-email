@@ -7,10 +7,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import javax.ejb.Stateless;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Stateless
 public class FinalEmailsSet {
@@ -71,12 +68,11 @@ public class FinalEmailsSet {
         return emailsFinal;
     }
 
-    public String emailsSeparatedWithComma(List<String> listToParse) {
-        String listParsed = "";
-        for (String element : listToParse) {
-            listParsed = listParsed + ", " + element;
-        }
-        listParsed = listParsed.substring(2);
-        return listParsed;
+    public String joinStringsWithComma(List<String> listToParse) {
+        StringJoiner sj = new StringJoiner(", ");
+        listToParse.forEach( s -> {
+            sj.add(s);
+        });
+        return sj.toString();
     }
 }
