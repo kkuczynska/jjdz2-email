@@ -1,6 +1,5 @@
 package com.jbd.searchEmails;
 
-import com.jbd.EmailSearchForm;
 import com.jbd.database.Address;
 import com.jbd.database.ManageUser;
 import com.jbd.fileManagement.FileParser;
