@@ -6,7 +6,6 @@ import static org.junit.Assert.assertEquals;
 
 public class SearchCriteriaValidatorTest {
     private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
-    private static SearchCriteria searchCriteria = new SearchCriteria();
 
     @Test
     public void empty_email_should_return_false() throws Exception {

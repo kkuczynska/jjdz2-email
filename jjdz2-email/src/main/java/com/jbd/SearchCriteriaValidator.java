@@ -43,7 +43,7 @@ public class SearchCriteriaValidator {
         if (isEnddateCorrect) {
             LocalDate endDateFormatted = LocalDate.parse(endDate, dateFormatter);
             boolean isEndDateAfterStartDate = endDateFormatted
-                    .isAfter(LocalDate.parse(SearchCriteria.getStartDate(), dateFormatter));
+                    .isAfter(LocalDate.parse(EmailSearchForm.getStartDate(), dateFormatter));
             LOGGER.debug(MARKER,
                     "End date after start date validation, outcome: " + isEndDateAfterStartDate);
 

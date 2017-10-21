@@ -1,6 +1,6 @@
 package com.jbd.searchEmails;
 
-import com.jbd.SearchCriteria;
+import com.jbd.EmailSearchForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -16,7 +16,7 @@ public class FinalEmailsSet {
     private static final Marker MARKER = MarkerFactory.getMarker("FinalEmailsSet");
 
     private ContentmentVerification contentmentVerification = new ContentmentVerification();
-    private SearchCriteria searchCriteria = new SearchCriteria();
+    private EmailSearchForm emailSearchForm = new EmailSearchForm();
 
     public Set<Email> createUniqueEmailsSet(List<Email> emails) {
 
@@ -24,10 +24,10 @@ public class FinalEmailsSet {
         List<Email> emailsFoundByEmail = new ArrayList<>();
         List<Email> emailsFoundByEmailAndDate = new ArrayList<>();
 
-        String getStartDate = searchCriteria.getStartDate();
-        String getEndDate = searchCriteria.getEndDate();
-        List<String> getEmail = searchCriteria.getEmail();
-        List<String> getKeywords = searchCriteria.getKeywords();
+        String getStartDate = emailSearchForm.getStartDate();
+        String getEndDate = emailSearchForm.getEndDate();
+        List<String> getEmail = emailSearchForm.getEmail();
+        List<String> getKeywords = emailSearchForm.getKeywords();
 
         if (1 == getEmail.size() && "".equals(getEmail.get(0))
                 && "1111-01-01 00:00".equals(getStartDate) && "9999-12-12 00:00".equals(getEndDate)
@@ -70,7 +70,7 @@ public class FinalEmailsSet {
 
     public String joinStringsWithComma(List<String> listToParse) {
         StringJoiner sj = new StringJoiner(", ");
-        listToParse.forEach( s -> {
+        listToParse.forEach(s -> {
             sj.add(s);
         });
         return sj.toString();

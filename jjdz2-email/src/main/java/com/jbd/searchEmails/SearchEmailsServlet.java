@@ -1,6 +1,6 @@
 package com.jbd.searchEmails;
 
-import com.jbd.SearchCriteria;
+import com.jbd.EmailSearchForm;
 import com.jbd.database.Address;
 import com.jbd.database.ManageUser;
 import com.jbd.fileManagement.FileParser;
@@ -44,7 +44,7 @@ public class SearchEmailsServlet extends HttpServlet {
     public static final int MINIMUM_EMAIL_ADDRESS_LENGTH = 3;
 
     @EJB
-    SearchCriteria searchCriteria;
+    EmailSearchForm emailSearchForm;
     @EJB
     PathGetter pathGetter;
     @EJB
@@ -69,13 +69,13 @@ public class SearchEmailsServlet extends HttpServlet {
         String fileName = "";
         Set<Email> emailSet = null;
 
-        searchCriteria.setEmail(req.getParameter("email"));
+        emailSearchForm.setEmail(req.getParameter("email"));
         LOGGER.info(MARKER, "Set value for email field.");
-        searchCriteria.setStartDate(req.getParameter("startDate"));
+        emailSearchForm.setStartDate(req.getParameter("startDate"));
         LOGGER.info(MARKER, "Set value for start date field.");
-        searchCriteria.setEndDate(req.getParameter("endDate"));
+        emailSearchForm.setEndDate(req.getParameter("endDate"));
         LOGGER.info(MARKER, "Set value for end date field.");
-        searchCriteria.setKeywords(req.getParameter("keywords"));
+        emailSearchForm.setKeywords(req.getParameter("keywords"));
         LOGGER.info(MARKER, "Set value for keywords field.");
 
         new File(FILE_UPLOAD_PATH).mkdir();
@@ -135,7 +135,7 @@ public class SearchEmailsServlet extends HttpServlet {
             message = phoneNumbers.setPhoneNumbersMessage(req.getParameter("phoneNumbers"), resultMap, req);
         }
 
-        for (String s : searchCriteria.getEmail()) {
+        for (String s : emailSearchForm.getEmail()) {
             if (s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
                 Address addr = new Address();
                 addr.setAddress(s);
@@ -158,10 +158,10 @@ public class SearchEmailsServlet extends HttpServlet {
         req.setAttribute("phoneNumbersFound", message);
         req.setAttribute("finalEmailSet", emailSet);
         req.setAttribute("emailFile", emailPath);
-        req.setAttribute("emails", finalEmailsSet.joinStringsWithComma(searchCriteria.getEmail()));
-        req.setAttribute("startDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getStartDate()));
-        req.setAttribute("endDate", searchCriteria.dateToDisplayInFrontEnd(searchCriteria.getEndDate()));
-        req.setAttribute("keywords", finalEmailsSet.joinStringsWithComma(searchCriteria.getKeywords()));
+        req.setAttribute("emails", finalEmailsSet.joinStringsWithComma(emailSearchForm.getEmail()));
+        req.setAttribute("startDate", emailSearchForm.dateToDisplayInFrontEnd(emailSearchForm.getStartDate()));
+        req.setAttribute("endDate", emailSearchForm.dateToDisplayInFrontEnd(emailSearchForm.getEndDate()));
+        req.setAttribute("keywords", finalEmailsSet.joinStringsWithComma(emailSearchForm.getKeywords()));
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");

@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
-public class SearchCriteria {
+public class EmailSearchForm {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchCriteria.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("SearchCriteria");
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailSearchForm.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("EmailSearchForm");
 
     private static String email;
     private static String startDate;
@@ -31,7 +31,7 @@ public class SearchCriteria {
     public static void setEmail(String email) {
         emailAdresses = new ArrayList<>();
         searchCriteriaValidator.validateEmail(email);
-        SearchCriteria.email = email;
+        EmailSearchForm.email = email;
         emailAdresses.addAll(searchCriteriaCommaParser(email));
         LOGGER.info(MARKER, "Element: " + email + " added to the emails list.");
     }
@@ -47,7 +47,7 @@ public class SearchCriteria {
             startDate = startDate + TIME;
         }
         LOGGER.info(MARKER, "Start date has been set: " + startDate);
-        SearchCriteria.startDate = startDate;
+        EmailSearchForm.startDate = startDate;
         //searchCriteriaValidator.validateStartDate(startDate);
     }
 
@@ -61,7 +61,7 @@ public class SearchCriteria {
         } else {
             endDate = endDate + TIME;
         }
-        SearchCriteria.endDate = endDate;
+        EmailSearchForm.endDate = endDate;
         LOGGER.info(MARKER, "End date has been set: " + endDate);
         //  searchCriteriaValidator.validateEndDate(endDate);
     }
@@ -72,7 +72,7 @@ public class SearchCriteria {
     }
 
     public static void setKeywords(String keywords) {
-        SearchCriteria.keywords = keywords;
+        EmailSearchForm.keywords = keywords;
         LOGGER.info(MARKER, "Keywords has been set: " + keywords);
     }
 
