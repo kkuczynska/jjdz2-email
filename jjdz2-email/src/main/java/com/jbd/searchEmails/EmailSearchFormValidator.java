@@ -1,6 +1,5 @@
-package com.jbd;
+package com.jbd.searchEmails;
 
-import com.jbd.searchEmails.EmailSearchForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -10,10 +9,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-public class SearchCriteriaValidator {
+public class EmailSearchFormValidator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SearchCriteriaValidator.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("SearchCriteriaValidator");
+    private static final Logger LOGGER = LoggerFactory.getLogger(EmailSearchFormValidator.class);
+    private static final Marker MARKER = MarkerFactory.getMarker("EmailSearchFormValidator");
 
     public static final int MAX_DAYS_IN_MONTH = 31;
     public static final int MAX_MONTHS_IN_YEAR = 12;

@@ -1,6 +1,5 @@
 package com.jbd.searchEmails;
 
-import com.jbd.SearchCriteriaValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -23,7 +22,7 @@ public class EmailSearchForm {
     private static final String TIME = " 00:00";
     private static ArrayList<String> emailAdresses = new ArrayList<>();
 
-    private static SearchCriteriaValidator searchCriteriaValidator = new SearchCriteriaValidator();
+    private static EmailSearchFormValidator emailSearchFormValidator = new EmailSearchFormValidator();
 
     public static ArrayList<String> getEmail() {
         return emailAdresses;
@@ -31,7 +30,7 @@ public class EmailSearchForm {
 
     public static void setEmail(String email) {
         emailAdresses = new ArrayList<>();
-        searchCriteriaValidator.validateEmail(email);
+        emailSearchFormValidator.validateEmail(email);
         EmailSearchForm.email = email;
         emailAdresses.addAll(searchCriteriaCommaParser(email));
         LOGGER.info(MARKER, "Element: " + email + " added to the emails list.");
@@ -43,13 +42,13 @@ public class EmailSearchForm {
 
     public static void setStartDate(String startDate) {
         if ("".equals(startDate)) {
-            startDate = SearchCriteriaValidator.DEFAULT_STARTDATE;
+            startDate = EmailSearchFormValidator.DEFAULT_STARTDATE;
         } else {
             startDate = startDate + TIME;
         }
         LOGGER.info(MARKER, "Start date has been set: " + startDate);
         EmailSearchForm.startDate = startDate;
-        //searchCriteriaValidator.validateStartDate(startDate);
+        //emailSearchFormValidator.validateStartDate(startDate);
     }
 
     public static String getEndDate() {
@@ -58,13 +57,13 @@ public class EmailSearchForm {
 
     public static void setEndDate(String endDate) {
         if ("".equals(endDate)) {
-            endDate = SearchCriteriaValidator.DEFAULT_ENDDATE;
+            endDate = EmailSearchFormValidator.DEFAULT_ENDDATE;
         } else {
             endDate = endDate + TIME;
         }
         EmailSearchForm.endDate = endDate;
         LOGGER.info(MARKER, "End date has been set: " + endDate);
-        //  searchCriteriaValidator.validateEndDate(endDate);
+        //  emailSearchFormValidator.validateEndDate(endDate);
     }
 
     public static List<String> getKeywords() {
@@ -99,8 +98,8 @@ public class EmailSearchForm {
     public String dateToDisplayInFrontEnd(String date) {
         String dateParsed = "";
 
-        if (!(SearchCriteriaValidator.DEFAULT_STARTDATE.equalsIgnoreCase(date) ||
-                SearchCriteriaValidator.DEFAULT_ENDDATE.equalsIgnoreCase(date))) {
+        if (!(EmailSearchFormValidator.DEFAULT_STARTDATE.equalsIgnoreCase(date) ||
+                EmailSearchFormValidator.DEFAULT_ENDDATE.equalsIgnoreCase(date))) {
             dateParsed = date.substring(0, 10);
         }
 
