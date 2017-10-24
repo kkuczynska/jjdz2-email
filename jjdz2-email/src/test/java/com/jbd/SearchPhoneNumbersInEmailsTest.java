@@ -1,6 +1,6 @@
 package com.jbd;
 
-import com.jbd.phoneNumbersSearch.DisplayPhoneNumbers;
+import com.jbd.phoneNumbersSearch.SearchPhoneNumbersInEmails;
 import com.jbd.searchEmails.Email;
 import org.junit.Test;
 
@@ -11,8 +11,7 @@ import java.util.Map;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-
-public class DisplayPhoneNumbersTest {
+public class SearchPhoneNumbersInEmailsTest {
     List<Email> eMailKeeper = Arrays.asList(new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515-417-846"),
             new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515417844"),
             new Email("marcin@wp.pl", "subject", "2015-01-01 00:00", "test 515 417 846"),
@@ -21,21 +20,19 @@ public class DisplayPhoneNumbersTest {
 
     private Map<String, List<String>> resultMap;
     private List<String> resultList;
-    DisplayPhoneNumbers displayPhoneNumbers = new DisplayPhoneNumbers();
+    SearchPhoneNumbersInEmails searchPhoneNumbersInEmails = new SearchPhoneNumbersInEmails();
 
     @Test
     public void forTwoDifferentNumberAndOneTheSameShouldReturnListSize2() throws Exception {
-        resultMap = displayPhoneNumbers.searchPhoneNumbers(eMailKeeper);
+        resultMap = searchPhoneNumbersInEmails.searchPhoneNumbers(eMailKeeper);
         resultList = resultMap.get("marcin@wp.pl");
         assertThat("Size of the list number is not equal 2! ", resultList.size(), is(2));
     }
 
     @Test
     public void forTheSamePhoneNumberShouldReturnSizeEqual1() throws Exception {
-        resultMap = displayPhoneNumbers.searchPhoneNumbers(eMailKeeper);
+        resultMap = searchPhoneNumbersInEmails.searchPhoneNumbers(eMailKeeper);
         resultList = resultMap.get("wojtek@wp.pl");
         assertThat("Add the same phone number to List! Should be unique", resultList.size(), is(1));
     }
-
-
 }
