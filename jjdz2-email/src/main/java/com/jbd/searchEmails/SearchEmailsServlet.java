@@ -4,7 +4,7 @@ import com.jbd.database.Address;
 import com.jbd.database.ManageUser;
 import com.jbd.fileManagement.FileParser;
 import com.jbd.fileManagement.PathGetter;
-import com.jbd.phoneNumbersSearch.DisplayPhoneNumbers;
+import com.jbd.phoneNumbersSearch.SearchPhoneNumbersInEmails;
 import com.jbd.phoneNumbersSearch.PhoneNumbers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class SearchEmailsServlet extends HttpServlet {
     @EJB
     FinalEmailsSet finalEmailsSet;
     @EJB
-    DisplayPhoneNumbers displayPhoneNumbers;
+    SearchPhoneNumbersInEmails searchPhoneNumbersInEmails;
     @EJB
     PhoneNumbers phoneNumbers;
 
@@ -130,7 +130,7 @@ public class SearchEmailsServlet extends HttpServlet {
             }
             LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
 
-            Map<String, List<String>> resultMap = displayPhoneNumbers.searchPhoneNumbers(emails);
+            Map<String, List<String>> resultMap = searchPhoneNumbersInEmails.searchPhoneNumbers(emails);
             message = phoneNumbers.setPhoneNumbersMessage(req.getParameter("phoneNumbers"), resultMap, req);
         }
 
