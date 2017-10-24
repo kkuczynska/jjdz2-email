@@ -36,13 +36,8 @@ public class DisplayPhoneNumbers {
         return foundDuplicate;
     }
 
-    private String returnFormattedPhoneNumber(String phoneNumber) {
-        String formatedPhoneNumber;
-        formatedPhoneNumber = phoneNumber.trim().replace(" ", "");
-        if (formatedPhoneNumber.contains("-")) {
-            formatedPhoneNumber = phoneNumber.trim().replace("-", "");
-        }
-        return formatedPhoneNumber;
+    private String replaceWrongCharactersInNumber(String phoneNumber) {
+        return phoneNumber.trim().replace(" ", "").trim().replace("-", "");
     }
 
     public Map<String, List<String>> searchPhoneNumbers(List<Email> emailList) {
@@ -53,7 +48,7 @@ public class DisplayPhoneNumbers {
         for (Email email : emailList) {
             Matcher matcher = patternPhone.matcher(email.getContent());
             while (matcher.find()) {
-                String phoneNumber = returnFormattedPhoneNumber(matcher.group());
+                String phoneNumber = replaceWrongCharactersInNumber(matcher.group());
                 if (resultMap.isEmpty()) {
                     LOGGER.info("Map is empty, adding record");
                     List<String> phoneList = new ArrayList<>();
