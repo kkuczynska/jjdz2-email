@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.jbd.searchKeywords.KeywordsQuestionsMap.QUESTION;
+import static com.jbd.searchKeywords.KeywordsForm.QUESTION;
 
 @WebServlet(urlPatterns = "keywords")
 public class SearchKeywordsServlet extends HttpServlet {
@@ -32,13 +32,13 @@ public class SearchKeywordsServlet extends HttpServlet {
     @EJB
     Keywords keywords;
     @EJB
-    KeywordsQuestionsMap keywordsQuestionsMap;
+    KeywordsForm keywordsForm;
     @Inject
     ManageUser manageUser;
 
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws IOException {
         LOGGER.info(MARKER, "User redirected to keywords.jsp with doGet().");
-        req.setAttribute("questions", keywordsQuestionsMap.createQuestionsMap());
+        req.setAttribute("questions", keywordsForm.getKeywordsForm());
         LOGGER.info(MARKER, "Set JSP attribute \"question\" with keywords questionnaire.");
 
         RequestDispatcher dispatcher = req.getRequestDispatcher("/keywords.jsp");
@@ -57,7 +57,7 @@ public class SearchKeywordsServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
         for (int questionIndex = 0;
-             questionIndex < keywordsQuestionsMap.getQuestionsMap().size(); questionIndex++) {
+             questionIndex < keywordsForm.getKeywordsQuestions().size(); questionIndex++) {
             String answer = "0";
             LOGGER.info(MARKER, "questionIndex " + questionIndex);
             if ("yes".equalsIgnoreCase(req.getParameter(QUESTION + "" + String.valueOf(questionIndex)))) {
@@ -78,7 +78,7 @@ public class SearchKeywordsServlet extends HttpServlet {
             req.setAttribute("keywordsList", keywords.createKeywordsSet());
         }
         LOGGER.info(MARKER, "Set JSP attribute \"keywordsList\".");
-        req.setAttribute("questions", keywordsQuestionsMap.getQuestionsMap());
+        req.setAttribute("questions", keywordsForm.getKeywordsQuestions());
         LOGGER.info(MARKER, "Set JSP attribute \"questions\" with keywords questionnaire.");
 
         if (req.getParameter("q0") != null && req.getParameter("q1") != null
