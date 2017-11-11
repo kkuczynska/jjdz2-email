@@ -24,72 +24,28 @@
         <wildfly.adminPassword>admin</wildfly.adminPassword>
         <wildfly.add-user>${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false</wildfly.add-user>
 
-        <version.mysql>5.1.37</version.mysql>
         <jdbc.datasource>java:jboss/datasources/MySQLDS</jdbc.datasource>
-        <mysql.connection.url>jdbc:mysql://localhost:3307/jbdee_rest??useUnicode=yes&amp;characterEncoding=UTF-8</mysql.connection.url>
+        <mysql.connection.url>jdbc:mysql://localhost:3306/jbdee_rest??useUnicode=yes&amp;characterEncoding=UTF-8</mysql.connection.url>
         <mysql.username>root</mysql.username>
         <mysql.password>root</mysql.password>
+
+        <version.mysql>5.1.37</version.mysql>
+        <version.hibernate-java8>5.2.6.Final</version.hibernate-java8>
+        <version.wildfly-maven-plugin>1.1.0.Alpha11</version.wildfly-maven-plugin>
+        <version.maven-compiler-plugin>3.6.1</version.maven-compiler-plugin>
     </properties>
 
     <dependencies>
         <!--mysql-->
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-java8</artifactId>
+            <version>${version.hibernate-java8}</version>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>${version.mysql}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-java8</artifactId>
-            <version>5.2.6.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>dom4j</groupId>
-            <artifactId>dom4j</artifactId>
-            <version>1.6.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <!-- log4j -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20160810</version>
-        </dependency>
-        <!-- slf4j -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>2.7</version>
-        </dependency>
-        <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>7.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-java8</artifactId>
-            <version>5.2.6.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <version>2.8.6</version>
         </dependency>
     </dependencies>
 
@@ -99,7 +55,7 @@
             <plugin>
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.1.0.Alpha11</version>
+                <version>${version.wildfly-maven-plugin}</version>
                 <configuration>
                     <username>${wildfly.adminUsername}</username>
                     <password>${wildfly.adminPassword}</password>
@@ -138,7 +94,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.1</version>
+                <version>${version.maven-compiler-plugin}</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -146,6 +102,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

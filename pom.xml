@@ -21,6 +21,16 @@
         <wildfly.adminUsername>admin</wildfly.adminUsername>
         <wildfly.adminPassword>admin</wildfly.adminPassword>
         <wildfly.add-user>${wildfly.adminUsername}:${wildfly.adminPassword}:group:ManagementRealm:false</wildfly.add-user>
+
+        <version.mysql>5.1.37</version.mysql>
+        <version.javax>7.0</version.javax>
+        <version.lof4j-api>2.7</version.lof4j-api>
+        <version.lof4j-core>2.7</version.lof4j-core>
+        <version.json>20160810</version.json>
+        <version.slf4j-api>1.7.21</version.slf4j-api>
+        <version.log4j-slf4j-impl>2.7</version.log4j-slf4j-impl>
+        <version.dom4j>1.6.1</version.dom4j>
+        <version.jackson-datatype-jsr310>2.8.6</version.jackson-datatype-jsr310>
     </properties>
 
     <modules>
@@ -28,14 +38,58 @@
         <module>reports-service</module>
     </modules>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>1.1.0.Alpha11</version>
-            </plugin>
-        </plugins>
-    </build>
+    <dependencies>
+        <!-- Java EE -->
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>${version.javax}</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- log4j -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${version.lof4j-api}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${version.lof4j-core}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${version.json}</version>
+        </dependency>
+        <!-- slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${version.slf4j-api}</version>
+        </dependency>
+        <!-- slf4j -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${version.log4j-slf4j-impl}</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>${version.dom4j}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${version.mysql}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>${version.jackson-datatype-jsr310}</version>
+        </dependency>
+    </dependencies>
 
 </project>
