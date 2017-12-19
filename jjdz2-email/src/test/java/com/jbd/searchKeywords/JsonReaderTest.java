@@ -9,11 +9,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.jbd.searchKeywords.Keywords.getNumberOfAnswers;
 import static org.junit.Assert.assertTrue;
 
 public class JsonReaderTest {
 
-    private static ArrayList<String> ANSWERS_LIST = new ArrayList<>(Arrays.asList(
+    private Set<String> answersSet = new HashSet<>();
+    private Keywords keywords = new Keywords();
+
+    private static ArrayList<String> BUSINESS_KEYWORDS = new ArrayList<>(Arrays.asList(
             "business",
             "official",
             "officialy",
@@ -39,46 +43,7 @@ public class JsonReaderTest {
         JsonReader jsonReader = new JsonReader();
         ArrayList<String> answers = jsonReader.readAnswerJsonArray(emailBusiness);
 
-        assertTrue(answers.containsAll(ANSWERS_LIST));
-    }
-
-    @Test
-    public void set_without_duplicates_should_return_true() {
-        ArrayList<String> answersList = new ArrayList<>(Arrays.asList(
-                "business",
-                "official",
-                "officialy",
-                "formally",
-                "manager",
-                "boss",
-                "work",
-                "job"
-        ));
-        ArrayList<String> finalAnswersList = new ArrayList<>(Arrays.asList(
-                "business",
-                "official",
-                "officialy",
-                "formally",
-                "manager",
-                "boss",
-                "work",
-                "job",
-                "wokplace",
-                "cowoker",
-                "office",
-                "assistant",
-                "secretary",
-                "CEO",
-                "chairman",
-                "president"
-        ));
-
-
-        Set<String> answersSet = new HashSet<>();
-        answersSet.addAll(answersList);
-        answersSet.addAll(ANSWERS_LIST);
-
-        assertTrue(answersSet.size() == finalAnswersList.size());
+        assertTrue(answers.containsAll(BUSINESS_KEYWORDS));
     }
 
     @Test
