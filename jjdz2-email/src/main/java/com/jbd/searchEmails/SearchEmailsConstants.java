@@ -4,6 +4,7 @@ public class SearchEmailsConstants {
 
     public static final String FILE_UPLOAD_PATH = "src/main/resources/temporary";
     public static final int MINIMUM_EMAIL_ADDRESS_LENGTH = 3;
+    public static final int ZERO_EMAILS = 0;
 
     public static final String LOGGING_MARKER = "SearchEmailsServlet";
     public static final String EMAIL_DISPATCHER = "/emails.jsp";
@@ -29,5 +30,9 @@ public class SearchEmailsConstants {
     public static final String ERROR_HTML_SPAN =
             "<span class=\"glyphicon glyphicon-exclamation-sign\" id=\"noPathMsg\"></span>\n" +
                     "No path to email file given.\n This field is required. \n";
+    public static final String EMAILS_MATCHING_YOUR_CRITERIA = "Emails matching your criteria: ";
+    public static final String NO_EMAILS_MATCHING_YOUR_CRITERIA = "No emails matching your criteria.";
     public static final String BACKSLASH = "/";
+    public static final String EMAIL_SPEC_CHAR_DOT = ".";
+    public static final String EMAIL_SPEC_CHAR_AT = "@";
 }

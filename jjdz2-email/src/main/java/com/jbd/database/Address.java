@@ -11,6 +11,10 @@ public class Address implements Serializable {
     private int Id;
     private String address;
 
+    public Address(String address) {
+        this.address = address;
+    }
+
     public int getId() {
         return Id;
     }
@@ -23,13 +27,9 @@ public class Address implements Serializable {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     @Override
     public String toString() {
-        return "Address{" +
+        return "Email{" +
                 "Id=" + Id +
                 ", address='" + address + '\'' +
                 '}';

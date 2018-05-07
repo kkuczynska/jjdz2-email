@@ -1,7 +1,6 @@
 package com.jbd.searchEmails;
 
-import com.jbd.database.Address;
-import com.jbd.database.ManageUser;
+import com.jbd.database.MngEmailsAddrSearch;
 import com.jbd.fileManagement.FileParser;
 import com.jbd.fileManagement.PathGetter;
 import com.jbd.phoneNumbersSearch.PhoneNumbers;
@@ -57,15 +56,16 @@ public class SearchEmailsServlet extends HttpServlet {
     @Inject
     MailHolder mailHolder;
     @Inject
-    ManageUser manageUser;
+    MngEmailsAddrSearch mngEmailsAddrSearch;
+
+    private List<Email> emails = new ArrayList<>();
+    private String message = "";
+    private File file = null;
+    private String fileName = "";
+    private Set<Email> emailSet = null;
+    private String emailPath;
 
     protected void doPost(HttpServletRequest req, HttpServletResponse response) {
-
-        List<Email> emails = new ArrayList<>();
-        String message = "";
-        File file = null;
-        String fileName = "";
-        Set<Email> emailSet = null;
 
         emailSearchForm.setEmail(req.getParameter(EMAIL_PARAM));
         LOGGER.info(MARKER, "Set value for email field.");
@@ -105,7 +105,7 @@ public class SearchEmailsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String emailPath = FILE_UPLOAD_PATH + BACKSLASH + fileName;
+        emailPath = FILE_UPLOAD_PATH.concat(BACKSLASH).concat(fileName);
         LOGGER.info(MARKER, "Set value for emailPath.");
         if (("".equals(fileName))) {
             req.setAttribute(EMAILS_FOUND_ATTRIBUTE, ERROR_HTML_SPAN);
@@ -116,36 +116,16 @@ public class SearchEmailsServlet extends HttpServlet {
                 LOGGER.debug(MARKER, "Wrong path has been given by user.");
                 e.printStackTrace();
             }
-
             emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
-            if (emailSet.size() > 0) {
-                req.setAttribute(EMAILS_FOUND_ATTRIBUTE, "Emails matching your criteria: ");
-            } else if (0 == emailSet.size() && !("".equals(emailPath))) {
-                req.setAttribute(EMAILS_FOUND_ATTRIBUTE, "No emails matching your criteria.");
-            }
-            LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
+            req.setAttribute(EMAILS_FOUND_ATTRIBUTE, setEmailsHtmlHeaderAttr());
 
             Map<String, List<String>> resultMap = searchPhoneNumbersInEmails.searchPhoneNumbers(emails);
             message = phoneNumbers.setPhoneNumbersMessage(req.getParameter(PHONE_NUMBERS_ATTRIBUTE), resultMap, req);
         }
 
-        for (String s : emailSearchForm.getEmail()) {
-            if (s.length() >= MINIMUM_EMAIL_ADDRESS_LENGTH) {
-                Address addr = new Address();
-                addr.setAddress(s);
-                manageUser.saveAddressee(addr);
-            }
-        }
+        saveEmailsToDb();
 
-        if (req.getCharacterEncoding() == null) {
-            try {
-                req.setCharacterEncoding(ENCODING);
-                LOGGER.info(MARKER, "Encoding Set.");
-            } catch (UnsupportedEncodingException e) {
-                LOGGER.error(MARKER, "Encoding fail.");
-                e.printStackTrace();
-            }
-        }
+        setEncoding(req);
 
         mailHolder.setMails(emails);
 
@@ -169,11 +149,35 @@ public class SearchEmailsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        deleteFile();
+    }
+
+    private String setEmailsHtmlHeaderAttr() {
+        LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
+        if (emailSet.size() > ZERO_EMAILS) {
+            return EMAILS_MATCHING_YOUR_CRITERIA;
+        }
+        return NO_EMAILS_MATCHING_YOUR_CRITERIA;
+    }
+
+    private void saveEmailsToDb() {
+        mngEmailsAddrSearch.saveEmailsToDb(emailSearchForm.getEmail());
+    }
+
+    private void setEncoding(HttpServletRequest req) {
+        try {
+            req.setCharacterEncoding(ENCODING);
+            LOGGER.info(MARKER, "Encoding Set.");
+        } catch (UnsupportedEncodingException e) {
+            LOGGER.error(MARKER, "Encoding fail.");
+            e.printStackTrace();
+        }
+    }
+
+    private void deleteFile() {
         file.delete();
-        if (!file.exists()) {
-            LOGGER.info(MARKER, "File " + fileName + " has been deleted from directory " + FILE_UPLOAD_PATH);
-        } else {
-            LOGGER.debug(MARKER, "File " + fileName + " could not be deleted from directory " + FILE_UPLOAD_PATH);
+        if (file.exists()) {
+            LOGGER.warn(MARKER, "File " + emailPath + " was not deleted.");
         }
     }
 }

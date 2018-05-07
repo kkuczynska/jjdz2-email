@@ -1,6 +1,6 @@
 package com.jbd.displayReport;
 
-import com.jbd.database.ManageUser;
+import com.jbd.database.MngEmailsAddrSearch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -25,13 +25,13 @@ public class DisplayReportServlet extends HttpServlet {
     private static final Marker MARKER = MarkerFactory.getMarker("DisplayReportServlet");
 
     @Inject
-    ManageUser manageUser;
+    MngEmailsAddrSearch mngEmailsAddrSearch;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LOGGER.info(MARKER, "User requested report.");
         Map<String, Long> toDisplay = new TreeMap<>();
-        List<String> fromDatabase = manageUser.getAllAddressee();
+        List<String> fromDatabase = mngEmailsAddrSearch.getAllEmails();
         toDisplay = fromDatabase
                 .stream()
                 .collect(Collectors.groupingBy(s -> s, Collectors.counting()));

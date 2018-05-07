@@ -84,18 +84,4 @@ public class ManageUser implements Serializable {
         LOGGER.info(MARKER, "Collected data form_details");
         return form_details;
     }
-
-    @Transactional
-    public void saveAddressee(Address address) {
-        entityManager.persist(address);
-        LOGGER.info(MARKER, "Collected data address");
-    }
-
-    public List<String> getAllAddressee() {
-        List<String> addresseeList = new ArrayList<>();
-        TypedQuery<String> query = entityManager.createNamedQuery("Address.getAll", String.class);
-        addresseeList = query.getResultList();
-        LOGGER.debug(MARKER, "All addressee list: " + addresseeList);
-        return addresseeList;
-    }
 }
