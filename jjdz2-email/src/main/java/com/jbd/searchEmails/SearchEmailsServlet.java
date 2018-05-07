@@ -4,8 +4,8 @@ import com.jbd.database.Address;
 import com.jbd.database.ManageUser;
 import com.jbd.fileManagement.FileParser;
 import com.jbd.fileManagement.PathGetter;
-import com.jbd.phoneNumbersSearch.SearchPhoneNumbersInEmails;
 import com.jbd.phoneNumbersSearch.PhoneNumbers;
+import com.jbd.phoneNumbersSearch.SearchPhoneNumbersInEmails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
@@ -32,15 +32,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@WebServlet(urlPatterns = "emails")
+import static com.jbd.searchEmails.SearchEmailsConstants.*;
+
+@WebServlet(urlPatterns = URL_PATTERN)
 @MultipartConfig
 public class SearchEmailsServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SearchEmailsServlet.class);
-    private static final Marker MARKER = MarkerFactory.getMarker("SearchEmailsServlet");
-
-    private static final String FILE_UPLOAD_PATH = "src/main/resources/temporary";
-    public static final int MINIMUM_EMAIL_ADDRESS_LENGTH = 3;
+    private static final Marker MARKER = MarkerFactory.getMarker(LOGGING_MARKER);
 
     @EJB
     EmailSearchForm emailSearchForm;
@@ -68,13 +67,13 @@ public class SearchEmailsServlet extends HttpServlet {
         String fileName = "";
         Set<Email> emailSet = null;
 
-        emailSearchForm.setEmail(req.getParameter("email"));
+        emailSearchForm.setEmail(req.getParameter(EMAIL_PARAM));
         LOGGER.info(MARKER, "Set value for email field.");
-        emailSearchForm.setStartDate(req.getParameter("startDate"));
+        emailSearchForm.setStartDate(req.getParameter(START_DATE_PARAM));
         LOGGER.info(MARKER, "Set value for start date field.");
-        emailSearchForm.setEndDate(req.getParameter("endDate"));
+        emailSearchForm.setEndDate(req.getParameter(END_DATE_PARAM));
         LOGGER.info(MARKER, "Set value for end date field.");
-        emailSearchForm.setKeywords(req.getParameter("keywords"));
+        emailSearchForm.setKeywords(req.getParameter(KEYWORDS_PARAM));
         LOGGER.info(MARKER, "Set value for keywords field.");
 
         new File(FILE_UPLOAD_PATH).mkdir();
@@ -83,7 +82,7 @@ public class SearchEmailsServlet extends HttpServlet {
         LOGGER.info(MARKER, "Set directory for uploads");
         Part filePart = null;
         try {
-            filePart = req.getPart("emailPath");
+            filePart = req.getPart(FILE_PATH_PARAM);
         } catch (IOException e) {
             LOGGER.debug(MARKER, "Caught IOException: " + e);
             e.printStackTrace();
@@ -106,13 +105,10 @@ public class SearchEmailsServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        String emailPath = FILE_UPLOAD_PATH + "/" + fileName;
+        String emailPath = FILE_UPLOAD_PATH + BACKSLASH + fileName;
         LOGGER.info(MARKER, "Set value for emailPath.");
         if (("".equals(fileName))) {
-            req.setAttribute("emailsFound",
-                    "          <span class=\"glyphicon glyphicon-exclamation-sign\" id=\"noPathMsg\"></span>\n" +
-                            "          No path to email file given.\n" +
-                            "           This field is required. \n");
+            req.setAttribute(EMAILS_FOUND_ATTRIBUTE, ERROR_HTML_SPAN);
         } else {
             try {
                 emails = fileParser.parseEmails(pathGetter.createFileListFromPath(emailPath));
@@ -121,17 +117,16 @@ public class SearchEmailsServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-
             emailSet = finalEmailsSet.createUniqueEmailsSet(emails);
             if (emailSet.size() > 0) {
-                req.setAttribute("emailsFound", "Emails matching your criteria: ");
+                req.setAttribute(EMAILS_FOUND_ATTRIBUTE, "Emails matching your criteria: ");
             } else if (0 == emailSet.size() && !("".equals(emailPath))) {
-                req.setAttribute("emailsFound", "No emails matching your criteria.");
+                req.setAttribute(EMAILS_FOUND_ATTRIBUTE, "No emails matching your criteria.");
             }
             LOGGER.info(MARKER, "Set JSP attribute \"finalEmailSet\".");
 
             Map<String, List<String>> resultMap = searchPhoneNumbersInEmails.searchPhoneNumbers(emails);
-            message = phoneNumbers.setPhoneNumbersMessage(req.getParameter("phoneNumbers"), resultMap, req);
+            message = phoneNumbers.setPhoneNumbersMessage(req.getParameter(PHONE_NUMBERS_ATTRIBUTE), resultMap, req);
         }
 
         for (String s : emailSearchForm.getEmail()) {
@@ -144,7 +139,7 @@ public class SearchEmailsServlet extends HttpServlet {
 
         if (req.getCharacterEncoding() == null) {
             try {
-                req.setCharacterEncoding("UTF-8");
+                req.setCharacterEncoding(ENCODING);
                 LOGGER.info(MARKER, "Encoding Set.");
             } catch (UnsupportedEncodingException e) {
                 LOGGER.error(MARKER, "Encoding fail.");
@@ -154,15 +149,15 @@ public class SearchEmailsServlet extends HttpServlet {
 
         mailHolder.setMails(emails);
 
-        req.setAttribute("phoneNumbersFound", message);
-        req.setAttribute("finalEmailSet", emailSet);
-        req.setAttribute("emailFile", emailPath);
-        req.setAttribute("emails", finalEmailsSet.joinStringsWithComma(emailSearchForm.getEmail()));
-        req.setAttribute("startDate", emailSearchForm.dateToDisplayInFrontEnd(emailSearchForm.getStartDate()));
-        req.setAttribute("endDate", emailSearchForm.dateToDisplayInFrontEnd(emailSearchForm.getEndDate()));
-        req.setAttribute("keywords", finalEmailsSet.joinStringsWithComma(emailSearchForm.getKeywords()));
+        req.setAttribute(PHONE_NUMBERS_FOUND_ATTRIBUTE, message);
+        req.setAttribute(FINAL_EMAILS_SET_ATTRIBUTE, emailSet);
+        req.setAttribute(EMAIL_FILE_ATTRIBUTE, emailPath);
+        req.setAttribute(EMAILS_ATTRIBUTE, finalEmailsSet.joinStringsWithComma(emailSearchForm.getEmail()));
+        req.setAttribute(START_DATE_ATTRIBUTE, emailSearchForm.dateToDisplayInFrontEnd(emailSearchForm.getStartDate()));
+        req.setAttribute(END_DATE_ATTRIBUTE, emailSearchForm.dateToDisplayInFrontEnd(emailSearchForm.getEndDate()));
+        req.setAttribute(KEYWORDS_ATTRIBUTE, finalEmailsSet.joinStringsWithComma(emailSearchForm.getKeywords()));
 
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/emails.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher(EMAIL_DISPATCHER);
         LOGGER.info(MARKER, "Dispatcher to emails.jsp");
         try {
             dispatcher.forward(req, response);
